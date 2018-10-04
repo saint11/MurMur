@@ -1,0 +1,990 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"com",
+				"commandId"
+			],
+			[
+				"vari",
+				"VARIABLE_START"
+			],
+			[
+				"VAR",
+				"VARIABLE_START"
+			],
+			[
+				"TAG",
+				"TAG_START"
+			],
+			[
+				"COMM",
+				"COMMAND_END"
+			],
+			[
+				"COM",
+				"COMMAND_START_PARAMS"
+			],
+			[
+				"bod",
+				"body_statement"
+			],
+			[
+				"On",
+				"OnStart"
+			],
+			[
+				"che",
+				"CheckMission"
+			],
+			[
+				"item",
+				"itemId"
+			],
+			[
+				"coro",
+				"coroutine.yield\t(...)"
+			],
+			[
+				"Care",
+				"A_CaretY"
+			],
+			[
+				"Ba",
+				"BackSpace"
+			],
+			[
+				"Re",
+				"Return"
+			],
+			[
+				"follo",
+				"following"
+			],
+			[
+				"for",
+				"for\tfor i=1,10"
+			],
+			[
+				"fo",
+				"fori\tfor i,v in ipairs()"
+			],
+			[
+				"collide",
+				"collide_with"
+			],
+			[
+				"hit_",
+				"hit_timer"
+			],
+			[
+				"dash",
+				"dash_timer"
+			],
+			[
+				"line",
+				"love.graphics.line"
+			],
+			[
+				"circl",
+				"love.graphics.circle"
+			],
+			[
+				"shake",
+				"shake_time"
+			],
+			[
+				"shak",
+				"shake_intensity"
+			],
+			[
+				"setd",
+				"love.graphics.setDefaultFilter"
+			],
+			[
+				"rec",
+				"love.graphics.rectangle"
+			],
+			[
+				"key",
+				"love.keyboard.isDown"
+			],
+			[
+				"setc",
+				"love.graphics.setColor"
+			],
+			[
+				"global",
+				"globalKeyEntry"
+			],
+			[
+				"ke",
+				"love.keyboard.isDown"
+			],
+			[
+				"time",
+				"timeAndAngle"
+			],
+			[
+				"proje",
+				"projectileTimesAndAngles"
+			],
+			[
+				"fl",
+				"float3\tcontext"
+			],
+			[
+				"dea",
+				"delay"
+			],
+			[
+				"ch",
+				"charging"
+			],
+			[
+				"cha",
+				"charginTimer"
+			],
+			[
+				"power",
+				"powerMultiplier"
+			],
+			[
+				"v",
+				"Vector3"
+			],
+			[
+				"targ",
+				"targetRoom"
+			],
+			[
+				"in",
+				"interpolationFactor"
+			],
+			[
+				"floa",
+				"float4\tcontext"
+			],
+			[
+				"icew",
+				"iceWaitLoop"
+			],
+			[
+				"Aim",
+				"Anim"
+			],
+			[
+				"fire",
+				"fireball"
+			],
+			[
+				"red",
+				"ready_to_enter"
+			],
+			[
+				"Star",
+				"StartCoroutine"
+			],
+			[
+				"mission",
+				"mission_update"
+			],
+			[
+				"doc",
+				"docked"
+			],
+			[
+				"fun",
+				"function\tfunction"
+			],
+			[
+				"func",
+				"function\tfunction"
+			],
+			[
+				"Idle",
+				"idleB"
+			],
+			[
+				"opt",
+				"options"
+			],
+			[
+				"bade",
+				"badelineBoss"
+			],
+			[
+				"lo",
+				"love"
+			],
+			[
+				"pl",
+				"playery"
+			],
+			[
+				"id",
+				"idle"
+			],
+			[
+				"th",
+				"throw"
+			],
+			[
+				"run",
+				"runSlow"
+			],
+			[
+				"idl",
+				"idle_carry"
+			],
+			[
+				"sp",
+				"speedy"
+			],
+			[
+				"scro",
+				"scrolly"
+			],
+			[
+				"class",
+				"class\tclass name extends..."
+			],
+			[
+				"actors",
+				"actors_to_add"
+			],
+			[
+				"goto",
+				"goto"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/D/dev/SomethingEvilGML/SomethingEvil/datafiles/ex_dialog_br.sed",
+			"settings":
+			{
+				"buffer_size": 1310,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "hello.mur",
+			"settings":
+			{
+				"buffer_size": 225,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "{face: mila}"
+			}
+		},
+		{
+			"file": "murmur.g4",
+			"settings":
+			{
+				"buffer_size": 807,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "murmur.sublime-project",
+			"settings":
+			{
+				"buffer_size": 207,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "vai.bat",
+			"settings":
+			{
+				"buffer_size": 405,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Build and Test",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Build and Test",
+					""
+				],
+				[
+					"Packages/ANTLR syntax highlight/Antlr.sublime-build",
+					""
+				],
+				[
+					"Packages/User/Compile Moon and Run Love.sublime-build",
+					""
+				]
+			],
+			[
+				"Build and Test",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					""
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"moonc: show output"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"love: run project"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"love: run file"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"moonc: compile project"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"moonc: run lint on file"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"moonc: run lint on project"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"ldoc: File"
+				],
+				[
+					"Packages/Moonscripty/Moonscript.sublime-build",
+					"ldoc: Project"
+				]
+			],
+			[
+				"Packages/Moonscripty/Moonscript.sublime-build",
+				"love: run project"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove p",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Install Package Control"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"vai.bat",
+			"2+2",
+			"print(\"hey\")",
+			"print \"hey\"",
+			"moon"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/dev/murmur"
+	],
+	"file_history":
+	[
+		"/D/dev/murmur/murmur.sublime-project",
+		"/D/dev/murmur/vai.bat",
+		"/C/Users/saint/AppData/Roaming/Sublime Text 3/Packages/User/Antlr.sublime-build",
+		"/D/dev/murmur/murmur.g4",
+		"/D/dev/murmur/testes/cool/cool.g4",
+		"/D/dev/murmur/testes/speak/Speak.g4",
+		"/D/dev/murmur/grun.bat",
+		"/D/dev/murmur/antlr4.bat",
+		"/D/dev/BunkerOperator/BunkerOperator/Content/Data/Scripts/Buildings/scrapPile.lua",
+		"/D/Downloads/MeshRenderOverrideEditor.cs",
+		"/D/Dropbox/MiniBoss/Patreon/Fonts/JustPlainText.json",
+		"/C/Users/saint/AppData/Local/Unity/Editor/Editor.log",
+		"/D/dev/MiniGames/Tama/Tama/.git/config",
+		"/D/dev/MiniGames/Tama/Tama/.git/index",
+		"/D/dev/MiniGames/Tama/Tama/Assets/Plugins/Relay/.git/HEAD",
+		"/C/Users/saint/Desktop/SortingLayerPropertyDrawer.cs",
+		"/D/dev/unity/Vector2Swizzles.cs",
+		"/C/Users/saint/Desktop/SortingLayerAttribute.cs",
+		"/D/dev/MiniGames/Tapestry/.gitignore",
+		"/D/dev/lib/Monocle/.git/config",
+		"/D/dev/BunkerOperator/BunkerOperator.sln",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Buildings/scrapPile.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Quest.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Buildings/miningDrill.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Buildings/chest.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/autoHarvester.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/ItemsData.xml",
+		"/D/dev/MiniGames/Tama/Tama/.gitignore",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/chestKit.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Levels/MainWorld.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/hazmatSuit.lua",
+		"/C/Users/saint/AppData/Roaming/Miniboss/Bunker/SaveGames/Save1/Session.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/equipedHazmatSuit.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Levels/LoneBeacon.xml",
+		"/C/Users/saint/AppData/Roaming/Miniboss/Bunker/SaveGames/Save1/Main.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Quests/Mission2.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/Documents/missionCopy.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/Documents/mission1.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/BasicDocs.xml",
+		"/D/Program Files (x86)/Steam/steamapps/common/Unavowed/acsetup.cfg",
+		"/D/Program Files (x86)/Steam/steamapps/common/Unavowed/agsteam_debug.log",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Quests/Mission1.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/ScriptingHelp.md",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Quest/Maintenance.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/Documents/maintenceRequest.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Maintenance.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/Documents/day1.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Effects/shader.bat",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Recipes.xml",
+		"/D/dev/celestefinale/Celeste/Celeste/Content/Effects/shader.bat",
+		"/D/dev/celestefinale/Celeste/Celeste/Graphics/Renderers/LightRenderer.cs",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Levels/Elevator.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Items/Documents/generic.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Documents/day1.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Documents/day3.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/Documents/day2.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/equipedHazmatSuit.lua",
+		"/D/Dropbox/Portable/ModalK/ModalK.ahk",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/crunch.bat",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scripts/hazmatSuit.lua",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Levels/Outside.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/Scritps/hazmatSuit.lua",
+		"/D/dev/celestefinale/Celeste/Celeste/Gameplay/UI/Textbox.cs",
+		"/D/dev/celestefinale/Celeste/Celeste/Graphics/UI/FancyText.cs",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Data/ItemsData.lua",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/Core/Player.cs",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/Core/Level.cs",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/Physics/Actor.cs",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Gfx/Atlases/Decals.xml",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/packer.bat",
+		"/D/dev/celestefinale/Celeste/Celeste/Static/GFX.cs",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Gfx/Atlases/Decals0.data",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Gfx/Atlases/Decals.meta",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/bin/Debug/Content/Gfx/Atlases/Decals0.data",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/packer.exe",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Gfx/packer.bat",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/Core/Session.cs",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/QZ.cs",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/Program.cs",
+		"/D/dev/ExOk/QuantumZoey/QuantumZoey/QuantumZoey.csproj",
+		"/D/dev/FromEarth/README.md",
+		"/D/dev/lib/MonoGame-Console/README.md",
+		"/D/dev/FromEarth/FarOutpost/bin/Debug/MyLevel.fou",
+		"/D/dev/FromEarth/FarOutpost/Content/Worlds/Template.fou",
+		"/D/dev/MiniGames/BunkerOperator/.gitignore",
+		"/D/dev/celestefinale/Celeste/Celeste/Content/CelesteContent.contentproj",
+		"/D/dev/lib/Starbound-input/Starbound.Input/Starbound.Input.Example/Starbound.Input.Example/Game1.cs",
+		"/D/dev/lib/MonoGame-Console/MonoGameConsole/InputProcessor.cs",
+		"/D/dev/MiniGames/BunkerOperator/BunkerOperator/Content/Terminal.fnt",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/Problems/ChemicalCorrosion.lua",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/Modules/RoamerBase.lua",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/Modules/NanowireBateries.lua",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/Modules/SentientCore.lua",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/Modules/CasimirGenerator.lua",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/SpriteData/spriteData.xml",
+		"/D/dev/unity-shared-scripts/.hg/hgrc",
+		"/D/dev/FromEarth/.gitignore",
+		"/D/Downloads/basic.ics",
+		"/D/dev/FromEarth/FarOutpost/Content/Things/CasimirGenerator.lua",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/GameData/archerData.xml",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/SpriteData/menuSpriteData.xml",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/GameData/bgData.xml",
+		"/D/Downloads/BLUETERM.COM",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/SpriteData/corpseSpriteData.xml",
+		"/D/Dropbox/MiniBoss/Patreon/Tutorial/Render Tricks/shader/outline.glsl",
+		"/D/dev/celeste/Celeste/Celeste/Content/Graphics/Sprites.xml",
+		"/D/Dropbox/MiniPC/GDDs/FarOutpost.md",
+		"/D/Dropbox/Pessoal/scripts/runner.ahk",
+		"/C/Users/saint/Desktop/KeyMap.ahk",
+		"/C/Users/saint/Desktop/Seek.ahk",
+		"/D/dev/towerfall2018/TowerFall/Content/Atlas/GameData/sixPlayerBGData.xml",
+		"/D/dev/towerfall2018/.hg/hgrc",
+		"/D/dev/LudumDare/footorb/src/objects/block.moon",
+		"/D/dev/LudumDare/footorb/src/objects/orb.moon",
+		"/D/dev/LudumDare/footorb/src/objects/stealer.moon",
+		"/D/dev/LudumDare/footorb/src/generator.moon",
+		"/D/dev/LudumDare/footorb/src/data/global.moon",
+		"/D/dev/LudumDare/footorb/src/scenes/gameScene.moon",
+		"/D/dev/LudumDare/footorb/src/main.moon",
+		"/D/Dropbox/MiniBoss/Patreon/patreons-with-no-access.txt",
+		"/D/dev/LudumDare/footorb/src/objects/player.moon",
+		"/D/dev/LudumDare/footorb/src/objects/attacker.moon",
+		"/D/dev/LudumDare/footorb/src/scenes/defeatScene.moon",
+		"/D/dev/LudumDare/footorb/src/scenes/mainMenu.moon",
+		"/D/dev/LudumDare/footorb/src/systems/scene.moon",
+		"/D/dev/LudumDare/footorb/src/systems/entity.moon",
+		"/D/dev/LudumDare/footorb/src/scenes/pause.moon",
+		"/D/dev/LudumDare/footorb/src/scenes/victoryScene.moon"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 142.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"    {\n        \"shell_cmd\": \"vai.bat\"\n    }",
+			"WORD",
+			"tagId",
+			"blueprin",
+			"bluep",
+			"form",
+			"hello",
+			"dirty",
+			"GetComponent(\"Inventory\")",
+			"quest",
+			"MakeDocumentItem",
+			"D",
+			"Documents",
+			"Border",
+			"xnb",
+			"Border",
+			"doc",
+			"Get",
+			"drop=",
+			"stack",
+			"equipedHazmatSuit",
+			"uses",
+			"AddNewLine",
+			"size.",
+			"size",
+			"Measure",
+			"maxLineWidth",
+			"Decals",
+			"FromAtlas(",
+			"Graphics",
+			"camera",
+			"overr",
+			"render",
+			"camera",
+			"font",
+			"Resources",
+			"Dream >",
+			"Dream",
+			"11",
+			"dentista - Pedr",
+			"dentista - Pe",
+			"scriptname",
+			"value",
+			"scrip",
+			"gem",
+			"Madeline",
+			"madeline",
+			"green",
+			"corpse",
+			"mirro",
+			"flip",
+			"^",
+			"X",
+			"white ",
+			"white",
+			"AscensionLightningLayer",
+			"WaterSplash",
+			"OceanLayer",
+			"oceanLayer",
+			"ocean",
+			"WaterSplash",
+			"splash",
+			"skyclouds",
+			"tower",
+			"invul",
+			"true",
+			"\"wall\"",
+			"\"door\"",
+			"true",
+			"\"wall\"",
+			"\"door\"",
+			"door",
+			"(Door",
+			"door",
+			"Door",
+			"else",
+			"room.doo",
+			"size",
+			"door_left",
+			"left",
+			"false",
+			"powerup_branch",
+			"branch",
+			"follow",
+			"kick",
+			"follow",
+			"mm_size",
+			"camera",
+			"respa",
+			"spawn",
+			"res",
+			"hit",
+			"ammount",
+			"expo",
+			"respa",
+			"x",
+			"25",
+			"))",
+			"collide(",
+			"invulnerable",
+			".x",
+			"dash_to",
+			"dash_timer",
+			"1.5",
+			"move",
+			"player",
+			"orb",
+			"xe",
+			".x",
+			"(time",
+			"imm",
+			"following",
+			".following",
+			".4",
+			".1",
+			"4",
+			"orb.",
+			"@scene.",
+			"x",
+			"y2",
+			" a.",
+			"a.",
+			"entities_to_remove",
+			"room",
+			"x",
+			"elastic",
+			"scale",
+			"sx"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/D/dev/SomethingEvilGML/SomethingEvil/datafiles/ex_dialog_br.sed",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								61,
+								61
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/User/SED.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "hello.mur",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 225,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								127,
+								127
+							]
+						],
+						"settings":
+						{
+							"auto_name": "{face: mila}",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "murmur.g4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								416,
+								416
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ANTLR syntax highlight/Antlr.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "murmur.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 207,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "vai.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 405,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								259,
+								259
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 50.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 206.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "murmur.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 246.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

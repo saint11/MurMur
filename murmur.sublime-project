@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"file_exclude_patterns": ["*.java","*.interp", "*.tokens"]
+		}
+	]
+	,"build_systems": 
+	[
+    	{
+    		"name":"Build and Test Tokens",
+	        "cmd": "tokens.bat"
+	    },
+	    {
+    		"name":"Build and Test Gui Tree",
+	        "cmd": "gui.bat"
+	    }
+    ]
+}
