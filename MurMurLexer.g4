@@ -17,7 +17,7 @@ fragment DIGIT : [0-9] ;
 
 
 // Extras
-WHITESPACE: (' ' | '\t') -> skip;
+WHITESPACE: (' ' | '\t')+ -> skip;
 NEWLINE: ('\n' | '\r' | '\r\n')+;
 
 // Comments
@@ -26,9 +26,10 @@ LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN) ;
 // Symbols
 TAG_START: ('#');
 COMMAND_START: ('{') -> pushMode(INSIDE_COMMAND) ;
+FAST_PICK_START: ('[') -> pushMode(FAST_PICK) ;
 GOTO_START: ('>');
 
-TEXT: (~([#{\r\n/]) | '/'~'/')+;
+TEXT: (~([#{\r\n/[]) | '/'~'/')+;
 
 mode INSIDE_COMMAND;
 	COMMAND_PARAMS_START:
@@ -55,6 +56,12 @@ mode INSIDE_COMMAND;
 
 	// Comparisson
 	COMPARISSON_SIGNAL: ('==' | '!=' | '>' | '<' | '>=' | '<=');
+	OPERATION_SIGNAL: ('+'|'-'|'*'|'/');
+
+mode FAST_PICK;
+	SUB_TEXT_SEPARATOR: ('|');
+	FAST_PICK_TEXT: (~([}\r\n/|\]]) | '/'~'/')+;
+	FAST_PICK_END: (']')  -> popMode;
 
 mode TEXT_MODE;
-	SUB_TEXT: (~([}\r\n/]) | '/'~'/')+ -> popMode;
+	SUB_TEXT: (~([}\r\n/|]) | '/'~'/')+ -> popMode;

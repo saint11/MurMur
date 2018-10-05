@@ -1,28 +1,7 @@
 #playcenter
 	let's compare
 	outra linha //Another comment!
+	Não sei o que fazer com [isso|aquilo].
 	booora>vai
-	{pick}
-		{this:1}	
-			Não sei o que fazer com isso.
-			{pick}
-				{this:1}
-					nossa que confusao
-				{this:1}
-					pra que isso
-			{end}
-		{this:1}
-			Hmm...  acho que não é uma boa ideia
-			{menu}
-				uepa>
-				uno>
-				{if:stress==1}
-					tres>
-				{end}
-			{end}
-
-		{this:0.5}
-			Mas pra quê?
-	{end}
 	eita
 	let's compare
