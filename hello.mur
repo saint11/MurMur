@@ -1,8 +1,28 @@
 #playcenter
-	{face:mila_angry}
-	vai se fude
-	//Comment test
+	let's compare
 	outra linha //Another comment!
-	booora
-	{break}
+	booora>vai
+	{pick}
+		{this:1}	
+			Não sei o que fazer com isso.
+			{pick}
+				{this:1}
+					nossa que confusao
+				{this:1}
+					pra que isso
+			{end}
+		{this:1}
+			Hmm...  acho que não é uma boa ideia
+			{menu}
+				uepa>
+				uno>
+				{if:stress==1}
+					tres>
+				{end}
+			{end}
+
+		{this:0.5}
+			Mas pra quê?
+	{end}
 	eita
+	let's compare
