@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Antlr4 Remove="obj\**" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Grammar\MurMurParser.g4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\netstandard2.0\MurMur.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurLexer.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurParser.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurParserBaseListener.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurParserBaseVisitor.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurParserListener.cs" />
+    <Compile Include="obj\Debug\netstandard2.0\MurMurParserVisitor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4" Version="4.6.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Antlr4.Runtime" Version="4.6.6-rc001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Antlr4 Update="Grammar\MurMurLexer.g4">
+      <Abstract>false</Abstract>
+      <ForceAtn>false</ForceAtn>
+    </Antlr4>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Grammar\MurMurLexer.g4">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>
