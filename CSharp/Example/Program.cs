@@ -10,40 +10,39 @@ namespace MurMurExample
     class Program
     {
         static string example = @"
+#another
+	Hello to you!
+        It works :)
+	{goto:[intro]}
+    
 #intro
 	Let's say...
-
+    Let's try
 	{goto:[target]}
-	eita
-	{if:@stress == [muita]}
-		to stressada
-	{end}
-
-	
-	{menu:[Vamos dizer algo]}
-		opcao 1
-		opcao 2
-	{end}
-	{goto:[target]}
-	
-#hidden
-	This is wrong
+	This is all wrong
+	This is all super wroooong
 
 #target
 	Hello World!
-	Hello to you!
-	It works :)
+	{goto:[another]}
 ";
         static void Main(string[] args)
         {
             var script = new MurMurScript();
             script.LoadString(example);
-            script.GoToTag("target");
 
+            script.GoToTag("intro");
 
-            Console.WriteLine();
-
-            var name = Console.ReadKey();
+            while (script.State != ScriptState.Done)
+            {
+                var line = script.Next();
+                if (line != null)
+                {
+                    Console.WriteLine("TEXT LINE>>> {0}", line.Text);
+                    Console.ReadKey();
+                }
+            }
+            
         }
     }
 }

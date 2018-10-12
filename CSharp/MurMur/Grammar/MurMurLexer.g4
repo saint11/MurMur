@@ -48,7 +48,8 @@ mode INSIDE_COMMAND;
 
 	// Comparisson
 	COMPARISSON_SIGNAL: ('==' | '!=' | '>' | '<' | '>=' | '<=');
-	OPERATION_SIGNAL: ('+'|'-'|'*'|'/');
+	MUL_DIV_SIGNAL: '*'|'/';
+	ADD_SUB_SIGNAL: '+'|'-';
 
 mode FAST_PICK;
 	SUB_TEXT_SEPARATOR: ('|');

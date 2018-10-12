@@ -2,16 +2,22 @@ parser grammar MurMurParser;
 
 options { tokenVocab = MurMurLexer; }
 
-murmur: tag+ EOF ;
-tag: TAG_START TEXT NEWLINE* (block)+;
+murmur: NEWLINE* tag+ EOF ;
+tag: TAG_START TEXT NEWLINE* block;
 
 block
-	: (text+
-	| pickCommand NEWLINE* pickBlock+ endCommand
-	| menuCommand NEWLINE* block+ endCommand
-	| ifCommand NEWLINE* block+ endCommand
+	: (text
+	| pickBlock
+	| menuBlock
+	| ifBlock
 	| command
-	) + NEWLINE*;
+	| NEWLINE+
+	)+ ;
+
+// Block types
+pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand;
+menuBlock: menuCommand NEWLINE* block+ endCommand;
+ifBlock: ifCommand NEWLINE* block+ endCommand;
 
 text
 	: TEXT
@@ -19,7 +25,7 @@ text
 	| fastPickBlock;
 
 fastPickBlock: FAST_PICK_START FAST_PICK_TEXT (SUB_TEXT_SEPARATOR FAST_PICK_TEXT)* FAST_PICK_END;
-pickBlock: pickThisCommand NEWLINE* block*;
+pickThisBlock: pickThisCommand NEWLINE* block*;
 
 command: COMMAND_START commandId (COMMAND_PARAMS_START params)? COMMAND_END;
 params: expression (COMMAND_PARAMS_SEPARATOR expression)*;

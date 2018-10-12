@@ -1,18 +1,13 @@
 #intro
 	Let's say...
-
+	one thing
 	{goto:[target]}
 	eita
 	{if:@stress == [muita]}
 		to stressada
+		fim do bloquinho
 	{end}
-
-	
-	{menu:[Vamos dizer algo]}
-		opcao 1
-		opcao 2
-	{end}
-	{goto:[target]}
+	fim do blocao
 	
 #hidden
 	This is wrong

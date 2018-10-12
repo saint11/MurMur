@@ -267,7 +267,7 @@
 			"file": "/D/dev/SomethingEvilGML/SomethingEvil/datafiles/ex_dialog_br.sed",
 			"settings":
 			{
-				"buffer_size": 1310,
+				"buffer_size": 1356,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -276,43 +276,105 @@
 			"file": "hello.mur",
 			"settings":
 			{
-				"buffer_size": 225,
+				"buffer_size": 211,
 				"encoding": "UTF-8",
 				"line_ending": "Windows",
 				"name": "{face: mila}"
 			}
 		},
 		{
-			"file": "murmur.g4",
+			"file": "MurMurParser.g4",
 			"settings":
 			{
-				"buffer_size": 807,
+				"buffer_size": 1327,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "murmur.sublime-project",
+			"file": "MurMurLexer.g4",
 			"settings":
 			{
-				"buffer_size": 207,
+				"buffer_size": 1371,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "vai.bat",
+			"contents": "/***\n * Excerpted from \"The Definitive ANTLR 4 Reference\",\n * published by The Pragmatic Bookshelf.\n * Copyrights apply to this code. It may not be used to create training material, \n * courses, books, articles, and the like. Contact us if you are in doubt.\n * We make no guarantees that this code is fit for any purpose. \n * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.\n***/\nimport java.util.HashMap;\nimport java.util.Map;\n\npublic class EvalVisitor extends LabeledExprBaseVisitor<Integer> {\n    /** \"memory\" for our calculator; variable/value pairs go here */\n    Map<String, Integer> memory = new HashMap<String, Integer>();\n\n    /** ID '=' expr NEWLINE */\n    @Override\n    public Integer visitAssign(LabeledExprParser.AssignContext ctx) {\n        String id = ctx.ID().getText();  // id is left-hand side of '='\n        int value = visit(ctx.expr());   // compute value of expression on right\n        memory.put(id, value);           // store it in our memory\n        return value;\n    }\n\n    /** expr NEWLINE */\n    @Override\n    public Integer visitPrintExpr(LabeledExprParser.PrintExprContext ctx) {\n        Integer value = visit(ctx.expr()); // evaluate the expr child\n        System.out.println(value);         // print the result\n        return 0;                          // return dummy value\n    }\n\n    /** INT */\n    @Override\n    public Integer visitInt(LabeledExprParser.IntContext ctx) {\n        return Integer.valueOf(ctx.INT().getText());\n    }\n\n    /** ID */\n    @Override\n    public Integer visitId(LabeledExprParser.IdContext ctx) {\n        String id = ctx.ID().getText();\n        if ( memory.containsKey(id) ) return memory.get(id);\n        return 0;\n    }\n\n    /** expr op=('*'|'/') expr */\n    @Override\n    public Integer visitMulDiv(LabeledExprParser.MulDivContext ctx) {\n        int left = visit(ctx.expr(0));  // get value of left subexpression\n        int right = visit(ctx.expr(1)); // get value of right subexpression\n        if ( ctx.op.getType() == LabeledExprParser.MUL ) return left * right;\n        return left / right; // must be DIV\n    }\n\n    /** expr op=('+'|'-') expr */\n    @Override\n    public Integer visitAddSub(LabeledExprParser.AddSubContext ctx) {\n        int left = visit(ctx.expr(0));  // get value of left subexpression\n        int right = visit(ctx.expr(1)); // get value of right subexpression\n        if ( ctx.op.getType() == LabeledExprParser.ADD ) return left + right;\n        return left - right; // must be SUB\n    }\n\n    /** '(' expr ')' */\n    @Override\n    public Integer visitParens(LabeledExprParser.ParensContext ctx) {\n        return visit(ctx.expr()); // return child expr's value\n    }\n}",
 			"settings":
 			{
-				"buffer_size": 405,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 2693,
+				"line_ending": "Windows",
+				"name": "/***"
+			}
+		},
+		{
+			"contents": "\nD:\\dev\\murmur\\ANTLR>echo off \n==============================\nLEXER: \n==============================\nPARSER: \n==============================\nCOMPILING:\n==============================\nTESTING: \n[@0,0:0='#',<TAG_START>,1:0]\n[@1,1:5='intro',<TEXT>,1:1]\n[@2,6:7='\\r\\n',<NEWLINE>,1:6]\n[@3,8:20='\\tLet's say...',<TEXT>,2:0]\n[@4,21:22='\\r\\n',<NEWLINE>,2:13]\n[@5,23:32='\\tone thing',<TEXT>,3:0]\n[@6,33:34='\\r\\n',<NEWLINE>,3:10]\n[@7,36:36='{',<COMMAND_START>,4:1]\n[@8,37:40='goto',<WORD>,4:2]\n[@9,41:41=':',<COMMAND_PARAMS_START>,4:6]\n[@10,42:42='[',<COMMAND_STRING_START>,4:7]\n[@11,43:48='target',<STRING>,4:8]\n[@12,49:49=']',<COMMAND_STRING_END>,4:14]\n[@13,50:50='}',<COMMAND_END>,4:15]\n[@14,51:52='\\r\\n',<NEWLINE>,4:16]\n[@15,53:57='\\teita',<TEXT>,5:0]\n[@16,58:59='\\r\\n',<NEWLINE>,5:5]\n[@17,61:61='{',<COMMAND_START>,6:1]\n[@18,62:63='if',<KEYWORD_IF>,6:2]\n[@19,64:64=':',<COMMAND_PARAMS_START>,6:4]\n[@20,65:65='@',<'@'>,6:5]\n[@21,66:71='stress',<WORD>,6:6]\n[@22,73:74='==',<COMPARISSON_SIGNAL>,6:13]\n[@23,76:76='[',<COMMAND_STRING_START>,6:16]\n[@24,77:81='muita',<STRING>,6:17]\n[@25,82:82=']',<COMMAND_STRING_END>,6:22]\n[@26,83:83='}',<COMMAND_END>,6:23]\n[@27,84:85='\\r\\n',<NEWLINE>,6:24]\n[@28,86:99='\\t\\tto stressada',<TEXT>,7:0]\n[@29,100:101='\\r\\n',<NEWLINE>,7:14]\n[@30,102:119='\\t\\tfim do bloquinho',<TEXT>,8:0]\n[@31,120:121='\\r\\n',<NEWLINE>,8:18]\n[@32,123:123='{',<COMMAND_START>,9:1]\n[@33,124:126='end',<KEYWORD_END>,9:2]\n[@34,127:127='}',<COMMAND_END>,9:5]\n[@35,128:129='\\r\\n',<NEWLINE>,9:6]\n[@36,130:143='\\tfim do blocao',<TEXT>,10:0]\n[@37,144:145='\\r\\n',<NEWLINE>,10:14]\n[@38,147:148='\\r\\n',<NEWLINE>,11:1]\n[@39,149:149='#',<TAG_START>,12:0]\n[@40,150:155='hidden',<TEXT>,12:1]\n[@41,156:157='\\r\\n',<NEWLINE>,12:7]\n[@42,158:171='\\tThis is wrong',<TEXT>,13:0]\n[@43,172:175='\\r\\n\\r\\n',<NEWLINE>,13:14]\n[@44,176:176='#',<TAG_START>,15:0]\n[@45,177:182='target',<TEXT>,15:1]\n[@46,183:184='\\r\\n',<NEWLINE>,15:7]\n[@47,185:197='\\tHello World!',<TEXT>,16:0]\n[@48,198:199='\\r\\n',<NEWLINE>,16:13]\n[@49,200:213='\\tHello to you!',<TEXT>,17:0]\n[@50,214:215='\\r\\n',<NEWLINE>,17:14]\n[@51,216:227='\\tIt works :)',<TEXT>,18:0]\n[@52,228:227='<EOF>',<EOF>,18:12]\n[Finished in 30.9s]",
+			"settings":
+			{
+				"buffer_size": 2161,
+				"line_ending": "Windows",
+				"name": "Build output",
+				"scratch": true
 			}
 		}
 	],
-	"build_system": "Build and Test",
+	"build_system": "Build and Test Tokens",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Build C#",
+					""
+				],
+				[
+					"Build and Test Gui Tree",
+					""
+				],
+				[
+					"Build and Test Tokens",
+					""
+				],
+				[
+					"Packages/ANTLR syntax highlight/Antlr.sublime-build",
+					""
+				],
+				[
+					"Packages/User/Compile Moon and Run Love.sublime-build",
+					""
+				]
+			],
+			[
+				"Build and Test Gui Tree",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Build C#",
+					""
+				],
+				[
+					"Build and Test Gui Tree",
+					""
+				],
+				[
+					"Build and Test Tokens",
+					""
+				],
+				[
+					"Packages/User/Compile Moon and Run Love.sublime-build",
+					""
+				]
+			],
+			[
+				"Build and Test Tokens",
+				""
+			]
+		],
 		[
 			[
 				[
@@ -459,10 +521,16 @@
 	},
 	"expanded_folders":
 	[
-		"/D/dev/murmur"
+		"/D/dev/murmur/ANTLR"
 	],
 	"file_history":
 	[
+		"/D/dev/murmur/ANTLR/build_c#.bat",
+		"/D/dev/murmur/ANTLR/MurMurLexer.g4",
+		"/D/dev/murmur/ANTLR/murmur.sublime-project",
+		"/D/dev/murmur/CSharp/MurMur/MurMur.csproj",
+		"/D/dev/murmur/ANTLR/vai.bat",
+		"/D/dev/murmur/ANTLR/murmur.g4",
 		"/D/dev/murmur/murmur.sublime-project",
 		"/D/dev/murmur/vai.bat",
 		"/C/Users/saint/AppData/Roaming/Sublime Text 3/Packages/User/Antlr.sublime-build",
@@ -584,17 +652,11 @@
 		"/D/dev/LudumDare/footorb/src/main.moon",
 		"/D/Dropbox/MiniBoss/Patreon/patreons-with-no-access.txt",
 		"/D/dev/LudumDare/footorb/src/objects/player.moon",
-		"/D/dev/LudumDare/footorb/src/objects/attacker.moon",
-		"/D/dev/LudumDare/footorb/src/scenes/defeatScene.moon",
-		"/D/dev/LudumDare/footorb/src/scenes/mainMenu.moon",
-		"/D/dev/LudumDare/footorb/src/systems/scene.moon",
-		"/D/dev/LudumDare/footorb/src/systems/entity.moon",
-		"/D/dev/LudumDare/footorb/src/scenes/pause.moon",
-		"/D/dev/LudumDare/footorb/src/scenes/victoryScene.moon"
+		"/D/dev/LudumDare/footorb/src/objects/attacker.moon"
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -608,6 +670,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lastTokenType",
+			"emit",
 			"    {\n        \"shell_cmd\": \"vai.bat\"\n    }",
 			"WORD",
 			"tagId",
@@ -733,9 +797,7 @@
 			"entities_to_remove",
 			"room",
 			"x",
-			"elastic",
-			"scale",
-			"sx"
+			"elastic"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -762,15 +824,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1310,
+						"buffer_size": 1356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								61,
-								61
+								0,
+								0
 							]
 						],
 						"settings":
@@ -791,49 +853,50 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 225,
+						"buffer_size": 211,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								127,
-								127
+								32,
+								32
 							]
 						],
 						"settings":
 						{
 							"auto_name": "{face: mila}",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/User/SED.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "murmur.g4",
+					"file": "MurMurParser.g4",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 807,
+						"buffer_size": 1327,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								416,
-								416
+								148,
+								148
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ANTLR syntax highlight/Antlr.tmLanguage"
+							"syntax": "Packages/ANTLR syntax highlight/Antlr.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -844,58 +907,94 @@
 				},
 				{
 					"buffer": 3,
-					"file": "murmur.sublime-project",
+					"file": "MurMurLexer.g4",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 207,
+						"buffer_size": 1371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								177,
-								177
+								787,
+								787
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/ANTLR syntax highlight/Antlr.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 360.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "vai.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 405,
+						"buffer_size": 2693,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								259,
-								259
+								1693,
+								1693
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+							"auto_name": "/***",
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 600.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2161,
+								2161
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 814.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -918,11 +1017,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.673237753883,
 			1.0
 		],
 		"rows":
