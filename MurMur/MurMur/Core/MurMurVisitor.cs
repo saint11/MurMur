@@ -57,13 +57,16 @@ namespace MurMur
         public override MurMurVariable VisitCommand([NotNull] MurMurParser.CommandContext context)
         {
             var commandId = context.WORD().GetText();
+            var global = script.Globals[commandId];
 
-            if (commandId.ToLower()=="goto")
+            if (global is Func<MurMurVariable,MurMurVariable>)
             {
-                var target = Visit(context.@params().expression(0)).Text;
-                return Visit(script.Tags[target]);
+                return (global as Func<MurMurVariable,MurMurVariable>).Invoke(Visit(context.@params().expression(0)));
             }
-
+            if (global is Action<MurMurVariable>)
+            {
+                (global as Action<MurMurVariable>).Invoke(Visit(context.@params().expression(0)));
+            }
             return null;
         }
 

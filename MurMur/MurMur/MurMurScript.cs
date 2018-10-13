@@ -26,6 +26,15 @@ namespace MurMur
 
         public ScriptState State { get; internal set; }
 
+        public MurMurScript()
+        {
+            Globals["goto"] = (Func<MurMurVariable, MurMurVariable>)Global_GoTo;
+
+            #if UNITY_EDITOR
+                Globals["print"] = (Func<MurMurVariable, MurMurVariable>)Global_Print;
+            #endif
+        }
+
         public void LoadString(string input)
         {
             AntlrInputStream inputStream = new AntlrInputStream(input);
@@ -41,6 +50,8 @@ namespace MurMur
 
         public MurMurLine Next()
         {
+            currentLine = null;
+
             if (State== ScriptState.Done)
             {
                 return null;
@@ -48,7 +59,11 @@ namespace MurMur
             else if (State == ScriptState.NotInitialized)
             {
                 visitor.Visit(Tags[currentTag]);
-                State = ScriptState.Talking;
+                
+                if (visitor.currentTree == null)
+                    State = ScriptState.Done;
+                else
+                    State = ScriptState.Talking;
             }
             else
             {
@@ -71,6 +86,23 @@ namespace MurMur
             currentTag = tagName;
         }
 
-        
+        #region GLOBALS
+
+        MurMurVariable Global_GoTo(MurMurVariable tag)
+        {
+            var target = tag.Text;
+            return visitor.Visit(Tags[target]);
+        }
+
+#if UNITY_EDITOR
+        MurMurVariable Global_Print(MurMurVariable text)
+        {
+            UnityEngine.Debug.Log(text.Text);
+            return null;
+        }
+#endif
+
+#endregion
+
     }
 }
