@@ -18,9 +18,8 @@ LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN) ;
 TAG_START: ('#');
 COMMAND_START: ('{') -> pushMode(INSIDE_COMMAND) ;
 FAST_PICK_START: ('[') -> pushMode(FAST_PICK) ;
-GOTO_START: ('>');
 
-TEXT: (~([#{\r\n/[]) | '/'~'/')+;
+TEXT: (~([#@{\r\n/[]) | ('/'~'/'))+;
 
 mode INSIDE_COMMAND;
 	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
@@ -29,7 +28,6 @@ mode INSIDE_COMMAND;
 	COMMAND_STRING_START:('[') -> pushMode(STRING_MODE); //go is an exception and allows free text input
 
 	COMMAND_PARAMS_SEPARATOR: (',');
-	VARIABLE_START: '@';
 	
 	COMMAND_END: ('}') -> popMode;
 
@@ -38,6 +36,7 @@ mode INSIDE_COMMAND;
 	KEYWORD_END: ('end');
 	KEYWORD_GOTO: ('go');
 	KEYWORD_MENU: ('menu');
+	KEYWORD_MENU_OPTION: ('option');
 	KEYWORD_PICK: ('pick');
 	KEYWORD_PICK_THIS: ('this');
 

@@ -60,6 +60,7 @@
     <Compile Include="MurMurScript.cs" />
     <Compile Include="Core\MurMurVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\MurMurException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="Grammar\MurMurLexer.g4">

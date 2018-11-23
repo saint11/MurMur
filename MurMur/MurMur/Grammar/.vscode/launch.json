@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "antlr4-MurMur",
+            "type": "antlr-debug",
+            "request": "launch",
+            //"input": "${workspaceFolder}/${command:AskForTestInput}",
+            "input": "example.mur",
+            "grammar": "MurMurParser.g4",
+            "startRule": "murmur",
+            "printParseTree": true,
+            "visualParseTree": true
+        }
+    ]
+}

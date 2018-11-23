@@ -8,16 +8,19 @@ namespace MurMur
     public enum MurMurLineType
     {
         text,
-        command
+        command,
+        menu
     }
 
     public class MurMurLine
     {
-        
+        public MurMurLineType Type;
+
         public string Text;
 
         public string Command;
         public MurMurVariable[] Params;
-        internal MurMurParser.TextLineContext Context;
+
+        public string[] OptionsText;
     }
 }

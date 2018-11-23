@@ -1,9 +1,11 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using MurMur.Grammar;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Collections;
+using System;
+using System.Linq;
 
 namespace MurMur
 {
@@ -19,6 +21,7 @@ namespace MurMur
         public Dictionary<string, object> Globals { get; private set; } = new Dictionary<string, object>();
 
         internal Dictionary<string,MurMurParser.BlockContext> Tags;
+
         string currentTag;
 
         internal MurMurLine currentLine;
@@ -29,10 +32,11 @@ namespace MurMur
         public MurMurScript()
         {
             Globals["goto"] = (Func<MurMurVariable, MurMurVariable>)Global_GoTo;
+            Globals["set"] = (Func<MurMurVariable, MurMurVariable, MurMurVariable>)Global_Set;
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 Globals["print"] = (Func<MurMurVariable, MurMurVariable>)Global_Print;
-            #endif
+#endif
         }
 
         public void LoadString(string input)
@@ -48,9 +52,16 @@ namespace MurMur
             visitor.Visit(tree);
         }
 
-        public MurMurLine Next()
+        public MurMurLine Next(int choice = -1)
         {
-            currentLine = null;
+            if (currentLine != null)
+            {
+                if (currentLine.Type != MurMurLineType.menu)
+                    choice = -1;
+                currentLine = null;
+            }
+            if (currentTag == null)
+                GoToTag(Tags.FirstOrDefault().Key);
 
             if (State== ScriptState.Done)
             {
@@ -58,6 +69,7 @@ namespace MurMur
             }
             else if (State == ScriptState.NotInitialized)
             {
+                
                 visitor.Visit(Tags[currentTag]);
                 
                 if (visitor.currentTree == null)
@@ -67,12 +79,31 @@ namespace MurMur
             }
             else
             {
-                visitor.Resume();
+                if (choice == -1) // This is a regular node
+                    visitor.Resume();
+                else // This should be a menu
+                    visitor.ResumeMenu(choice);
+
                 if (visitor.currentTree == null)
                     State = ScriptState.Done;
             }
 
+            if (currentLine.Text != null && Globals.ContainsKey("say"))
+            {
+                visitor.Invoke("say", new MurMurVariable() { Text = currentLine.Text });
+            }  
             return currentLine;
+        }
+
+        internal string NextText(int choice = -1)
+        {
+            string text = null;
+            while (text==null && State!= ScriptState.Done)
+            {
+                text = Next(choice).Text;
+            }
+
+            return text;
         }
 
 
@@ -86,12 +117,31 @@ namespace MurMur
             currentTag = tagName;
         }
 
+        internal void SetVariables(Dictionary<string, string> variables)
+        {
+            foreach (var v in variables)
+            {
+                Globals[v.Key] = new MurMurVariable(v.Value);
+            }
+        }
+
+        public void SetString(string name, string value)
+        {
+            Globals[name] = new MurMurVariable(value);
+        }
+
         #region GLOBALS
 
         MurMurVariable Global_GoTo(MurMurVariable tag)
         {
             var target = tag.Text;
             return visitor.Visit(Tags[target]);
+        }
+
+        MurMurVariable Global_Set(MurMurVariable name, MurMurVariable value)
+        {
+            Globals[name.Text] = value;
+            return value;
         }
 
 #if UNITY_EDITOR
