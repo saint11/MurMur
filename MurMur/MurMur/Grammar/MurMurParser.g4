@@ -16,7 +16,7 @@ block
 // Block types
 pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand (NEWLINE+ | EOF);
 menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand (NEWLINE+ | EOF);
-ifBlock: ifCommand NEWLINE* block endCommand;
+ifBlock: ifCommand NEWLINE* block (elseCommand block)? endCommand (NEWLINE+ | EOF);
 
 line
 	: lineFragment+ (NEWLINE+ | EOF)
@@ -28,7 +28,9 @@ lineFragment
 	| command
 	| fastPickBlock
 	;
-inlineIfBlock: ifCommand lineFragment+ endCommand;
+inlineIfBlock: ifCommand inlineIfTrueFragment (elseCommand inlineIfFalseFragment)? endCommand;
+inlineIfTrueFragment: lineFragment+;
+inlineIfFalseFragment: lineFragment+;
 
 menuSubBlock
 	: menuOptionCommand NEWLINE* block
@@ -56,4 +58,5 @@ pickThisCommand: COMMAND_START KEYWORD_PICK_THIS COMMAND_PARAMS_START NUMBER COM
 menuCommand: COMMAND_START KEYWORD_MENU  (COMMAND_PARAMS_START expression)? COMMAND_END;
 menuOptionCommand: COMMAND_START KEYWORD_MENU_OPTION COMMAND_PARAMS_START expression COMMAND_END;
 ifCommand: COMMAND_START KEYWORD_IF COMMAND_PARAMS_START expression COMMAND_END;
+elseCommand: COMMAND_START KEYWORD_ELSE COMMAND_END;
 endCommand: COMMAND_START KEYWORD_END COMMAND_END;

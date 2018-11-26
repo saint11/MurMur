@@ -9,16 +9,15 @@ namespace MurMurExample
 {
     class Program
     {
-        static string example = @"
-#start
-Hello {player}, {if:welcome==true} welcome to the harvest outpost. {end}
+        static string example = @"#start
+Hello {player}{if:welcome==true}, welcome to the harvest outpost. {else}.{end}
 I'm here to help with the harvesting.
 {menu:[Are you ready to get started?]}
 	{option:[I can do this on my own]}
 		Ok, let me know if you need help.
 	
 	{option:[I'm not sure if I'm prepared]}
-        {menu:[All right, do you know what are we harvesting here?]}
+        {menu:[All right, do you know what we are harvesting here?]}
             {option: [No]}
                 They didn't tell you anything?
             {option: [Minerals, I guess?]}
@@ -29,6 +28,8 @@ I'm here to help with the harvesting.
 		I'll explain how things work around here.
 {end}
 Talk to you later then.
+
+
 ";
         static void Main(string[] args)
         {

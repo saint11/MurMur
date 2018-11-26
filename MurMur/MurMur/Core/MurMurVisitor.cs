@@ -85,16 +85,26 @@ namespace MurMur
         {
             var expression = context.ifCommand().expression();
 
-            var result = VisitExpression(expression);
+            var result = Visit(expression);
             if (result.Boolean)
             {
                 currentStack.Push(context);
                 var txt = "";
-                foreach (var fragment in context.lineFragment())
+                foreach (var fragment in context.inlineIfTrueFragment().lineFragment())
                 {
                     txt += Visit(fragment).Text;
                 }
-                
+
+                return new MurMurVariable(txt);
+            }
+            else if (context.elseCommand() != null) 
+            {
+                currentStack.Push(context);
+                var txt = "";
+                foreach (var fragment in context.inlineIfFalseFragment().lineFragment())
+                {
+                    txt += Visit(fragment).Text;
+                }
 
                 return new MurMurVariable(txt);
             }
@@ -105,12 +115,18 @@ namespace MurMur
         {
             var expression = context.ifCommand().expression();
 
-            var result = VisitExpression(expression);
+            var result = Visit(expression);
             if (result.Boolean)
             {
                 currentStack.Push(context);
-                Visit(context.block());
+                Visit(context.block()[0]);
             }
+            else if (context.elseCommand() != null)
+            {
+                currentStack.Push(context);
+                Visit(context.block()[1]);
+            }
+
             return new MurMurVariable();
         }
 

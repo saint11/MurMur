@@ -123,6 +123,30 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInlineIfTrueFragment(MurMurParser.InlineIfTrueFragmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInlineIfTrueFragment(MurMurParser.InlineIfTrueFragmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInlineIfFalseFragment(MurMurParser.InlineIfFalseFragmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInlineIfFalseFragment(MurMurParser.InlineIfFalseFragmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMenuSubBlock(MurMurParser.MenuSubBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -322,6 +346,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIfCommand(MurMurParser.IfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElseCommand(MurMurParser.ElseCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElseCommand(MurMurParser.ElseCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

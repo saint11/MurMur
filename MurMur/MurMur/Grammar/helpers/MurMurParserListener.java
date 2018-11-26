@@ -97,6 +97,26 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitInlineIfBlock(MurMurParser.InlineIfBlockContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MurMurParser#inlineIfTrueFragment}.
+	 * @param ctx the parse tree
+	 */
+	void enterInlineIfTrueFragment(MurMurParser.InlineIfTrueFragmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#inlineIfTrueFragment}.
+	 * @param ctx the parse tree
+	 */
+	void exitInlineIfTrueFragment(MurMurParser.InlineIfTrueFragmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MurMurParser#inlineIfFalseFragment}.
+	 * @param ctx the parse tree
+	 */
+	void enterInlineIfFalseFragment(MurMurParser.InlineIfFalseFragmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#inlineIfFalseFragment}.
+	 * @param ctx the parse tree
+	 */
+	void exitInlineIfFalseFragment(MurMurParser.InlineIfFalseFragmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MurMurParser#menuSubBlock}.
 	 * @param ctx the parse tree
 	 */
@@ -280,6 +300,16 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIfCommand(MurMurParser.IfCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MurMurParser#elseCommand}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseCommand(MurMurParser.ElseCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#elseCommand}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseCommand(MurMurParser.ElseCommandContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#endCommand}.
 	 * @param ctx the parse tree

@@ -43,6 +43,7 @@ mode INSIDE_COMMAND;
 
 	// Keywords
 	KEYWORD_IF: ('if');
+	KEYWORD_ELSE: ('else');
 	KEYWORD_END: ('end');
 	KEYWORD_GOTO: ('go');
 	KEYWORD_MENU: ('menu');
