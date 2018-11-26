@@ -11,7 +11,7 @@ namespace MurMurExample
     {
         static string example = @"
 #start
-Hello {player}, welcome to the harvest outpost.
+Hello {player}, {if:welcome==true} welcome to the harvest outpost. {end}
 I'm here to help with the harvesting.
 {menu:[Are you ready to get started?]}
 	{option:[I can do this on my own]}
@@ -26,18 +26,16 @@ I'm here to help with the harvesting.
             {option: [Elder blood]}
                 Good, they told you that at least.
         {end}
-		I'll explain how things work around here
+		I'll explain how things work around here.
 {end}
-Carai nao pode seeee
-Foi?
+Talk to you later then.
 ";
         static void Main(string[] args)
         {
             var script = new MurMurScript();
             script.LoadString(example);
             script.SetString("player", "rodrigson");
-
-            script.GoToTag("start");
+            script.SetBool("welcome", true);
 
             int choice = 0;
 

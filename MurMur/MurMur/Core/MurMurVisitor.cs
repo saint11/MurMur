@@ -12,12 +12,13 @@ namespace MurMur
     internal class MurMurVisitor: MurMurParserBaseVisitor<MurMurVariable>
     {
         MurMurScript script;
-        internal ParserRuleContext currentTree;
+        internal Stack<ParserRuleContext> currentStack;
 
         int lastChoice = -1;
 
         public MurMurVisitor(MurMurScript script)
         {
+            currentStack = new Stack<ParserRuleContext>();
             this.script = script;
         }
 
@@ -32,7 +33,7 @@ namespace MurMur
             var name = context.TEXT().GetText();
             script.Tags[name] = context.block();
 
-            return null;
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitLineFragment([NotNull] MurMurParser.LineFragmentContext context)
@@ -50,6 +51,13 @@ namespace MurMur
             {
                 var txt = Visit(command);
                 script.currentLine.Text += txt.Text;
+                return txt;
+            }
+
+            var inlineIf = context.inlineIfBlock();
+            if (inlineIf != null)
+            {
+                var txt = Visit(inlineIf);
                 return txt;
             }
 
@@ -71,6 +79,39 @@ namespace MurMur
             {
                 Halt = context
             };
+        }
+
+        public override MurMurVariable VisitInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context)
+        {
+            var expression = context.ifCommand().expression();
+
+            var result = VisitExpression(expression);
+            if (result.Boolean)
+            {
+                currentStack.Push(context);
+                var txt = "";
+                foreach (var fragment in context.lineFragment())
+                {
+                    txt += Visit(fragment).Text;
+                }
+                
+
+                return new MurMurVariable(txt);
+            }
+            return new MurMurVariable();
+        }
+
+        public override MurMurVariable VisitIfBlock([NotNull] MurMurParser.IfBlockContext context)
+        {
+            var expression = context.ifCommand().expression();
+
+            var result = VisitExpression(expression);
+            if (result.Boolean)
+            {
+                currentStack.Push(context);
+                Visit(context.block());
+            }
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitMenuBlock([NotNull] MurMurParser.MenuBlockContext context)
@@ -97,7 +138,6 @@ namespace MurMur
                 script.currentLine.OptionsText = options.ToArray();
 
                 return new MurMurVariable()
-
                 {
                     Halt = context
                 };
@@ -107,11 +147,10 @@ namespace MurMur
                 var blocks = context.menuSubBlock(); 
                 var block = blocks[lastChoice];
                 lastChoice = -1;
-                Visit(block);
 
-                currentTree = context;
+                currentStack.Push(context);
 
-                return null;
+                return Visit(block);
             }
 
         }
@@ -142,7 +181,7 @@ namespace MurMur
         {
             var value = script.Globals[name];
             if (value is MurMurVariable)
-                return value as MurMurVariable;
+                return (MurMurVariable)value;
 
             if (value is string)
                 return new MurMurVariable(value as string);
@@ -154,7 +193,7 @@ namespace MurMur
                 return new MurMurVariable((float)value);
 
             //TODO: Should display error
-            return null;
+            return new MurMurVariable();
         }
 
         internal MurMurVariable Invoke(string function, params MurMurVariable[] parameters)
@@ -197,7 +236,7 @@ namespace MurMur
                 (method as Action<int>).Invoke((int)parameters[0].Number);
             }
 
-            return null;
+            return new MurMurVariable();
         }
         
         private MurMurVariable Halt(ParserRuleContext context = null)
@@ -206,6 +245,27 @@ namespace MurMur
             {
                 Halt = context
             };
+        }
+
+        
+
+        public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
+        {
+            return new MurMurVariable(Visit(context.expression()[0]) == Visit(context.expression()[1]));
+        }
+
+        public override MurMurVariable VisitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context)
+        {
+            return new MurMurVariable(context.TRUE() != null);
+        }
+
+        public override MurMurVariable VisitVariableExpression([NotNull] MurMurParser.VariableExpressionContext context)
+        {
+            var variable = script.Globals[context.WORD().GetText()];
+            if (variable is MurMurVariable)
+                return (MurMurVariable)variable;
+
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitStringExpression([NotNull] MurMurParser.StringExpressionContext context)
@@ -218,14 +278,13 @@ namespace MurMur
 
         protected override bool ShouldVisitNextChild([NotNull] IRuleNode node, MurMurVariable currentResult)
         {
-            if (currentResult != null && currentResult.Halt != null)
+            if (currentResult.Halt != null)
             {
-                currentTree = currentResult.Halt;
+                currentStack.Push(currentResult.Halt);
                 return false;
             }
             else
             {
-                currentTree = null;
                 return base.ShouldVisitNextChild(node, currentResult);
             }
         }
@@ -234,13 +293,14 @@ namespace MurMur
         {
             lastChoice = choice;
             
-            Visit(currentTree);
+            Visit(currentStack.Pop());
         }
 
         internal void Resume()
         {
             var parentTree = new ParserRuleContext();
-            var originalParent = currentTree.Parent as ParserRuleContext;
+            var lastTree = currentStack.Pop();
+            var originalParent = lastTree.Parent as ParserRuleContext;
 
             parentTree.CopyFrom(originalParent);
             parentTree.children.Clear();
@@ -249,15 +309,16 @@ namespace MurMur
             {
                 parentTree.children.Add(c);
             }
-            if (currentTree != null)
+
+            if (currentStack != null)
             {
-                
-                int removeCount = (currentTree.Parent as ParserRuleContext).children.IndexOf(currentTree);
+                int removeCount = originalParent.children.IndexOf(lastTree);
+
                 for (int i = 0; i <= removeCount; i++)
                 {
                     parentTree.children.RemoveAt(0);
                 }
-                currentTree = null;
+
                 Visit(parentTree);
             }
         }

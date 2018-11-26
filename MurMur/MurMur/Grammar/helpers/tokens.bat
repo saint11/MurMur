@@ -1,6 +1,7 @@
 echo off
 SET CLASSPATH=.;C:\PATH\antlr-4.7.1-complete.jar;%CLASSPATH%
 
+
 echo ==============================
 echo LEXER: 
 java org.antlr.v4.Tool %* ../MurMurLexer.g4

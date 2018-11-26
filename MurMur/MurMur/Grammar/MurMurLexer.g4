@@ -31,6 +31,16 @@ mode INSIDE_COMMAND;
 	
 	COMMAND_END: ('}') -> popMode;
 
+	// Fragments
+	fragment T : ('T' | 't');
+	fragment R : ('R' | 'r');
+	fragment U : ('U' | 'u');
+	fragment E : ('E' | 'e');
+	fragment F : ('F' | 'f');
+	fragment A : ('A' | 'a');
+	fragment L : ('L' | 'l');
+	fragment S : ('S' | 's');
+
 	// Keywords
 	KEYWORD_IF: ('if');
 	KEYWORD_END: ('end');
@@ -39,6 +49,8 @@ mode INSIDE_COMMAND;
 	KEYWORD_MENU_OPTION: ('option');
 	KEYWORD_PICK: ('pick');
 	KEYWORD_PICK_THIS: ('this');
+	TRUE: T R U E;
+	FALSE: F A L S E;
 
 	// Expressions
 	NUMBER: DIGIT+ ([.,] DIGIT+)?;

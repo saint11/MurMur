@@ -9,7 +9,8 @@ namespace MurMur
     {
         text,
         command,
-        menu
+        menu,
+        eof
     }
 
     public class MurMurLine

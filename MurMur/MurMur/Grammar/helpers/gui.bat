@@ -8,7 +8,7 @@ java org.antlr.v4.Tool %* ../MurMurLexer.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 echo ==============================
 echo PARSER: 
-java org.antlr.v4.Tool %* ../MurMurLexer.g4
+java org.antlr.v4.Tool %* ../MurMurParser.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo ==============================

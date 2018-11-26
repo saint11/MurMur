@@ -54,56 +54,54 @@ namespace MurMur
 
         public MurMurLine Next(int choice = -1)
         {
-            if (currentLine != null)
-            {
-                if (currentLine.Type != MurMurLineType.menu)
-                    choice = -1;
-                currentLine = null;
-            }
-            if (currentTag == null)
-                GoToTag(Tags.FirstOrDefault().Key);
+            if (currentLine != null && currentLine.Type != MurMurLineType.menu)
+                choice = -1;
 
-            if (State== ScriptState.Done)
+            currentLine = null;
+
+            while (currentLine == null)
             {
-                return null;
-            }
-            else if (State == ScriptState.NotInitialized)
-            {
-                
-                visitor.Visit(Tags[currentTag]);
-                
-                if (visitor.currentTree == null)
-                    State = ScriptState.Done;
+                if (currentTag == null)
+                    GoToTag(Tags.FirstOrDefault().Key);
+
+                if (State == ScriptState.Done)
+                {
+                    return new MurMurLine() { Type = MurMurLineType.eof };
+                }
+                else if (State == ScriptState.NotInitialized)
+                {
+                    visitor.Visit(Tags[currentTag]);
+                }
                 else
-                    State = ScriptState.Talking;
-            }
-            else
-            {
-                if (choice == -1) // This is a regular node
-                    visitor.Resume();
-                else // This should be a menu
-                    visitor.ResumeMenu(choice);
+                {
+                    if (choice == -1) // This is a regular node
+                        visitor.Resume();
+                    else // This should be a menu
+                        visitor.ResumeMenu(choice);
+                }
 
-                if (visitor.currentTree == null)
-                    State = ScriptState.Done;
+                CheckForState();
             }
 
             if (currentLine.Text != null && Globals.ContainsKey("say"))
             {
                 visitor.Invoke("say", new MurMurVariable() { Text = currentLine.Text });
-            }  
+            }
+
             return currentLine;
+        }
+
+        private void CheckForState()
+        {
+            if (visitor.currentStack.Count == 0)
+                State = ScriptState.Done;
+            else
+                State = ScriptState.Talking;
         }
 
         internal string NextText(int choice = -1)
         {
-            string text = null;
-            while (text==null && State!= ScriptState.Done)
-            {
-                text = Next(choice).Text;
-            }
-
-            return text;
+            return  Next(choice).Text;
         }
 
 
@@ -123,6 +121,11 @@ namespace MurMur
             {
                 Globals[v.Key] = new MurMurVariable(v.Value);
             }
+        }
+
+        public void SetBool(string name, bool value)
+        {
+            Globals[name] = new MurMurVariable(value);
         }
 
         public void SetString(string name, string value)

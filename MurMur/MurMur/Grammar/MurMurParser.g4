@@ -2,7 +2,7 @@ parser grammar MurMurParser;
 
 options { tokenVocab = MurMurLexer; }
 
-murmur: NEWLINE* tag+ EOF ;
+murmur: NEWLINE* tag+;
 tag: TAG_START TEXT NEWLINE* block;
 
 block
@@ -11,23 +11,24 @@ block
 	| menuBlock
 	| ifBlock
 	| command
-	| NEWLINE+
 	)+ ;
 
 // Block types
-pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand;
-menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand;
-ifBlock: ifCommand NEWLINE* block+ endCommand;
+pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand (NEWLINE+ | EOF);
+menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand (NEWLINE+ | EOF);
+ifBlock: ifCommand NEWLINE* block endCommand;
 
 line
-	: lineFragment+ NEWLINE*
+	: lineFragment+ (NEWLINE+ | EOF)
 	;
 
 lineFragment
 	: TEXT
+	| inlineIfBlock
 	| command
 	| fastPickBlock
 	;
+inlineIfBlock: ifCommand lineFragment+ endCommand;
 
 menuSubBlock
 	: menuOptionCommand NEWLINE* block
@@ -42,6 +43,8 @@ command
 params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
 expression
 	: (NUMBER | INT)									# numberExpression
+	| WORD												# variableExpression
+	| (TRUE | FALSE)									# booleanExpression
 	| COMMAND_STRING_START STRING COMMAND_STRING_END	# stringExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
 	| expression ADD_SUB_SIGNAL expression				# additionExpression

@@ -67,25 +67,35 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitIfBlock(MurMurParser.IfBlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#textLine}.
+	 * Enter a parse tree produced by {@link MurMurParser#line}.
 	 * @param ctx the parse tree
 	 */
-	void enterTextLine(MurMurParser.TextLineContext ctx);
+	void enterLine(MurMurParser.LineContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MurMurParser#textLine}.
+	 * Exit a parse tree produced by {@link MurMurParser#line}.
 	 * @param ctx the parse tree
 	 */
-	void exitTextLine(MurMurParser.TextLineContext ctx);
+	void exitLine(MurMurParser.LineContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#text}.
+	 * Enter a parse tree produced by {@link MurMurParser#lineFragment}.
 	 * @param ctx the parse tree
 	 */
-	void enterText(MurMurParser.TextContext ctx);
+	void enterLineFragment(MurMurParser.LineFragmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MurMurParser#text}.
+	 * Exit a parse tree produced by {@link MurMurParser#lineFragment}.
 	 * @param ctx the parse tree
 	 */
-	void exitText(MurMurParser.TextContext ctx);
+	void exitLineFragment(MurMurParser.LineFragmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MurMurParser#inlineIfBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterInlineIfBlock(MurMurParser.InlineIfBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#inlineIfBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitInlineIfBlock(MurMurParser.InlineIfBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#menuSubBlock}.
 	 * @param ctx the parse tree
@@ -196,6 +206,30 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMultiplicationExpression(MurMurParser.MultiplicationExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code booleanExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanExpression(MurMurParser.BooleanExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code booleanExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanExpression(MurMurParser.BooleanExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code variableExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableExpression(MurMurParser.VariableExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code variableExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableExpression(MurMurParser.VariableExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#pickCommand}.
 	 * @param ctx the parse tree
