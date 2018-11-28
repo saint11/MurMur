@@ -10,7 +10,6 @@ block
 	| pickBlock
 	| menuBlock
 	| ifBlock
-	| command
 	)+ ;
 
 // Block types

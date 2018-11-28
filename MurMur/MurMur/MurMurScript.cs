@@ -23,6 +23,7 @@ namespace MurMur
         internal Dictionary<string,MurMurParser.BlockContext> Tags;
 
         string currentTag;
+        bool clearStack;
 
         internal MurMurLine currentLine;
         private MurMurVisitor visitor;
@@ -77,9 +78,21 @@ namespace MurMur
                 else
                 {
                     if (choice == -1) // This is a regular node
+                    {
                         visitor.Resume();
+                    }
                     else // This should be a menu
                         visitor.ResumeMenu(choice);
+                }
+
+                if (State == ScriptState.NotInitialized)
+                {
+                    if (clearStack)
+                    {
+                        visitor.currentStack.Clear();
+                        clearStack = false;
+                    }
+                    return Next(choice);
                 }
 
                 CheckForState();
@@ -99,15 +112,12 @@ namespace MurMur
             return  Next(choice).Text;
         }
 
-
         /// <summary>
         /// Set the pointer to the start of the tag
         /// </summary>
         /// <param name="tagName"></param>
         public void GoToTag(string tagName)
         {
-            currentLine = null;
-            visitor.currentStack.Clear();
             State = ScriptState.NotInitialized;
             currentTag = tagName;
         }
@@ -130,7 +140,7 @@ namespace MurMur
             Globals[name] = new MurMurVariable(value);
         }
 
-        #region GLOBALS
+#region GLOBALS
 
         void Global_GoTo(MurMurVariable tag)
         {
@@ -139,7 +149,7 @@ namespace MurMur
 
         void Global_Skip(MurMurVariable tag)
         {
-            visitor.skipToTag = tag.Text;
+            clearStack = true;
             GoToTag(tag.Text);
         }
 
@@ -153,7 +163,7 @@ namespace MurMur
         MurMurVariable Global_Print(MurMurVariable text)
         {
             UnityEngine.Debug.Log(text.Text);
-            return null;
+            return new MurMurVariable();
         }
 #endif
 

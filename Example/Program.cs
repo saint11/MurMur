@@ -9,34 +9,22 @@ namespace MurMurExample
 {
     class Program
     {
-        static string example = @"#start
-Hello {player}{if:welcome==true}, welcome to the harvest outpost. {else}.{end}
-{skip:[another]}
-I'm here to help with the harvesting.
-{menu:[Are you ready to get started?]}
-	{option:[I can do this on my own]}
-		Ok, let me know if you need help.
-	
-	{option:[I'm not sure if I'm prepared]}
-        {menu:[All right, do you know what we are harvesting here?]}
-            {option: [No]}
-                They didn't tell you anything?
-            {option: [Minerals, I guess?]}
-                Uh... No. We are harvesting Elder Blood.
-            {option: [Elder blood]}
-                Good, they told you that at least.
-        {end}
-		I'll explain how things work around here.
-{end}
-Talk to you later then.
+        static string example = @"
 #another
 It works!
+
+#start
+ Hello {player}
+{skip:[another]}
+another line
 ";
         static void Main(string[] args)
         {
             var script = new MurMurScript();
             script.LoadString(example);
-            script.SetString("player", "rodrigson");
+            script.GoToTag("start");
+
+            script.SetString("player", "player_name");
             script.SetBool("welcome", false);
 
             int choice = 0;

@@ -13,7 +13,6 @@ namespace MurMur
     {
         MurMurScript script;
         internal Stack<ParserRuleContext> currentStack;
-        internal string skipToTag;
 
         int lastChoice = -1;
 
@@ -68,7 +67,6 @@ namespace MurMur
 
         public override MurMurVariable VisitLine([NotNull] MurMurParser.LineContext context)
         {
-
             script.currentLine = new MurMurLine()
             {
                 Type = MurMurLineType.text,
@@ -78,20 +76,10 @@ namespace MurMur
             if (script.currentLine != null)
                 script.currentLine.Text = script.currentLine.Text.TrimStart(' ', '\t');
 
-            if (!string.IsNullOrEmpty(skipToTag))
+            return new MurMurVariable()
             {
-                var tag = skipToTag;
-                skipToTag = null;
-                return new MurMurVariable()
-                {
-                    Halt = script.Tags[tag]
-                };
-                }
-            else
-                return new MurMurVariable()
-                {
-                    Halt = context
-                };
+                Halt = context
+            };
         }
 
         public override MurMurVariable VisitInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context)
@@ -270,7 +258,7 @@ namespace MurMur
                 return new MurMurVariable();
             }
 
-            throw new MurMurException("Unknown method type", line);
+            throw new MurMurException("Unknown method type (" + function + ")", line);
         }
         
         public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
@@ -344,6 +332,7 @@ namespace MurMur
                 }
 
                 Visit(parentTree);
+                
             }
         }
     }
