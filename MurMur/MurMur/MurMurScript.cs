@@ -31,7 +31,8 @@ namespace MurMur
 
         public MurMurScript()
         {
-            Globals["goto"] = (Func<MurMurVariable, MurMurVariable>)Global_GoTo;
+            Globals["goto"] = (Action<MurMurVariable>)Global_GoTo;
+            Globals["skip"] = (Action<MurMurVariable>)Global_Skip;
             Globals["set"] = (Func<MurMurVariable, MurMurVariable, MurMurVariable>)Global_Set;
 
 #if UNITY_EDITOR
@@ -71,6 +72,7 @@ namespace MurMur
                 else if (State == ScriptState.NotInitialized)
                 {
                     visitor.Visit(Tags[currentTag]);
+                    State = ScriptState.Talking;
                 }
                 else
                 {
@@ -83,11 +85,6 @@ namespace MurMur
                 CheckForState();
             }
 
-            if (currentLine.Text != null && Globals.ContainsKey("say"))
-            {
-                visitor.Invoke("say", new MurMurVariable() { Text = currentLine.Text });
-            }
-
             return currentLine;
         }
 
@@ -95,8 +92,6 @@ namespace MurMur
         {
             if (visitor.currentStack.Count == 0)
                 State = ScriptState.Done;
-            else
-                State = ScriptState.Talking;
         }
 
         internal string NextText(int choice = -1)
@@ -111,6 +106,8 @@ namespace MurMur
         /// <param name="tagName"></param>
         public void GoToTag(string tagName)
         {
+            currentLine = null;
+            visitor.currentStack.Clear();
             State = ScriptState.NotInitialized;
             currentTag = tagName;
         }
@@ -135,10 +132,15 @@ namespace MurMur
 
         #region GLOBALS
 
-        MurMurVariable Global_GoTo(MurMurVariable tag)
+        void Global_GoTo(MurMurVariable tag)
         {
-            var target = tag.Text;
-            return visitor.Visit(Tags[target]);
+            GoToTag(tag.Text);
+        }
+
+        void Global_Skip(MurMurVariable tag)
+        {
+            visitor.skipToTag = tag.Text;
+            GoToTag(tag.Text);
         }
 
         MurMurVariable Global_Set(MurMurVariable name, MurMurVariable value)

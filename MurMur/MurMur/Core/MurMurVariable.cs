@@ -8,8 +8,15 @@ namespace MurMur
     [Serializable]
     public struct MurMurVariable
     {
+        public MurMurType Type;
         public string Text;
         public float Number;
+
+        public enum MurMurType
+        {
+            Uninitialized, Text, Number, Boolean
+        }
+
         public bool Boolean
         {
             get
@@ -25,6 +32,7 @@ namespace MurMur
 
         public MurMurVariable(string value)
         {
+            Type = MurMurType.Text;
             Text = value;
             Number = 0;
             Halt = null;
@@ -32,6 +40,8 @@ namespace MurMur
 
         public MurMurVariable(int value)
         {
+            Type = MurMurType.Number;
+
             Text = null;
             Number = value;
             Halt = null;
@@ -39,6 +49,8 @@ namespace MurMur
 
         public MurMurVariable(float value)
         {
+            Type = MurMurType.Number;
+
             Text = null;
             Number = value;
             Halt = null;
@@ -46,6 +58,8 @@ namespace MurMur
 
         public MurMurVariable(bool boolean)
         {
+            Type = MurMurType.Boolean;
+
             Text = null;
             Number = boolean? 1 : -1;
             Halt = null;
@@ -58,6 +72,11 @@ namespace MurMur
         public static bool operator !=(MurMurVariable a, MurMurVariable b)
         {
             return a.Text != b.Text || a.Number!=b.Number || a.Halt!=b.Halt;
+        }
+
+        internal bool HasValue()
+        {
+            return Type != MurMurType.Uninitialized;
         }
     }
 }

@@ -6,7 +6,7 @@ I'm here to help with the harvesting.
 		Ok, let me know if you need help.
 	
 	{option:[I'm not sure if I'm prepared]}
-        {menu:[All right, do you know what we are harvesting here?]}
+        {menu:[All right, do you know what we're harvesting here?]}
             {option: [No]}
                 They didn't tell you anything?
             {option: [Minerals, I guess?]}
