@@ -6,16 +6,16 @@ murmur: NEWLINE* tag+;
 tag: TAG_START TEXT NEWLINE* block;
 
 block
-	: (line
+	: (ifBlock
 	| pickBlock
 	| menuBlock
-	| ifBlock
+	| line
 	)+ ;
 
 // Block types
 pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand (NEWLINE+ | EOF);
 menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand (NEWLINE+ | EOF);
-ifBlock: ifCommand NEWLINE* block (elseCommand block)? endCommand (NEWLINE+ | EOF);
+ifBlock: ifCommand NEWLINE+ block (elseCommand NEWLINE+ block)? endCommand (NEWLINE+ | EOF);
 
 line
 	: lineFragment+ (NEWLINE+ | EOF)
@@ -27,6 +27,7 @@ lineFragment
 	| command
 	| fastPickBlock
 	;
+
 inlineIfBlock: ifCommand inlineIfTrueFragment (elseCommand inlineIfFalseFragment)? endCommand;
 inlineIfTrueFragment: lineFragment+;
 inlineIfFalseFragment: lineFragment+;
