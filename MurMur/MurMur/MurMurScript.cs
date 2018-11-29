@@ -22,13 +22,15 @@ namespace MurMur
 
         internal Dictionary<string,MurMurParser.BlockContext> Tags;
 
-        string currentTag;
-        bool clearStack;
+        string CurrentTag;
+        bool ClearStack;
 
-        internal MurMurLine currentLine;
-        private MurMurVisitor visitor;
+        internal MurMurLine CurrentLine;
+        private MurMurVisitor Visitor;
 
         public ScriptState State { get; internal set; }
+
+        public bool UnsafeMode;
 
         public MurMurScript()
         {
@@ -49,21 +51,21 @@ namespace MurMur
             MurMurParser murMurParser = new MurMurParser(tokenStream);
 
             var tree = murMurParser.murmur();
-            visitor = new MurMurVisitor(this);
+            Visitor = new MurMurVisitor(this);
 
-            visitor.Visit(tree);
+            Visitor.Visit(tree);
         }
 
         public MurMurLine Next(int choice = -1)
         {
-            if (currentLine != null && currentLine.Type != MurMurLineType.menu)
+            if (CurrentLine != null && CurrentLine.Type != MurMurLineType.menu)
                 choice = -1;
 
-            currentLine = null;
+            CurrentLine = null;
 
-            while (currentLine == null)
+            while (CurrentLine == null || string.IsNullOrEmpty(CurrentLine.Text))
             {
-                if (currentTag == null)
+                if (CurrentTag == null)
                     GoToTag(Tags.FirstOrDefault().Key);
 
                 if (State == ScriptState.Done)
@@ -72,25 +74,25 @@ namespace MurMur
                 }
                 else if (State == ScriptState.NotInitialized)
                 {
-                    visitor.Visit(Tags[currentTag]);
+                    Visitor.Visit(Tags[CurrentTag]);
                     State = ScriptState.Talking;
                 }
                 else
                 {
                     if (choice == -1) // This is a regular node
                     {
-                        visitor.Resume();
+                        Visitor.Resume();
                     }
                     else // This should be a menu
-                        visitor.ResumeMenu(choice);
+                        Visitor.ResumeMenu(choice);
                 }
 
                 if (State == ScriptState.NotInitialized)
                 {
-                    if (clearStack)
+                    if (ClearStack)
                     {
-                        visitor.currentStack.Clear();
-                        clearStack = false;
+                        Visitor.currentStack.Clear();
+                        ClearStack = false;
                     }
                     return Next(choice);
                 }
@@ -98,12 +100,12 @@ namespace MurMur
                 CheckForState();
             }
 
-            return currentLine;
+            return CurrentLine;
         }
 
         private void CheckForState()
         {
-            if (visitor.currentStack.Count == 0)
+            if (Visitor.currentStack.Count == 0)
                 State = ScriptState.Done;
         }
 
@@ -119,7 +121,7 @@ namespace MurMur
         public void GoToTag(string tagName)
         {
             State = ScriptState.NotInitialized;
-            currentTag = tagName;
+            CurrentTag = tagName;
         }
 
         internal void SetVariables(Dictionary<string, string> variables)
@@ -149,7 +151,7 @@ namespace MurMur
 
         void Global_Skip(MurMurVariable tag)
         {
-            clearStack = true;
+            ClearStack = true;
             GoToTag(tag.Text);
         }
 

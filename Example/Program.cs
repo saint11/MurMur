@@ -11,28 +11,29 @@ namespace MurMurExample
     {
         static string example = @"
 #start
+Hey there
+{player=[eita]}
 Hello {player}, welcome to the royal harvest outpost.
 {skip:[orders]}
 
 #orders
 {menu:[What are my orders?]}
 	{option:[Ask for more info]}
-		We're currently in currentLocation.
+		We're currently in {currentLocation}.
 		{skip:[orders]}
 	{option:[Mine for metals]}
     	Ok, I can do that.
 	{option:[Mine for elder blood]}
     	Yeah... I just hope it's safe.
 {end}
-This should appear only once!
 ";
         static void Main(string[] args)
         {
             var script = new MurMurScript();
+            script.UnsafeMode = true;
             script.LoadString(example);
             script.GoToTag("start");
 
-            script.SetString("player", "player_name");
             script.SetBool("welcome", false);
 
             int choice = 0;

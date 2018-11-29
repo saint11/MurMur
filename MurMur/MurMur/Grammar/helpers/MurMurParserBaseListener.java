@@ -195,18 +195,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParams(MurMurParser.ParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParams(MurMurParser.ParamsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStringExpression(MurMurParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -243,6 +231,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignExpression(MurMurParser.AssignExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignExpression(MurMurParser.AssignExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterComparissonExpression(MurMurParser.ComparissonExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -250,6 +250,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitComparissonExpression(MurMurParser.ComparissonExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodExpression(MurMurParser.MethodExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodExpression(MurMurParser.MethodExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -286,6 +298,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariableExpression(MurMurParser.VariableExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParams(MurMurParser.ParamsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParams(MurMurParser.ParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

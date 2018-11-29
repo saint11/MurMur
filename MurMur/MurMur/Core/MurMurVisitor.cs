@@ -44,16 +44,16 @@ namespace MurMur
             if (raw != null)
             {
                 var txt = raw.GetText();
-                script.currentLine.Text += txt;
+                script.CurrentLine.Text += txt;
                 return new MurMurVariable(txt);
             }
 
             var command = context.command();
             if (command != null)
             {
-                var txt = Visit(command);
+                var txt = Visit(command.expression());
                 if (txt.HasValue())
-                    script.currentLine.Text += txt.Text;
+                    script.CurrentLine.Text += txt.Text;
                 return txt;
             }
 
@@ -69,14 +69,14 @@ namespace MurMur
 
         public override MurMurVariable VisitLine([NotNull] MurMurParser.LineContext context)
         {
-            script.currentLine = new MurMurLine()
+            script.CurrentLine = new MurMurLine()
             {
                 Type = MurMurLineType.text,
                 Text = "",
             };
             base.VisitLine(context);
-            if (script.currentLine != null)
-                script.currentLine.Text = script.currentLine.Text.TrimStart(' ', '\t');
+            if (script.CurrentLine != null)
+                script.CurrentLine.Text = script.CurrentLine.Text.TrimStart(' ', '\t');
 
             return new MurMurVariable()
             {
@@ -137,7 +137,7 @@ namespace MurMur
         {
             if (lastChoice == -1) // never visited this menu
             {
-                script.currentLine = new MurMurLine()
+                script.CurrentLine = new MurMurLine()
                 {
                     Type = MurMurLineType.menu,
                     Text = ""
@@ -146,7 +146,7 @@ namespace MurMur
                 var expression = context.menuCommand().expression();
                 if (expression != null)
                 {
-                    script.currentLine.Text = Visit(expression).Text;
+                    script.CurrentLine.Text = Visit(expression).Text;
                 }
 
                 List<string> options = new List<string>();
@@ -154,7 +154,7 @@ namespace MurMur
                 {
                     options.Add(Visit(item.menuOptionCommand().expression()).Text);
                 }
-                script.currentLine.OptionsText = options.ToArray();
+                script.CurrentLine.OptionsText = options.ToArray();
 
                 currentStack.Push(context);
 
@@ -174,13 +174,20 @@ namespace MurMur
 
         }
 
-        public override MurMurVariable VisitCommand([NotNull] MurMurParser.CommandContext context)
+        public override MurMurVariable VisitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context)
         {
             var name = context.WORD().GetText();
-            var variable = VisitVariable(name);
+            var variable = FindVariable(name, context.start.Line);
 
             if (variable.HasValue())
                 return variable;
+
+            return Invoke(name, context.start.Line);
+        }
+
+        public override MurMurVariable VisitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context)
+        {
+            var name = context.WORD().GetText();
 
             var paramContexts = context.@params()?.expression();
             MurMurVariable[] parameters = null;
@@ -196,23 +203,29 @@ namespace MurMur
             return Invoke(name, context.start.Line, parameters);
         }
 
-        public MurMurVariable VisitVariable(string name)
+        public MurMurVariable FindVariable(string name, int line)
         {
-            var value = script.Globals[name];
-            if (value is MurMurVariable)
-                return (MurMurVariable)value;
+            if (script.Globals.ContainsKey(name))
+            {
+                var value = script.Globals[name];
+                if (value is MurMurVariable)
+                    return (MurMurVariable)value;
 
-            if (value is string)
-                return new MurMurVariable(value as string);
+                if (value is string)
+                    return new MurMurVariable(value as string);
 
-            if (value is int)
-                return new MurMurVariable((int)value);
+                if (value is int)
+                    return new MurMurVariable((int)value);
 
-            if (value is float)
-                return new MurMurVariable((float)value);
+                if (value is float)
+                    return new MurMurVariable((float)value);
 
-            //TODO: Should display error
-            return new MurMurVariable();
+                throw new MurMurException("Unknown variable type (" + name + ")", line);
+            }
+            else if (script.UnsafeMode)
+                return new MurMurVariable("??" + name + "??");
+            else
+                throw new MurMurException("Could not find variable " + name, line);
         }
 
         internal MurMurVariable Invoke(string function, int line, params MurMurVariable[] parameters)
@@ -260,9 +273,18 @@ namespace MurMur
                 return new MurMurVariable();
             }
 
-            throw new MurMurException("Unknown method type (" + function + ")", line);
+            if (script.UnsafeMode)
+                return new MurMurVariable("??" + function + "??");
+            else
+                throw new MurMurException("Unknown method type (" + function + ")", line);
         }
-        
+
+        public override MurMurVariable VisitAssignExpression([NotNull] MurMurParser.AssignExpressionContext context)
+        {
+            script.Globals[context.WORD().GetText()] = Visit(context.expression());
+            return new MurMurVariable();
+        }
+
         public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
         {
             return new MurMurVariable(Visit(context.expression()[0]) == Visit(context.expression()[1]));
@@ -273,21 +295,9 @@ namespace MurMur
             return new MurMurVariable(context.TRUE() != null);
         }
 
-        public override MurMurVariable VisitVariableExpression([NotNull] MurMurParser.VariableExpressionContext context)
-        {
-            var variable = script.Globals[context.WORD().GetText()];
-            if (variable is MurMurVariable)
-                return (MurMurVariable)variable;
-
-            return new MurMurVariable();
-        }
-
         public override MurMurVariable VisitStringExpression([NotNull] MurMurParser.StringExpressionContext context)
         {
-            return new MurMurVariable()
-            {
-                Text = context.STRING().GetText()
-            };
+            return new MurMurVariable(context.STRING().GetText());
         }
 
         protected override bool ShouldVisitNextChild([NotNull] IRuleNode node, MurMurVariable currentResult)

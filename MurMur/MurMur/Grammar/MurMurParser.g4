@@ -39,18 +39,23 @@ fastPickBlock: FAST_PICK_START FAST_PICK_TEXT (SUB_TEXT_SEPARATOR FAST_PICK_TEXT
 pickThisBlock: pickThisCommand NEWLINE* block*;
 
 command
-	: COMMAND_START WORD (COMMAND_PARAMS_START params)? COMMAND_END
+	: COMMAND_START expression COMMAND_END
 	;
-params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
+
 expression
 	: (NUMBER | INT)									# numberExpression
-	| WORD												# variableExpression
+	| WORD												# methodOrVariableExpression
+	| WORD (COMMAND_PARAMS_START params)?				# methodExpression
 	| (TRUE | FALSE)									# booleanExpression
 	| COMMAND_STRING_START STRING COMMAND_STRING_END	# stringExpression
+	| WORD ASSIGN_SIGNAL expression						# assignExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
 	| expression ADD_SUB_SIGNAL expression				# additionExpression
 	| expression COMPARISSON_SIGNAL expression			# comparissonExpression
 	;
+
+params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
+
 
 pickCommand: COMMAND_START KEYWORD_PICK COMMAND_END;
 pickThisCommand: COMMAND_START KEYWORD_PICK_THIS COMMAND_PARAMS_START NUMBER COMMAND_END;

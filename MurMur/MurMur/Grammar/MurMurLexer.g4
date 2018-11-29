@@ -59,6 +59,7 @@ mode INSIDE_COMMAND;
 	WORD: (LOWERCASE | UPPERCASE | '_')+;
 
 	// Comparisson
+	ASSIGN_SIGNAL: ('=');
 	COMPARISSON_SIGNAL: ('==' | '!=' | '>' | '<' | '>=' | '<=');
 	MUL_DIV_SIGNAL: '*'|'/';
 	ADD_SUB_SIGNAL: '+'|'-';

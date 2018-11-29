@@ -1,0 +1,95 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions: [mur]
+scope: string.unquoted 
+contexts:
+  main:
+    - match: "{"
+      scope: keyword.operator
+      push: call_command
+
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '//'
+      push: line_comment
+
+    - name: Dialog Tag
+      match: '#'
+      push: dialog_tag
+
+  error:
+    - meta_scope: invalid.illegal
+    - match: $
+      pop: true
+
+  call_command:
+
+    - match: "(/)"
+      scope: keyword.operator
+
+    - match: \b(if|else|end|menu)\b
+      scope: keyword.conditional
+    
+    - match: ':'
+      scope: keyword.operator
+
+    - match: '='
+      scope: keyword.operator
+      set: call_command
+    
+    - match: '\['
+      scope: string.quoted.double
+      push: pure_string
+
+    - match: \b(true|false)\b
+      scope: constant.language
+
+    - match: \b\d+\b
+      scope: constant.numeric
+
+    - match: ((==)|(!=)|(>=)|(<=)|>|<)
+      scope: keyword.operator.logical
+
+    - match: (=|\+|-|\*|/)
+      scope: keyword.operator.assignment
+
+    - match: (,)
+      scope: keyword.operator
+
+    - match: "([a-zA-Z]+[ ]+[a-zA-Z]+)+"
+      scope: invalid
+      
+    - match: "[a-zA-Z]+"
+      scope: storage.type
+
+    - match: '}'
+      scope: keyword.operator
+      pop: true
+
+  pure_string:
+    - meta_scope: string.quoted
+
+    - match: ']'
+      scope: string.quoted.double
+      pop: true
+
+  menu_args:
+    - meta_scope: variable.parameter 
+    - match: '}'
+      scope: keyword.operator
+      pop: true
+    - match: $
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line
+    - match: $
+      pop: true
+
+  dialog_tag:
+    - meta_scope: entity.name
+    - match: $
+      pop: true
+
+  text:
+    - meta_scope: invalid.illegal
