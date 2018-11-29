@@ -169,6 +169,18 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitStringExpression(MurMurParser.StringExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code methodOrVariableExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodOrVariableExpression(MurMurParser.MethodOrVariableExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code methodOrVariableExpression}
+	 * labeled alternative in {@link MurMurParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodOrVariableExpression(MurMurParser.MethodOrVariableExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code additionExpression}
 	 * labeled alternative in {@link MurMurParser#expression}.
 	 * @param ctx the parse tree
@@ -252,18 +264,6 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBooleanExpression(MurMurParser.BooleanExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code variableExpression}
-	 * labeled alternative in {@link MurMurParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableExpression(MurMurParser.VariableExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code variableExpression}
-	 * labeled alternative in {@link MurMurParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableExpression(MurMurParser.VariableExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#params}.
 	 * @param ctx the parse tree

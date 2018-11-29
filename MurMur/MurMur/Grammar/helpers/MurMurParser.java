@@ -1332,6 +1332,18 @@ public class MurMurParser extends Parser {
 			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).exitStringExpression(this);
 		}
 	}
+	public static class MethodOrVariableExpressionContext extends ExpressionContext {
+		public TerminalNode WORD() { return getToken(MurMurParser.WORD, 0); }
+		public MethodOrVariableExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).enterMethodOrVariableExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).exitMethodOrVariableExpression(this);
+		}
+	}
 	public static class AdditionExpressionContext extends ExpressionContext {
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -1444,18 +1456,6 @@ public class MurMurParser extends Parser {
 			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).exitBooleanExpression(this);
 		}
 	}
-	public static class VariableExpressionContext extends ExpressionContext {
-		public TerminalNode WORD() { return getToken(MurMurParser.WORD, 0); }
-		public VariableExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).enterVariableExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MurMurParserListener ) ((MurMurParserListener)listener).exitVariableExpression(this);
-		}
-	}
 
 	public final ExpressionContext expression() throws RecognitionException {
 		return expression(0);
@@ -1496,7 +1496,7 @@ public class MurMurParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new VariableExpressionContext(_localctx);
+				_localctx = new MethodOrVariableExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(218);

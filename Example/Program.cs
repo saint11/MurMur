@@ -9,11 +9,9 @@ namespace MurMurExample
 {
     class Program
     {
-        static string example = @"
-#start
-Hey there
-{player=[eita]}
-Hello {player}, welcome to the royal harvest outpost.
+        static string example = @"#start
+{player=[Rodrigson]}
+Hello {player}, {[welcome]} to the royal harvest outpost.
 {skip:[orders]}
 
 #orders
@@ -33,8 +31,6 @@ Hello {player}, welcome to the royal harvest outpost.
             script.UnsafeMode = true;
             script.LoadString(example);
             script.GoToTag("start");
-
-            script.SetBool("welcome", false);
 
             int choice = 0;
 
@@ -65,7 +61,6 @@ Hello {player}, welcome to the royal harvest outpost.
                     choice = value;
                 }
             }
-            
         }
     }
 }

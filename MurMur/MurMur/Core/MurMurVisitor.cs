@@ -289,7 +289,20 @@ namespace MurMur
         {
             return new MurMurVariable(Visit(context.expression()[0]) == Visit(context.expression()[1]));
         }
+        
+        public override MurMurVariable VisitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context)
+        {
+            var a = Visit(context.expression()[0]);
+            var b = Visit(context.expression()[1]);
+            if (a.Type== MurMurVariable.MurMurType.Text && b.Type== MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Text + b.Text);
+            }
 
+            throw new MurMurException(string.Format("Cannot add {0} and {1}", context.expression()[0].GetText(), context.expression()[1].GetText()),
+                context.start.Line);
+        }
+        
         public override MurMurVariable VisitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context)
         {
             return new MurMurVariable(context.TRUE() != null);

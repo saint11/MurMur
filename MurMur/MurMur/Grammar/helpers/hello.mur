@@ -1,6 +1,6 @@
 #start
 {player=[Rodrigson]}
-Hello {player}, welcome to the royal harvest outpost.
+Hello {player}, {[welcome]} to the royal harvest outpost.
 {skip:[orders]}
 
 #orders

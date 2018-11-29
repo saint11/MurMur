@@ -58,9 +58,7 @@ namespace MurMur
 
         public MurMurLine Next(int choice = -1)
         {
-            if (CurrentLine != null && CurrentLine.Type != MurMurLineType.menu)
-                choice = -1;
-
+            var previousLine = CurrentLine;
             CurrentLine = null;
 
             while (CurrentLine == null || string.IsNullOrEmpty(CurrentLine.Text))
@@ -74,17 +72,20 @@ namespace MurMur
                 }
                 else if (State == ScriptState.NotInitialized)
                 {
-                    Visitor.Visit(Tags[CurrentTag]);
                     State = ScriptState.Talking;
+                    Visitor.Visit(Tags[CurrentTag]);
                 }
                 else
                 {
-                    if (choice == -1) // This is a regular node
+                    if (previousLine?.Type == MurMurLineType.menu)
                     {
+                        Visitor.ResumeMenu(choice);
+                    }
+                    else
+                    {
+                        CurrentLine = null;
                         Visitor.Resume();
                     }
-                    else // This should be a menu
-                        Visitor.ResumeMenu(choice);
                 }
 
                 if (State == ScriptState.NotInitialized)
@@ -101,7 +102,7 @@ namespace MurMur
             }
 
             return CurrentLine;
-        }
+         }
 
         private void CheckForState()
         {
