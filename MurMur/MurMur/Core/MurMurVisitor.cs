@@ -281,8 +281,9 @@ namespace MurMur
 
         public override MurMurVariable VisitAssignExpression([NotNull] MurMurParser.AssignExpressionContext context)
         {
-            script.Globals[context.WORD().GetText()] = Visit(context.expression());
-            return new MurMurVariable();
+            var value = Visit(context.expression());
+            script.Globals[context.WORD().GetText()] = value;
+            return value;
         }
 
         public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
@@ -310,7 +311,8 @@ namespace MurMur
 
         public override MurMurVariable VisitStringExpression([NotNull] MurMurParser.StringExpressionContext context)
         {
-            return new MurMurVariable(context.STRING().GetText());
+            string text = context.STRING().GetText();
+            return new MurMurVariable(text);
         }
 
         protected override bool ShouldVisitNextChild([NotNull] IRuleNode node, MurMurVariable currentResult)

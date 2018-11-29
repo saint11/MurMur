@@ -1564,7 +1564,7 @@ public class MurMurParser extends Parser {
 				setState(229);
 				match(ASSIGN_SIGNAL);
 				setState(230);
-				expression(4);
+				expression(1);
 				}
 				break;
 			}
@@ -1585,11 +1585,11 @@ public class MurMurParser extends Parser {
 						_localctx = new MultiplicationExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(233);
-						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(234);
 						match(MUL_DIV_SIGNAL);
 						setState(235);
-						expression(4);
+						expression(5);
 						}
 						break;
 					case 2:
@@ -1597,11 +1597,11 @@ public class MurMurParser extends Parser {
 						_localctx = new AdditionExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(236);
-						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(237);
 						match(ADD_SUB_SIGNAL);
 						setState(238);
-						expression(3);
+						expression(4);
 						}
 						break;
 					case 3:
@@ -1609,11 +1609,11 @@ public class MurMurParser extends Parser {
 						_localctx = new ComparissonExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(239);
-						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(240);
 						match(COMPARISSON_SIGNAL);
 						setState(241);
-						expression(2);
+						expression(3);
 						}
 						break;
 					}
@@ -2051,11 +2051,11 @@ public class MurMurParser extends Parser {
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 3);
+			return precpred(_ctx, 4);
 		case 1:
-			return precpred(_ctx, 2);
+			return precpred(_ctx, 3);
 		case 2:
-			return precpred(_ctx, 1);
+			return precpred(_ctx, 2);
 		}
 		return true;
 	}
@@ -2138,12 +2138,12 @@ public class MurMurParser extends Parser {
 		"\7\33\2\2\u00dd\u00e0\7\33\2\2\u00de\u00df\7\13\2\2\u00df\u00e1\5\"\22"+
 		"\2\u00e0\u00de\3\2\2\2\u00e0\u00e1\3\2\2\2\u00e1\u00ea\3\2\2\2\u00e2\u00ea"+
 		"\t\3\2\2\u00e3\u00e4\7\f\2\2\u00e4\u00e5\7#\2\2\u00e5\u00ea\7$\2\2\u00e6"+
-		"\u00e7\7\33\2\2\u00e7\u00e8\7\34\2\2\u00e8\u00ea\5 \21\6\u00e9\u00da\3"+
+		"\u00e7\7\33\2\2\u00e7\u00e8\7\34\2\2\u00e8\u00ea\5 \21\3\u00e9\u00da\3"+
 		"\2\2\2\u00e9\u00dc\3\2\2\2\u00e9\u00dd\3\2\2\2\u00e9\u00e2\3\2\2\2\u00e9"+
-		"\u00e3\3\2\2\2\u00e9\u00e6\3\2\2\2\u00ea\u00f6\3\2\2\2\u00eb\u00ec\f\5"+
-		"\2\2\u00ec\u00ed\7\36\2\2\u00ed\u00f5\5 \21\6\u00ee\u00ef\f\4\2\2\u00ef"+
-		"\u00f0\7\37\2\2\u00f0\u00f5\5 \21\5\u00f1\u00f2\f\3\2\2\u00f2\u00f3\7"+
-		"\35\2\2\u00f3\u00f5\5 \21\4\u00f4\u00eb\3\2\2\2\u00f4\u00ee\3\2\2\2\u00f4"+
+		"\u00e3\3\2\2\2\u00e9\u00e6\3\2\2\2\u00ea\u00f6\3\2\2\2\u00eb\u00ec\f\6"+
+		"\2\2\u00ec\u00ed\7\36\2\2\u00ed\u00f5\5 \21\7\u00ee\u00ef\f\5\2\2\u00ef"+
+		"\u00f0\7\37\2\2\u00f0\u00f5\5 \21\6\u00f1\u00f2\f\4\2\2\u00f2\u00f3\7"+
+		"\35\2\2\u00f3\u00f5\5 \21\5\u00f4\u00eb\3\2\2\2\u00f4\u00ee\3\2\2\2\u00f4"+
 		"\u00f1\3\2\2\2\u00f5\u00f8\3\2\2\2\u00f6\u00f4\3\2\2\2\u00f6\u00f7\3\2"+
 		"\2\2\u00f7!\3\2\2\2\u00f8\u00f6\3\2\2\2\u00f9\u00fe\5 \21\2\u00fa\u00fb"+
 		"\7\r\2\2\u00fb\u00fd\5 \21\2\u00fc\u00fa\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe"+

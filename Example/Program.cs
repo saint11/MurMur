@@ -10,7 +10,8 @@ namespace MurMurExample
     class Program
     {
         static string example = @"#start
-{player=[Rodrigson]}
+{eita=[sons]}
+{player=[Rodrig] + eita}
 Hello {player}, {[welcome]} to the royal harvest outpost.
 {skip:[orders]}
 

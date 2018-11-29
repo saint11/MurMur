@@ -48,10 +48,10 @@ expression
 	| WORD (COMMAND_PARAMS_START params)?				# methodExpression
 	| (TRUE | FALSE)									# booleanExpression
 	| COMMAND_STRING_START STRING COMMAND_STRING_END	# stringExpression
-	| WORD ASSIGN_SIGNAL expression						# assignExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
 	| expression ADD_SUB_SIGNAL expression				# additionExpression
 	| expression COMPARISSON_SIGNAL expression			# comparissonExpression
+	| WORD ASSIGN_SIGNAL expression						# assignExpression
 	;
 
 params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
