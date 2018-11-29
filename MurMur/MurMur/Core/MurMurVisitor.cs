@@ -16,6 +16,8 @@ namespace MurMur
 
         int lastChoice = -1;
 
+        internal bool IsMenu;
+
         public MurMurVisitor(MurMurScript script)
         {
             currentStack = new Stack<ParserRuleContext>();
@@ -154,6 +156,8 @@ namespace MurMur
                 }
                 script.currentLine.OptionsText = options.ToArray();
 
+                currentStack.Push(context);
+
                 return new MurMurVariable()
                 {
                     Halt = context
@@ -164,8 +168,6 @@ namespace MurMur
                 var blocks = context.menuSubBlock(); 
                 var block = blocks[lastChoice];
                 lastChoice = -1;
-
-                currentStack.Push(context);
 
                 return Visit(block);
             }

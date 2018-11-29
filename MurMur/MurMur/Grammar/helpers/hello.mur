@@ -1,7 +1,14 @@
 #start
- Hello {player}{if:welcome==true}, welcome to the harvest outpost. {else}.{end}
-{skip:[another]}
-//Talk to you later then.
+Hello {player}, welcome to the royal harvest outpost.
+{skip:[orders]}
 
-#another
- It works!
+#orders
+{menu:[What are my orders?]}
+	{option:[Ask for more info]}
+		We're currently in [currentLocation].
+		{skip:orders}
+	{option:[Mine for metals]}
+    	Ok, I can do that.
+	{option:[Mine for elder blood]}
+    	Yeah... I just hope it's safe.
+{end}

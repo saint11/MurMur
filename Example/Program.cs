@@ -10,13 +10,21 @@ namespace MurMurExample
     class Program
     {
         static string example = @"
-#another
-It works!
-
 #start
- Hello {player}
-{skip:[another]}
-another line
+Hello {player}, welcome to the royal harvest outpost.
+{skip:[orders]}
+
+#orders
+{menu:[What are my orders?]}
+	{option:[Ask for more info]}
+		We're currently in currentLocation.
+		{skip:[orders]}
+	{option:[Mine for metals]}
+    	Ok, I can do that.
+	{option:[Mine for elder blood]}
+    	Yeah... I just hope it's safe.
+{end}
+This should appear only once!
 ";
         static void Main(string[] args)
         {
