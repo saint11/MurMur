@@ -16,7 +16,7 @@ namespace MurMur
 
         int lastChoice = -1;
 
-        internal bool IsMenu;
+        internal List<MurMurParser.MenuSubBlockContext> availableOptions;
 
         public MurMurVisitor(MurMurScript script)
         {
@@ -150,12 +150,17 @@ namespace MurMur
                 }
 
                 List<string> options = new List<string>();
+                availableOptions = new List<MurMurParser.MenuSubBlockContext>();
                 foreach (var item in context.menuSubBlock())
                 {
-                    options.Add(Visit(item.menuOptionCommand().expression()).Text);
+                    var condition = item.menuOptionCommand().expression()[1];
+                    if (condition == null || Visit(condition).Boolean)
+                    {
+                        options.Add(Visit(item.menuOptionCommand().expression()[0]).Text);
+                        availableOptions.Add(item);
+                    }
                 }
                 script.CurrentLine.OptionsText = options.ToArray();
-
                 currentStack.Push(context);
 
                 return new MurMurVariable()
@@ -166,7 +171,8 @@ namespace MurMur
             else // We've been here before, let's run a submenu block
             {
                 var blocks = context.menuSubBlock(); 
-                var block = blocks[lastChoice];
+                var block = availableOptions[lastChoice];
+                availableOptions = null;
                 lastChoice = -1;
 
                 return Visit(block);

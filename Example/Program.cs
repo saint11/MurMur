@@ -11,31 +11,11 @@ namespace MurMurExample
     {
         static string example = @"
 #init
-	{fistTimeTalking=false}
-	{skip:[start]}
-
-#start
-	Greetings {player}.
-	{if:fistTimeTalking}
-		Welcome to the Royal Castle of Ghoulcrest.
-		{menu:[Are you familiar with your job in here?]}
-			{option:[Yes, I know what I am doing]}
-				Good. Let me know if you change your mind.
-			{option:[No, explain it to me]}
-				{skip:[intro]}
-		{end}
-	{else}
-		I hope you find everything in order.
-		{menu:[Can I help you with anything?]}
-			{option:[I need help understanding this job]}
-				{skip:[intro]}
-			{option:[No, thanks]}
-				Just let me know if you need anything.
-		{end}
-	{end}
-
-#intro
-	We are here to mine Elder Blood
+	{menu:[Hello]}
+        {option:[this should appear], true} Yay
+        {option:[this shouldn't], true} Nay
+        {option:[and this should], true} Yay
+    {end}
 ";
         static void Main(string[] args)
         {
