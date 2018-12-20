@@ -51,7 +51,7 @@ Basically, everything is a line. Lines can contain text or commands. Line breaks
 
 [Still working on the documentation, sorry, for now check the example project included in this repository]
 
-## Licence
+## License
 MIT License
 
 Copyright (c) 2018 Pedro Medeiros de Almeida
