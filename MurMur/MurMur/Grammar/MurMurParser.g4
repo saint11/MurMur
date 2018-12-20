@@ -33,7 +33,7 @@ inlineIfTrueFragment: lineFragment+;
 inlineIfFalseFragment: lineFragment+;
 
 menuSubBlock
-	: menuOptionCommand NEWLINE* block
+	: menuOptionCommand NEWLINE* block?
 	;
 
 fastPickBlock: FAST_PICK_START FAST_PICK_TEXT (SUB_TEXT_SEPARATOR FAST_PICK_TEXT)* FAST_PICK_END;

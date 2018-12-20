@@ -10,7 +10,8 @@ namespace MurMur
         text,
         command,
         menu,
-        eof
+        eof,
+        empty
     }
 
     public class MurMurLine

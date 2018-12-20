@@ -61,8 +61,14 @@ namespace MurMur
             var previousLine = CurrentLine;
             CurrentLine = null;
 
-            while (CurrentLine == null || string.IsNullOrEmpty(CurrentLine.Text))
+            while (CurrentLine == null || CurrentLine.Type == MurMurLineType.empty || string.IsNullOrEmpty(CurrentLine.Text))
             {
+                if (CurrentLine?.Type == MurMurLineType.empty)
+                {
+                    previousLine = CurrentLine;
+                    CurrentLine = null;
+                }
+
                 if (CurrentTag == null)
                     GoToTag(Tags.FirstOrDefault().Key);
 

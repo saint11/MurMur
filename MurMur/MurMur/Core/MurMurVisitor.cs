@@ -170,12 +170,24 @@ namespace MurMur
             }
             else // We've been here before, let's run a submenu block
             {
-                var blocks = context.menuSubBlock(); 
                 var block = availableOptions[lastChoice];
                 availableOptions = null;
                 lastChoice = -1;
 
-                return Visit(block);
+                
+                if (block.block() != null)
+                {
+                    return Visit(block.block());
+                }
+                else // Empty menu subblock, let's skip ahead
+                {
+                    script.CurrentLine = new MurMurLine()
+                    {
+                        Type = MurMurLineType.empty,
+                    };
+
+                    return new MurMurVariable();
+                }
             }
 
         }
@@ -294,7 +306,13 @@ namespace MurMur
 
         public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
         {
-            return new MurMurVariable(Visit(context.expression()[0]) == Visit(context.expression()[1]));
+            var signal = context.COMPARISSON_SIGNAL().GetText();
+            if (signal == "==")
+                return new MurMurVariable(Visit(context.expression()[0]) == Visit(context.expression()[1]));
+            else if (signal == "!=")
+                return new MurMurVariable(Visit(context.expression()[0]) != Visit(context.expression()[1]));
+            else
+                throw new MurMurException(string.Format("Unknown comparisson signal '{0}'", signal), context.start.Line);
         }
         
         public override MurMurVariable VisitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context)

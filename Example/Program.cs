@@ -12,10 +12,13 @@ namespace MurMurExample
         static string example = @"
 #init
 	{menu:[Hello]}
-        {option:[this should appear], true} Yay
-        {option:[this shouldn't], true} Nay
-        {option:[and this should], true} Yay
+        {option:[this should appear], true}
+            Yay
+        {option:[this shouldn't], true}
+        {option:[and this should], true}
+            Nay
     {end}
+    Endgame
 ";
         static void Main(string[] args)
         {
