@@ -6,11 +6,13 @@ using System.Diagnostics;
 using System.Collections;
 using System;
 using System.Linq;
+using System.IO;
 
 namespace MurMur
 {
     public enum ScriptState
     {
+        Empty,
         NotInitialized,
         Talking,
         Done
@@ -30,21 +32,68 @@ namespace MurMur
 
         public ScriptState State { get; internal set; }
 
+
+        public string Path;
         public bool UnsafeMode;
 
         public MurMurScript()
         {
-            Globals["goto"] = (Action<MurMurVariable>)Global_GoTo;
-            Globals["skip"] = (Action<MurMurVariable>)Global_Skip;
+            Clear();
+        }
+
+        public void Clear()
+        {
+            State = ScriptState.Empty;
+            Path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            ClearStack = false;
+            CurrentTag = null;
+            Tags = new Dictionary<string, MurMurParser.BlockContext>();
+            Globals = new Dictionary<string, object>();
+
+            Globals["goto"] = (Action<MurMurVariable>) Global_GoTo;
+            Globals["skip"] = (Action<MurMurVariable>) Global_Skip;
             Globals["set"] = (Func<MurMurVariable, MurMurVariable, MurMurVariable>)Global_Set;
 
 #if UNITY_EDITOR
-                Globals["print"] = (Func<MurMurVariable, MurMurVariable>)Global_Print;
+            Globals["print"] = (Func<MurMurVariable, MurMurVariable>)Global_Print;
 #endif
+        }
+
+        public void LoadFile(string path)
+        {
+            if (State != ScriptState.Empty)
+                throw new Exception("Cannot load over a loaded script, use 'Clear' before.");
+
+
+            Path = path;
+            string text;
+
+            if (File.Exists(path))
+            {
+                text = File.ReadAllText(path);
+                LoadString(text);
+            }
+            throw new Exception(string.Format("Cannot find file {0} to load. Are you sure it's there?", path));
+        }
+
+
+        /// <summary>
+        /// Using when including new files in the MurMurScript, for now it literally pastes the text in the end of the current file.
+        /// </summary>
+        /// <param name="file"></param>
+        void AppendFile(string file)
+        {
+            throw new NotImplementedException();
         }
 
         public void LoadString(string input)
         {
+            if (State != ScriptState.Empty)
+                throw new Exception("Cannot load over a loaded script, use 'Clear' before.");
+
+            State = ScriptState.NotInitialized;
+
             AntlrInputStream inputStream = new AntlrInputStream(input);
             MurMurLexer murMurLexer = new MurMurLexer(inputStream);
             CommonTokenStream tokenStream = new CommonTokenStream(murMurLexer);
@@ -55,6 +104,7 @@ namespace MurMur
 
             Visitor.Visit(tree);
         }
+
 
         public MurMurLine Next(int choice = -1)
         {

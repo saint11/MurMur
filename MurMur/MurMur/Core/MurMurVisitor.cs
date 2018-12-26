@@ -223,7 +223,18 @@ namespace MurMur
                     parameters[i] = Visit(paramContexts[i]);
                 }
             }
-            return Invoke(name, context.start.Line, parameters);
+
+            if (script.Globals.ContainsKey(name))
+                try
+                {
+                    return Invoke(name, context.start.Line, parameters);
+                }
+                catch (Exception e)
+                {
+                    throw new MurMurException(string.Format("Method {0} failed with the message: {1}",name, e.Message), context.start.Line);
+                }
+            else
+                throw new MurMurException(string.Format("Couldn't find any variable or method called {0}", name), context.start.Line);
         }
 
         public MurMurVariable FindVariable(string name, int line)

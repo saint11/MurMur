@@ -11,15 +11,25 @@ namespace MurMurExample
     {
         static string example = @"
 #init
-    Let's say {[bana] + [na] + (3 + 5)}.
-	{menu:[Hello]}
-        {option:[this should appear], true}
-            Yay
-        {option:[this shouldn't], true}
-        {option:[and this should], true}
-            Nay
-    {end}
-    Endgame
+  {goto:[tag]}
+
+#tag
+  Line of dialog
+  Another line, with a {variable} or {shake:2} method
+  {menu:[Strings are under square brackets]}
+    {option:[This is a menu option]}
+      This option will render this line.
+    {option:[This is another menu option]}
+      The other option will render this other line and jump to another tag
+      {skip:[another]}
+  {end}
+      
+#another
+  This is another tag!
+  You can also set values and make operations
+  {foo = [abra]}
+  {boo = [cadabra]}
+  Let's say {foo + boo}
 ";
         static void Main(string[] args)
         {
