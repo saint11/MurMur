@@ -78,5 +78,23 @@ namespace MurMur
         {
             return Type != MurMurType.Uninitialized;
         }
+
+        public override string ToString()
+        {
+            if (Type == MurMurType.Text)
+            {
+                return Text;
+            }
+            else if (Type == MurMurType.Number)
+            {
+                return Number.ToString();
+            }
+            else if (Type == MurMurType.Boolean)
+            {
+                return Boolean.ToString();
+            }
+
+            return "UNDEFINED VALUE";
+        }
     }
 }

@@ -27,6 +27,9 @@ mode INSIDE_COMMAND;
 	COMMAND_PARAMS_START:(':');
 	COMMAND_STRING_START:('[') -> pushMode(STRING_MODE); //go is an exception and allows free text input
 
+	OPEN_PAREN: ('(');
+	CLOSE_PAREN: (')');
+
 	COMMAND_PARAMS_SEPARATOR: (',');
 	
 	COMMAND_END: ('}') -> popMode;
@@ -54,8 +57,7 @@ mode INSIDE_COMMAND;
 	FALSE: F A L S E;
 
 	// Expressions
-	NUMBER: DIGIT+ ([.,] DIGIT+)?;
-	INT: DIGIT+ ;
+	NUMBER: DIGIT+ ([.] DIGIT+)?;
 	WORD: (LOWERCASE | UPPERCASE | '_')+;
 
 	// Comparisson

@@ -52,8 +52,13 @@ namespace MurMur
             if (command != null)
             {
                 var txt = Visit(command.expression());
-                if (txt.HasValue())
+                if (txt.Type == MurMurVariable.MurMurType.Text)
                     script.CurrentLine.Text += txt.Text;
+                else if (txt.Type == MurMurVariable.MurMurType.Number)
+                    script.CurrentLine.Text += txt.Number.ToString();
+                else if (txt.Type == MurMurVariable.MurMurType.Boolean)
+                    script.CurrentLine.Text += txt.Boolean.ToString();
+                    
                 return txt;
             }
 
@@ -314,30 +319,67 @@ namespace MurMur
             else
                 throw new MurMurException(string.Format("Unknown comparisson signal '{0}'", signal), context.start.Line);
         }
-        
-        public override MurMurVariable VisitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context)
+
+        #region Operations And Values
+
+        public override MurMurVariable VisitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context)
         {
-            var a = Visit(context.expression()[0]);
-            var b = Visit(context.expression()[1]);
-            if (a.Type== MurMurVariable.MurMurType.Text && b.Type== MurMurVariable.MurMurType.Text)
+            return Visit(context.expression());
+        }
+
+        public override MurMurVariable VisitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context)
+        {
+            var values = context.expression();
+            var a = Visit(values[0]);
+            var b = Visit(values[1]);
+
+            return AddValues(a, b);
+        }
+
+        private static MurMurVariable AddValues(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Text)
             {
                 return new MurMurVariable(a.Text + b.Text);
             }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Number.ToString() + b.Text);
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Text + b.Number.ToString());
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Number + b.Number);
+            }
 
-            throw new MurMurException(string.Format("Cannot add {0} and {1}", context.expression()[0].GetText(), context.expression()[1].GetText()),
-                context.start.Line);
+            throw new Exception(string.Format("Cannot add {0} and {1}", a.ToString(), b.ToString()));
         }
-        
+
+
         public override MurMurVariable VisitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context)
         {
             return new MurMurVariable(context.TRUE() != null);
         }
 
-        public override MurMurVariable VisitStringExpression([NotNull] MurMurParser.StringExpressionContext context)
+        public override MurMurVariable VisitString([NotNull] MurMurParser.StringContext context)
         {
             string text = context.STRING().GetText();
             return new MurMurVariable(text);
         }
+
+        public override MurMurVariable VisitNumberExpression([NotNull] MurMurParser.NumberExpressionContext context)
+        {
+            string text = context.GetText();
+            if (float.TryParse(text, out float value))
+                return new MurMurVariable(value);
+            else
+                throw new MurMurException("Cannot parse " + text + "into a float", context.start.Line);
+        }
+
+        #endregion
 
         protected override bool ShouldVisitNextChild([NotNull] IRuleNode node, MurMurVariable currentResult)
         {

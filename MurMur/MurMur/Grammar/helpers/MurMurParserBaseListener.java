@@ -195,6 +195,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterString(MurMurParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(MurMurParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStringExpression(MurMurParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -219,18 +231,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAdditionExpression(MurMurParser.AdditionExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAdditionExpression(MurMurParser.AdditionExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNumberExpression(MurMurParser.NumberExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -238,6 +238,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNumberExpression(MurMurParser.NumberExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAdditionExpressionNN(MurMurParser.AdditionExpressionNNContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdditionExpressionNN(MurMurParser.AdditionExpressionNNContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -286,6 +298,18 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMultiplicationExpression(MurMurParser.MultiplicationExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAdditionExpressionBase(MurMurParser.AdditionExpressionBaseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdditionExpressionBase(MurMurParser.AdditionExpressionBaseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

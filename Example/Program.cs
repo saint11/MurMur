@@ -11,6 +11,7 @@ namespace MurMurExample
     {
         static string example = @"
 #init
+    Let's say {[bana] + [na] + (3 + 5)}.
 	{menu:[Hello]}
         {option:[this should appear], true}
             Yay

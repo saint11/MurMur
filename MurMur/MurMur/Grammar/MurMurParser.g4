@@ -43,14 +43,23 @@ command
 	: COMMAND_START expression COMMAND_END
 	;
 
+
+string
+	: COMMAND_STRING_START STRING COMMAND_STRING_END
+	;
+
 expression
-	: (NUMBER | INT)									# numberExpression
+
+	: NUMBER											# numberExpression
+	| (TRUE | FALSE)									# booleanExpression
 	| WORD												# methodOrVariableExpression
 	| WORD (COMMAND_PARAMS_START params)?				# methodExpression
-	| (TRUE | FALSE)									# booleanExpression
-	| COMMAND_STRING_START STRING COMMAND_STRING_END	# stringExpression
+	| string											# stringExpression
+	
+	| OPEN_PAREN expression CLOSE_PAREN					# priorityExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
-	| expression ADD_SUB_SIGNAL expression				# additionExpression
+	| expression ADD_SUB_SIGNAL expression				# additiveExpression
+	
 	| expression COMPARISSON_SIGNAL expression			# comparissonExpression
 	| WORD ASSIGN_SIGNAL expression						# assignExpression
 	;
