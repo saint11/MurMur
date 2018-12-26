@@ -11,25 +11,22 @@ namespace MurMurExample
     {
         static string example = @"
 #init
-  {goto:[tag]}
+	abcd
+	{
+		what=2+2
+		eita=[opa]
+		what=[World]
+	}
 
-#tag
-  Line of dialog
-  Another line, with a {variable} or {shake:2} method
-  {menu:[Strings are under square brackets]}
-    {option:[This is a menu option]}
-      This option will render this line.
-    {option:[This is another menu option]}
-      The other option will render this other line and jump to another tag
-      {skip:[another]}
-  {end}
-      
-#another
-  This is another tag!
-  You can also set values and make operations
-  {foo = [abra]}
-  {boo = [cadabra]}
-  Let's say {foo + boo}
+    Let's say Hello {what}.
+	{menu:[Hello]}
+        {option:[this should appear], true}
+            Yay
+        {option:[this shouldn't], true}
+        {option:[and this should], true}
+            Nay
+    {end}
+    Endgame
 ";
         static void Main(string[] args)
         {
@@ -46,12 +43,12 @@ namespace MurMurExample
 
                 if (line.Type == MurMurLineType.text)
                 {
-                    Console.WriteLine("TEXT LINE>>> {0}", line.Text);
+                    Console.WriteLine(">> {0}", line.Text);
                     Console.ReadKey();
                 }
                 else if (line.Type == MurMurLineType.menu)
                 {
-                    Console.WriteLine("MENU START>>> {0}", line.Text != null ? line.Text : "");
+                    Console.WriteLine(">> {0}", line.Text != null ? line.Text : "");
 
                     for (int i = 0; i < line.OptionsText.Length; i++)
                     {

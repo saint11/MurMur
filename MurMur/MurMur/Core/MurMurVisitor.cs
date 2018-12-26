@@ -45,28 +45,39 @@ namespace MurMur
             {
                 var txt = raw.GetText();
                 script.CurrentLine.Text += txt;
-                return new MurMurVariable(txt);
+                return new MurMurVariable();
             }
 
-            var command = context.command();
-            if (command != null)
+            var simpleCommand = context.simpleCommand();
+            if (simpleCommand != null)
             {
-                var txt = Visit(command.expression());
-                if (txt.Type == MurMurVariable.MurMurType.Text)
-                    script.CurrentLine.Text += txt.Text;
-                else if (txt.Type == MurMurVariable.MurMurType.Number)
-                    script.CurrentLine.Text += txt.Number.ToString();
-                else if (txt.Type == MurMurVariable.MurMurType.Boolean)
-                    script.CurrentLine.Text += txt.Boolean.ToString();
-                    
-                return txt;
+                var txt = Visit(simpleCommand.expression());
+                if (txt.HasValue())
+                    script.CurrentLine.Text += txt.ToString();
+
+                return new MurMurVariable();
+            }
+
+            var multiCommand = context.multiLineCommand();
+            if (multiCommand != null)
+            {
+
+                foreach (var expression in multiCommand.expression())
+                {
+                    var txt = Visit(expression);
+                    if (txt.HasValue())
+                        script.CurrentLine.Text += txt.ToString();
+                }
+
+                return new MurMurVariable();
             }
 
             var inlineIf = context.inlineIfBlock();
             if (inlineIf != null)
             {
                 var txt = Visit(inlineIf);
-                return txt;
+
+                return new MurMurVariable();
             }
 
             throw new MurMurException("Unknown line fragment type.", context.Start.Line);
@@ -312,12 +323,14 @@ namespace MurMur
             else
                 throw new MurMurException("Unknown method type (" + function + ")", line);
         }
+        #region Operations And Values
+
 
         public override MurMurVariable VisitAssignExpression([NotNull] MurMurParser.AssignExpressionContext context)
         {
             var value = Visit(context.expression());
             script.Globals[context.WORD().GetText()] = value;
-            return value;
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context)
@@ -330,8 +343,6 @@ namespace MurMur
             else
                 throw new MurMurException(string.Format("Unknown comparisson signal '{0}'", signal), context.start.Line);
         }
-
-        #region Operations And Values
 
         public override MurMurVariable VisitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context)
         {

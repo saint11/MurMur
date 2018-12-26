@@ -22,7 +22,10 @@ FAST_PICK_START: ('[') -> pushMode(FAST_PICK) ;
 TEXT: (~([#@{\r\n/[]) | ('/'~'/'))+;
 
 mode INSIDE_COMMAND;
-	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
+	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')+;
+
+//	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
+	COMMAND_IGNORE: (' ' | '\t')+ -> skip;
 
 	COMMAND_PARAMS_START:(':');
 	COMMAND_STRING_START:('[') -> pushMode(STRING_MODE); //go is an exception and allows free text input

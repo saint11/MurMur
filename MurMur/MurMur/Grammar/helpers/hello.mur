@@ -1,5 +1,12 @@
 #init
-    Let's say {[bana] + [na] + 3 + 5}.
+	???
+	{
+		2+2
+		eita
+		what=[World]
+	}
+
+    Let's say Hello {what}.
 	{menu:[Hello]}
         {option:[this should appear], true}
             Yay

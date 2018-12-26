@@ -24,7 +24,8 @@ line
 lineFragment
 	: TEXT
 	| inlineIfBlock
-	| command
+	| simpleCommand
+	| multiLineCommand
 	| fastPickBlock
 	;
 
@@ -39,8 +40,12 @@ menuSubBlock
 fastPickBlock: FAST_PICK_START FAST_PICK_TEXT (SUB_TEXT_SEPARATOR FAST_PICK_TEXT)* FAST_PICK_END;
 pickThisBlock: pickThisCommand NEWLINE* block*;
 
-command
+simpleCommand
 	: COMMAND_START expression COMMAND_END
+	;
+
+multiLineCommand
+	: COMMAND_START COMMAND_NEWLINE* (expression COMMAND_NEWLINE+)+ COMMAND_NEWLINE* COMMAND_END
 	;
 
 
@@ -49,12 +54,12 @@ string
 	;
 
 expression
-
 	: NUMBER											# numberExpression
-	| (TRUE | FALSE)									# booleanExpression
 	| WORD												# methodOrVariableExpression
 	| WORD (COMMAND_PARAMS_START params)?				# methodExpression
+	| (TRUE | FALSE)									# booleanExpression
 	| string											# stringExpression
+	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
 	
 	| OPEN_PAREN expression CLOSE_PAREN					# priorityExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression

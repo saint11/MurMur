@@ -84,7 +84,7 @@ namespace MurMur
         /// <param name="file"></param>
         void AppendFile(string file)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void LoadString(string input)
