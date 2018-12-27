@@ -49,6 +49,37 @@ The MurMur file is split into Tags and each tag represents a block of dialog. Wh
 ### Lines
 Basically, everything is a line. Lines can contain text or commands. Line breaks will stop the execution, return their value and wait for the next `script.Next()` to be called. Commands will keep running until the end of file is reached or until a line with text appears.
 
+### Commands
+Anything inside curly braces (`{` and `}`) will be considered a command, there are many types of commands, here's the most common ones:
+
+#### String
+`{[Hello world!]}`
+In most languages `"` is used to separate a string text from the code, but since that character is often used in dialog we should use `[` and `]` to create text strings in MurMur.
+
+#### Number
+`{35.7}`
+Numbers in MurMur use `.` to separate the decimal point. There's no distinction between integers, floats, doubles, etc. Everything is a float.
+
+### Simple Operation
+`{[just a string ] + [another string]}`
+`{[just a string ] + 123}`
+`{2 / 2}`
+You can append strings, numbers just like you can do in most languages. If you try to add a number to a string it will be automatically converted to a string.
+
+#### Simple command
+`{command_or_variable_name}`
+This will check if `command_or_variable_name` is a method, then it will run the method and check if there's a returned value, if so it will append it to the current line text. If it's a variable it will just append the variable value to the current line text.
+If the name doesn't match anything it place `??command_name??` in the line text.
+
+#### Command with parameters
+`{command_name:[string parameter], 123, true, [more parameters]}`
+The same thing as the simple command, but will call a method with the parameters in front of the `:`. You can have as many parameters as you want.
+
+#### Assing variable
+`{variable_to_assign = 2}`
+Create or change the value of a variable to a expression. You can perform simple operations such as `{foo = 3 + 3}` or `{magic = [abra] + another_variable}`.
+
+
 [Still working on the documentation, sorry, for now check the example project included in this repository]
 
 ## License
