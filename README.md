@@ -25,6 +25,8 @@ The MurMurLine object that the `script.Next()` method returns has the type of th
 
 ## Basic Syntax
 ```
+string example = @"
+
 #tag
   Line of dialog
   Another line, with a {variable} or {shake:2} method
