@@ -49,12 +49,12 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>additiveExpression</c>
+	/// Visit a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context);
+	Result VisitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>numberExpression</c>
@@ -87,14 +87,6 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>multiplicationExpression</c>
@@ -211,25 +203,11 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Visit a parse tree produced by <see cref="MurMurParser.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitString([NotNull] MurMurParser.StringContext context);
+	Result VisitCommand([NotNull] MurMurParser.CommandContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.expression"/>.
@@ -293,12 +271,5 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitEndCommand([NotNull] MurMurParser.EndCommandContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 }
 } // namespace MurMur.Grammar

@@ -58,17 +58,17 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>additiveExpression</c>
+	/// Enter a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context);
+	void EnterAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>additiveExpression</c>
+	/// Exit a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context);
+	void ExitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>numberExpression</c>
@@ -121,19 +121,6 @@ public interface IMurMurParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>multiplicationExpression</c>
@@ -316,37 +303,15 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context);
+	void EnterCommand([NotNull] MurMurParser.CommandContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterString([NotNull] MurMurParser.StringContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitString([NotNull] MurMurParser.StringContext context);
+	void ExitCommand([NotNull] MurMurParser.CommandContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.expression"/>.
@@ -446,16 +411,5 @@ public interface IMurMurParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitEndCommand([NotNull] MurMurParser.EndCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDeclaration([NotNull] MurMurParser.DeclarationContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 }
 } // namespace MurMur.Grammar

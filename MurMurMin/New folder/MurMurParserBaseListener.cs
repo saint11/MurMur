@@ -20,442 +20,479 @@
 #pragma warning disable 419
 
 namespace MurMur.Grammar {
+
 using Antlr4.Runtime.Misc;
-using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
+using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
+using ITerminalNode = Antlr4.Runtime.Tree.ITerminalNode;
 using IToken = Antlr4.Runtime.IToken;
+using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
-/// This interface defines a complete listener for a parse tree produced by
-/// <see cref="MurMurParser"/>.
+/// This class provides an empty implementation of <see cref="IMurMurParserListener"/>,
+/// which can be extended to create a listener which only needs to handle a subset
+/// of the available methods.
 /// </summary>
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.6.5")]
 [System.CLSCompliant(false)]
-public interface IMurMurParserListener : IParseTreeListener {
+public partial class MurMurParserBaseListener : IMurMurParserListener {
 	/// <summary>
 	/// Enter a parse tree produced by the <c>stringExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterStringExpression([NotNull] MurMurParser.StringExpressionContext context);
+	public virtual void EnterStringExpression([NotNull] MurMurParser.StringExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>stringExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitStringExpression([NotNull] MurMurParser.StringExpressionContext context);
+	public virtual void ExitStringExpression([NotNull] MurMurParser.StringExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>methodOrVariableExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context);
+	public virtual void EnterMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>methodOrVariableExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context);
+	public virtual void ExitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>additiveExpression</c>
+	/// Enter a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context);
+	public virtual void EnterAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by the <c>additiveExpression</c>
+	/// Exit a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context);
+	public virtual void ExitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>numberExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterNumberExpression([NotNull] MurMurParser.NumberExpressionContext context);
+	public virtual void EnterNumberExpression([NotNull] MurMurParser.NumberExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>numberExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitNumberExpression([NotNull] MurMurParser.NumberExpressionContext context);
+	public virtual void ExitNumberExpression([NotNull] MurMurParser.NumberExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>assignExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterAssignExpression([NotNull] MurMurParser.AssignExpressionContext context);
+	public virtual void EnterAssignExpression([NotNull] MurMurParser.AssignExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>assignExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitAssignExpression([NotNull] MurMurParser.AssignExpressionContext context);
+	public virtual void ExitAssignExpression([NotNull] MurMurParser.AssignExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>comparissonExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context);
+	public virtual void EnterComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>comparissonExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context);
+	public virtual void ExitComparissonExpression([NotNull] MurMurParser.ComparissonExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>methodExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMethodExpression([NotNull] MurMurParser.MethodExpressionContext context);
+	public virtual void EnterMethodExpression([NotNull] MurMurParser.MethodExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>methodExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context);
+	public virtual void ExitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>multiplicationExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMultiplicationExpression([NotNull] MurMurParser.MultiplicationExpressionContext context);
+	public virtual void EnterMultiplicationExpression([NotNull] MurMurParser.MultiplicationExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>multiplicationExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMultiplicationExpression([NotNull] MurMurParser.MultiplicationExpressionContext context);
+	public virtual void ExitMultiplicationExpression([NotNull] MurMurParser.MultiplicationExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>booleanExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context);
+	public virtual void EnterBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>booleanExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context);
+	public virtual void ExitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.murmur"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMurmur([NotNull] MurMurParser.MurmurContext context);
+	public virtual void EnterMurmur([NotNull] MurMurParser.MurmurContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.murmur"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMurmur([NotNull] MurMurParser.MurmurContext context);
+	public virtual void ExitMurmur([NotNull] MurMurParser.MurmurContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.tag"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterTag([NotNull] MurMurParser.TagContext context);
+	public virtual void EnterTag([NotNull] MurMurParser.TagContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.tag"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitTag([NotNull] MurMurParser.TagContext context);
+	public virtual void ExitTag([NotNull] MurMurParser.TagContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.block"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterBlock([NotNull] MurMurParser.BlockContext context);
+	public virtual void EnterBlock([NotNull] MurMurParser.BlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.block"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitBlock([NotNull] MurMurParser.BlockContext context);
+	public virtual void ExitBlock([NotNull] MurMurParser.BlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPickBlock([NotNull] MurMurParser.PickBlockContext context);
+	public virtual void EnterPickBlock([NotNull] MurMurParser.PickBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.pickBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPickBlock([NotNull] MurMurParser.PickBlockContext context);
+	public virtual void ExitPickBlock([NotNull] MurMurParser.PickBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMenuBlock([NotNull] MurMurParser.MenuBlockContext context);
+	public virtual void EnterMenuBlock([NotNull] MurMurParser.MenuBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.menuBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMenuBlock([NotNull] MurMurParser.MenuBlockContext context);
+	public virtual void ExitMenuBlock([NotNull] MurMurParser.MenuBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.ifBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterIfBlock([NotNull] MurMurParser.IfBlockContext context);
+	public virtual void EnterIfBlock([NotNull] MurMurParser.IfBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.ifBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitIfBlock([NotNull] MurMurParser.IfBlockContext context);
+	public virtual void ExitIfBlock([NotNull] MurMurParser.IfBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.line"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterLine([NotNull] MurMurParser.LineContext context);
+	public virtual void EnterLine([NotNull] MurMurParser.LineContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.line"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitLine([NotNull] MurMurParser.LineContext context);
+	public virtual void ExitLine([NotNull] MurMurParser.LineContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.lineFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterLineFragment([NotNull] MurMurParser.LineFragmentContext context);
+	public virtual void EnterLineFragment([NotNull] MurMurParser.LineFragmentContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.lineFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitLineFragment([NotNull] MurMurParser.LineFragmentContext context);
+	public virtual void ExitLineFragment([NotNull] MurMurParser.LineFragmentContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.inlineIfBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context);
+	public virtual void EnterInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.inlineIfBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context);
+	public virtual void ExitInlineIfBlock([NotNull] MurMurParser.InlineIfBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.inlineIfTrueFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterInlineIfTrueFragment([NotNull] MurMurParser.InlineIfTrueFragmentContext context);
+	public virtual void EnterInlineIfTrueFragment([NotNull] MurMurParser.InlineIfTrueFragmentContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.inlineIfTrueFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitInlineIfTrueFragment([NotNull] MurMurParser.InlineIfTrueFragmentContext context);
+	public virtual void ExitInlineIfTrueFragment([NotNull] MurMurParser.InlineIfTrueFragmentContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.inlineIfFalseFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterInlineIfFalseFragment([NotNull] MurMurParser.InlineIfFalseFragmentContext context);
+	public virtual void EnterInlineIfFalseFragment([NotNull] MurMurParser.InlineIfFalseFragmentContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.inlineIfFalseFragment"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitInlineIfFalseFragment([NotNull] MurMurParser.InlineIfFalseFragmentContext context);
+	public virtual void ExitInlineIfFalseFragment([NotNull] MurMurParser.InlineIfFalseFragmentContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuSubBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
+	public virtual void EnterMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.menuSubBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
+	public virtual void ExitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context);
+	public virtual void EnterFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context);
+	public virtual void ExitFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
+	public virtual void EnterPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
+	public virtual void ExitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.command"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context);
+	public virtual void EnterCommand([NotNull] MurMurParser.CommandContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.command"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterString([NotNull] MurMurParser.StringContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitString([NotNull] MurMurParser.StringContext context);
+	public virtual void ExitCommand([NotNull] MurMurParser.CommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterExpression([NotNull] MurMurParser.ExpressionContext context);
+	public virtual void EnterExpression([NotNull] MurMurParser.ExpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitExpression([NotNull] MurMurParser.ExpressionContext context);
+	public virtual void ExitExpression([NotNull] MurMurParser.ExpressionContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.params"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterParams([NotNull] MurMurParser.ParamsContext context);
+	public virtual void EnterParams([NotNull] MurMurParser.ParamsContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.params"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitParams([NotNull] MurMurParser.ParamsContext context);
+	public virtual void ExitParams([NotNull] MurMurParser.ParamsContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPickCommand([NotNull] MurMurParser.PickCommandContext context);
+	public virtual void EnterPickCommand([NotNull] MurMurParser.PickCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.pickCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPickCommand([NotNull] MurMurParser.PickCommandContext context);
+	public virtual void ExitPickCommand([NotNull] MurMurParser.PickCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context);
+	public virtual void EnterPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.pickThisCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context);
+	public virtual void ExitPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMenuCommand([NotNull] MurMurParser.MenuCommandContext context);
+	public virtual void EnterMenuCommand([NotNull] MurMurParser.MenuCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.menuCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMenuCommand([NotNull] MurMurParser.MenuCommandContext context);
+	public virtual void ExitMenuCommand([NotNull] MurMurParser.MenuCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuOptionCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMenuOptionCommand([NotNull] MurMurParser.MenuOptionCommandContext context);
+	public virtual void EnterMenuOptionCommand([NotNull] MurMurParser.MenuOptionCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.menuOptionCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMenuOptionCommand([NotNull] MurMurParser.MenuOptionCommandContext context);
+	public virtual void ExitMenuOptionCommand([NotNull] MurMurParser.MenuOptionCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.ifCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterIfCommand([NotNull] MurMurParser.IfCommandContext context);
+	public virtual void EnterIfCommand([NotNull] MurMurParser.IfCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.ifCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitIfCommand([NotNull] MurMurParser.IfCommandContext context);
+	public virtual void ExitIfCommand([NotNull] MurMurParser.IfCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.elseCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterElseCommand([NotNull] MurMurParser.ElseCommandContext context);
+	public virtual void EnterElseCommand([NotNull] MurMurParser.ElseCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.elseCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitElseCommand([NotNull] MurMurParser.ElseCommandContext context);
+	public virtual void ExitElseCommand([NotNull] MurMurParser.ElseCommandContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.endCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterEndCommand([NotNull] MurMurParser.EndCommandContext context);
+	public virtual void EnterEndCommand([NotNull] MurMurParser.EndCommandContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by <see cref="MurMurParser.endCommand"/>.
+	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitEndCommand([NotNull] MurMurParser.EndCommandContext context);
+	public virtual void ExitEndCommand([NotNull] MurMurParser.EndCommandContext context) { }
 
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDeclaration([NotNull] MurMurParser.DeclarationContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDeclaration([NotNull] MurMurParser.DeclarationContext context);
+	/// <inheritdoc/>
+	/// <remarks>The default implementation does nothing.</remarks>
+	public virtual void EnterEveryRule([NotNull] ParserRuleContext context) { }
+	/// <inheritdoc/>
+	/// <remarks>The default implementation does nothing.</remarks>
+	public virtual void ExitEveryRule([NotNull] ParserRuleContext context) { }
+	/// <inheritdoc/>
+	/// <remarks>The default implementation does nothing.</remarks>
+	public virtual void VisitTerminal([NotNull] ITerminalNode node) { }
+	/// <inheritdoc/>
+	/// <remarks>The default implementation does nothing.</remarks>
+	public virtual void VisitErrorNode([NotNull] IErrorNode node) { }
 }
 } // namespace MurMur.Grammar

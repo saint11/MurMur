@@ -9,7 +9,7 @@ namespace MurMur
     public class MurMurException : Exception
     {
         public MurMurException(string error, int line) 
-            : base("MurMur: " + error + " (line: " + line + ")") { }
+            : base("MurMur: " + error + "(line: " + line + ")") { }
     }
 }
 

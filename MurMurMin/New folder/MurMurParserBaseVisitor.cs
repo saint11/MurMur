@@ -59,7 +59,7 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	public virtual Result VisitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>additiveExpression</c>
+	/// Visit a parse tree produced by the <c>additionExpression</c>
 	/// labeled alternative in <see cref="MurMurParser.expression"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -68,7 +68,7 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context) { return VisitChildren(context); }
+	public virtual Result VisitAdditionExpression([NotNull] MurMurParser.AdditionExpressionContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>numberExpression</c>
@@ -117,18 +117,6 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by the <c>priorityExpression</c>
-	/// labeled alternative in <see cref="MurMurParser.expression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitPriorityExpression([NotNull] MurMurParser.PriorityExpressionContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>multiplicationExpression</c>
@@ -309,7 +297,7 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	public virtual Result VisitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
+	/// Visit a parse tree produced by <see cref="MurMurParser.command"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -317,29 +305,7 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitSimpleCommand([NotNull] MurMurParser.SimpleCommandContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.multiLineCommand"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMultiLineCommand([NotNull] MurMurParser.MultiLineCommandContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.string"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitString([NotNull] MurMurParser.StringContext context) { return VisitChildren(context); }
+	public virtual Result VisitCommand([NotNull] MurMurParser.CommandContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.expression"/>.
@@ -439,16 +405,5 @@ public partial class MurMurParserBaseVisitor<Result> : AbstractParseTreeVisitor<
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitEndCommand([NotNull] MurMurParser.EndCommandContext context) { return VisitChildren(context); }
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitDeclaration([NotNull] MurMurParser.DeclarationContext context) { return VisitChildren(context); }
 }
 } // namespace MurMur.Grammar
