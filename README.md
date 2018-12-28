@@ -80,14 +80,20 @@ The same thing as the simple command, but will call a method with the parameters
 `{variable_to_assign = 2}`
 Create or change the value of a variable to a expression. You can perform simple operations such as `{foo = 3 + 3}` or `{magic = [abra] + another_variable}`.
 
+
 ### Headers
+The header is a place for special commands and they should be declared before the tags start. They start with the `@`character
+
 #### Including more files
 It's not very practical to work with very long files, so you can break them down into multiple files. To do so, simply write this before starting with the tags of a file:
-```@include: [file to include]```
+
+`@include: [file to include]`
+
 It will search for the exact match, a `.mur` and `.murmur` file in the application folder. You can change the script path via C# too.
 Remember that you can include multiple files, and watch out, because you can accidentally include a file more than once.
 
-[Still working on the documentation, sorry, for now check the example project included in this repository]
+***
+Still working on the documentation, sorry, for now check the example project included in this repository
 
 ## License
 MIT License
