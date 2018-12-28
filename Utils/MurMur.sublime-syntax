@@ -1,0 +1,108 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions: [mur]
+scope: string.unquoted 
+contexts:
+  main:
+    - match: "{"
+      scope: keyword.operator
+      push: call_command
+
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '//'
+      push: line_comment
+
+    - name: Dialog Tag
+      match: '#'
+      push: dialog_tag
+
+    - name: Include File
+      match: '@include'
+      push: header
+
+  header:
+    - meta_scope: constant.numeric
+    - match: '\n'
+      pop: true
+
+    - name: Dialog Tag
+      match: '#'
+      push: dialog_tag
+
+  error:
+    - meta_scope: invalid.illegal
+    - match: $
+      pop: true
+
+  call_command:
+
+    - match: "(/)"
+      scope: keyword.operator
+
+    - match: \b(if|else|end|menu|option)\b
+      scope: keyword.control
+    
+    - match: ':'
+      scope: keyword.operator
+
+    - match: '='
+      scope: keyword.operator
+      set: call_command
+    
+    - match: '\['
+      scope: constant.language
+      push: pure_string
+
+    - match: \b(true|false)\b
+      scope: constant.language
+
+    - match: \b\d+\b
+      scope: constant.numeric
+
+    - match: ((==)|(!=)|(>=)|(<=)|>|<)
+      scope: keyword.operator.logical
+
+    - match: (=|\+|-|\*|/)
+      scope: keyword.operator.assignment
+
+    - match: (,)
+      scope: keyword.operator
+
+    - match: "([a-zA-Z_]+[ ]+[a-zA-Z_]+[ ]*)+"
+      scope: invalid
+      
+    - match: "[a-zA-Z_]+"
+      scope: storage.type
+
+    - match: '}'
+      scope: keyword.operator
+      pop: true
+
+  pure_string:
+    - meta_scope: constant.language
+
+    - match: ']'
+      scope: constant.language
+      pop: true
+
+  menu_args:
+    - meta_scope: variable.parameter 
+    - match: '}'
+      scope: keyword.operator
+      pop: true
+    - match: $
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line
+    - match: $
+      pop: true
+
+  dialog_tag:
+    - meta_scope: entity.name
+    - match: $
+      pop: true
+
+  text:
+    - meta_scope: invalid.illegal
