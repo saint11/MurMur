@@ -73,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Antlr4">
-      <Version>4.6.5</Version>
+      <Version>4.6.6</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Antlr4.CodeGenerator">
       <Version>4.6.5</Version>
