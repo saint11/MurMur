@@ -376,4 +376,14 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEndCommand(MurMurParser.EndCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MurMurParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(MurMurParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(MurMurParser.DeclarationContext ctx);
 }

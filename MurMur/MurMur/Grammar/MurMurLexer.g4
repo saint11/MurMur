@@ -5,7 +5,7 @@ fragment LOWERCASE : [a-z] ;
 fragment UPPERCASE : [A-Z] ;
 fragment COMMENT_ESCAPE : '//';
 fragment DIGIT : [0-9] ;
-
+fragment TAG : '#' ;
 
 // Extras
 WHITESPACE: (' ' | '\t')+ -> skip;
@@ -15,14 +15,17 @@ NEWLINE: ('\n' | '\r' | '\r\n')+;
 LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN) ;
 
 // Symbols
-TAG_START: ('#');
+TAG_START: (TAG);
 COMMAND_START: ('{') -> pushMode(INSIDE_COMMAND) ;
 FAST_PICK_START: ('[') -> pushMode(FAST_PICK) ;
 
+INCLUDE_KEYWORD: '@include' -> pushMode(INSIDE_COMMAND);
 TEXT: (~([#@{\r\n/[]) | ('/'~'/'))+;
 
+
 mode INSIDE_COMMAND;
-	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')+;
+	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')(~[#]);
+	NEW_TAG: ('\n' | '\r' | '\r\n') -> popMode;
 
 //	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
 	COMMAND_IGNORE: (' ' | '\t')+ -> skip;

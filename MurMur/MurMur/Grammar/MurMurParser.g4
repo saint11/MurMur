@@ -2,7 +2,7 @@ parser grammar MurMurParser;
 
 options { tokenVocab = MurMurLexer; }
 
-murmur: NEWLINE* tag+;
+murmur: NEWLINE* (tag | declaration)+;
 tag: TAG_START TEXT NEWLINE* block;
 
 block
@@ -79,3 +79,5 @@ menuOptionCommand: COMMAND_START KEYWORD_MENU_OPTION COMMAND_PARAMS_START expres
 ifCommand: COMMAND_START KEYWORD_IF COMMAND_PARAMS_START expression COMMAND_END;
 elseCommand: COMMAND_START KEYWORD_ELSE COMMAND_END;
 endCommand: COMMAND_START KEYWORD_END COMMAND_END;
+
+declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string COMMAND_NEWLINE* (NEW_TAG | EOF);

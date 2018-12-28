@@ -38,6 +38,12 @@ namespace MurMur
             return new MurMurVariable();
         }
 
+        public override MurMurVariable VisitDeclaration([NotNull] MurMurParser.DeclarationContext context)
+        {
+            script.AppendFile(Visit(context.@string()).ToString());
+            return new MurMurVariable();
+        }
+
         public override MurMurVariable VisitLineFragment([NotNull] MurMurParser.LineFragmentContext context)
         {
             var raw = context.TEXT();

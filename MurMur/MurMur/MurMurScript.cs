@@ -41,6 +41,9 @@ namespace MurMur
             Clear();
         }
 
+
+        #region Loading
+
         public void Clear()
         {
             State = ScriptState.Empty;
@@ -65,26 +68,11 @@ namespace MurMur
             if (State != ScriptState.Empty)
                 throw new Exception("Cannot load over a loaded script, use 'Clear' before.");
 
-
+            State = ScriptState.NotInitialized;
+            Visitor = new MurMurVisitor(this);
             Path = path;
-            string text;
 
-            if (File.Exists(path))
-            {
-                text = File.ReadAllText(path);
-                LoadString(text);
-            }
-            throw new Exception(string.Format("Cannot find file {0} to load. Are you sure it's there?", path));
-        }
-
-
-        /// <summary>
-        /// Using when including new files in the MurMurScript, for now it literally pastes the text in the end of the current file.
-        /// </summary>
-        /// <param name="file"></param>
-        void AppendFile(string file)
-        {
-            
+            AppendFile(path);
         }
 
         public void LoadString(string input)
@@ -93,18 +81,56 @@ namespace MurMur
                 throw new Exception("Cannot load over a loaded script, use 'Clear' before.");
 
             State = ScriptState.NotInitialized;
+            Visitor = new MurMurVisitor(this);
 
+            AppendString(input);
+        }
+
+        private bool TryLoading(string path, out string text)
+        {
+            if (File.Exists(path))
+            {
+                text = File.ReadAllText(path);
+                AppendString(text);
+                return true;
+            }
+
+            text = null;
+            return false;
+        }
+
+
+        /// <summary>
+        /// Using when including new files in a existing MurMurScript.
+        /// </summary>
+        /// <param name="file"></param>
+        public bool AppendFile(string path)
+        {
+            string text;
+
+            if (TryLoading(path, out text))
+                return true;
+            else if (TryLoading(path + ".mur", out text))
+                return true;
+            else if (TryLoading(path + ".murmur", out text))
+                return true;
+
+            throw new Exception(string.Format("Cannot find file '{0}' to load. Are you sure it's there?", path));
+        }
+
+        private void AppendString(string input)
+        {
             AntlrInputStream inputStream = new AntlrInputStream(input);
             MurMurLexer murMurLexer = new MurMurLexer(inputStream);
             CommonTokenStream tokenStream = new CommonTokenStream(murMurLexer);
             MurMurParser murMurParser = new MurMurParser(tokenStream);
 
             var tree = murMurParser.murmur();
-            Visitor = new MurMurVisitor(this);
 
             Visitor.Visit(tree);
         }
 
+        #endregion
 
         public MurMurLine Next(int choice = -1)
         {

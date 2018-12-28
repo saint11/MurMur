@@ -32,7 +32,10 @@ namespace MurMurExample
         {
             var script = new MurMurScript();
             script.UnsafeMode = true;
+
             script.LoadString(example);
+            //script.LoadFile("hello");
+
             script.GoToTag("init");
 
             int choice = 0;
