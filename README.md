@@ -10,8 +10,6 @@ For now just grab the MurMurMin folder and copy it to your project. In the futur
 Now you can just create a MurMurScript object, load a string containing the script and just ask for `script.Next()` for the next line. Yep, that simple.
 ```C#
 string example = @"
-@include:[another file.mur]
-
 #start
 Hello world!
 ";
@@ -25,7 +23,7 @@ The MurMurLine object that the `script.Next()` method returns has the type of th
 
 ## Basic Syntax
 ```
-string example = @"
+@include:[another file.mur]
 
 #tag
   Line of dialog
