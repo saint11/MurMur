@@ -355,38 +355,30 @@ namespace MurMur
             return Visit(context.expression());
         }
 
+        public override MurMurVariable VisitMultiplicationExpression([NotNull] MurMurParser.MultiplicationExpressionContext context)
+        {
+            var values = context.expression();
+            var a = Visit(values[0]);
+            var b = Visit(values[1]);
+            
+            if (context.MUL_DIV_SIGNAL().GetText() == "*")
+                return a * b;
+            else
+                return a / b;
+        }
+
         public override MurMurVariable VisitAdditiveExpression([NotNull] MurMurParser.AdditiveExpressionContext context)
         {
             var values = context.expression();
             var a = Visit(values[0]);
             var b = Visit(values[1]);
 
-            return AddValues(a, b);
+            if (context.ADD_SUB_SIGNAL().GetText() == "+")
+                return a + b;
+            else
+                return a - b;
         }
-
-        private static MurMurVariable AddValues(MurMurVariable a, MurMurVariable b)
-        {
-            if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Text)
-            {
-                return new MurMurVariable(a.Text + b.Text);
-            }
-            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Text)
-            {
-                return new MurMurVariable(a.Number.ToString() + b.Text);
-            }
-            else if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Number)
-            {
-                return new MurMurVariable(a.Text + b.Number.ToString());
-            }
-            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
-            {
-                return new MurMurVariable(a.Number + b.Number);
-            }
-
-            throw new Exception(string.Format("Cannot add {0} and {1}", a.ToString(), b.ToString()));
-        }
-
-
+        
         public override MurMurVariable VisitBooleanExpression([NotNull] MurMurParser.BooleanExpressionContext context)
         {
             return new MurMurVariable(context.TRUE() != null);

@@ -65,6 +65,70 @@ namespace MurMur
             Halt = null;
         }
 
+        public static MurMurVariable operator +(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Text + b.Text);
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Number.ToString() + b.Text);
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Text + b.Number.ToString());
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Number + b.Number);
+            }
+
+            throw new Exception(string.Format("Cannot add {0} and {1}", a.ToString(), b.ToString()));
+        }
+
+        public static MurMurVariable operator -(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Text.Replace(b.Text, ""));
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Text)
+            {
+                return new MurMurVariable(a.Number.ToString().Replace(b.Text, ""));
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Text && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Text.Replace(b.Number.ToString(), ""));
+            }
+            else if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Number - b.Number);
+            }
+
+            throw new Exception(string.Format("Cannot subtract {0} and {1}", a.ToString(), b.ToString()));
+        }
+
+        public static MurMurVariable operator *(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Number * b.Number);
+            }
+
+            throw new Exception(string.Format("Cannot multiply {0} by {1}", a.ToString(), b.ToString()));
+        }
+
+        public static MurMurVariable operator /(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurVariable.MurMurType.Number && b.Type == MurMurVariable.MurMurType.Number)
+            {
+                return new MurMurVariable(a.Number / b.Number);
+            }
+
+            throw new Exception(string.Format("Cannot divide {0} by {1}", a.ToString(), b.ToString()));
+        }
+
         public static bool operator ==(MurMurVariable a, MurMurVariable b)
         {
             return a.Text == b.Text && a.Number==b.Number && a.Halt==b.Halt;
