@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MurMur.Grammar;
-
-namespace MurMur
+﻿namespace MurMur
 {
     public enum MurMurLineType
     {

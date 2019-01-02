@@ -12,11 +12,11 @@ namespace MurMurExample
         static string example = @"
 #init
 	{
-		what = 1 + 2 * 2
+		what = 2 == 2
 		eita=[opa]
 	}
 
-    Let's say Hello {what}.
+    Let's say Hello {what}, {[true] == false}.
 ";
         static void Main(string[] args)
         {

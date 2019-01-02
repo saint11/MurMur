@@ -1,7 +1,5 @@
 ﻿using Antlr4.Runtime;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MurMur
 {
@@ -22,8 +20,8 @@ namespace MurMur
             get
             {
                 return
-                    Text?.ToLower() == "true" ||
-                    Number == 1;
+                    Number == 1 ||
+                    Text?.ToLower() == "true";
             }
             set { Number = value? 1 : -1; }
         }
@@ -129,13 +127,78 @@ namespace MurMur
             throw new Exception(string.Format("Cannot divide {0} by {1}", a.ToString(), b.ToString()));
         }
 
+        public static bool operator >(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type==MurMurType.Number && b.Type == MurMurType.Number)
+            {
+                return a.Number > b.Number;
+            }
+            throw new Exception(string.Format("Cannot compare {0} > {1}", a.ToString(), b.ToString()));
+        }
+
+        public static bool operator <(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurType.Number && b.Type == MurMurType.Number)
+            {
+                return a.Number < b.Number;
+            }
+            throw new Exception(string.Format("Cannot compare {0} > {1}", a.ToString(), b.ToString()));
+        }
+
+        public static bool operator >=(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurType.Number && b.Type == MurMurType.Number)
+            {
+                return a.Number >= b.Number;
+            }
+            throw new Exception(string.Format("Cannot compare {0} > {1}", a.ToString(), b.ToString()));
+        }
+
+        public static bool operator <=(MurMurVariable a, MurMurVariable b)
+        {
+            if (a.Type == MurMurType.Number && b.Type == MurMurType.Number)
+            {
+                return a.Number <= b.Number;
+            }
+            throw new Exception(string.Format("Cannot compare {0} > {1}", a.ToString(), b.ToString()));
+        }
+
         public static bool operator ==(MurMurVariable a, MurMurVariable b)
         {
-            return a.Text == b.Text && a.Number==b.Number && a.Halt==b.Halt;
+            if (a.Type == MurMurType.Boolean)
+            {
+                if (b.Type == MurMurType.Boolean)
+                    return a.Boolean == b.Boolean;
+                else if (b.Type == MurMurType.Number)
+                    return a.Boolean == (b.Number > 0);
+                else if (b.Type == MurMurType.Text)
+                    return a.Boolean == (b.Text.ToLower() == "true");
+            }
+            else if (a.Type == MurMurType.Number)
+            {
+                if (b.Type == MurMurType.Boolean)
+                    return (a.Number > 0) == b.Boolean;
+                else if (b.Type == MurMurType.Number)
+                    return a.Number == b.Number;
+                else if (b.Type == MurMurType.Text)
+                    return a.Number.ToString() == b.Text;
+            }
+            else if (a.Type == MurMurType.Text)
+            {
+                if (b.Type == MurMurType.Boolean)
+                    return (a.Text.ToLower() == "true") == b.Boolean;
+                else if (b.Type == MurMurType.Number)
+                    return a.Text == b.Number.ToString();
+                else if (b.Type == MurMurType.Text)
+                    return a.Text == b.Text;
+            }
+
+            throw new Exception(string.Format("Cannot compare {0} == {1}", a.ToString(), b.ToString()));
+            //return a.Text == b.Text && a.Number==b.Number && a.Halt==b.Halt;
         }
         public static bool operator !=(MurMurVariable a, MurMurVariable b)
         {
-            return a.Text != b.Text || a.Number!=b.Number || a.Halt!=b.Halt;
+            return !(a==b);
         }
 
         internal bool HasValue()
