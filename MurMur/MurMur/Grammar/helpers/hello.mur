@@ -1,6 +1,10 @@
-@include:[another]
-
 #init
-	{goto:[boop]}
 	Hello World!
-    Endgame
+    This is in another line.
+    {menu:[This is a question]}
+    	{option:[answer 1]}
+    		This is the first outcome.
+		{option:[answer 2]}
+			This is the second outcome.
+    {end}
+    But you are always back right here!

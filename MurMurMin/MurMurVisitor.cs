@@ -175,12 +175,20 @@ namespace MurMur
                 availableOptions = new List<MurMurParser.MenuSubBlockContext>();
                 foreach (var item in context.menuSubBlock())
                 {
-                    var condition = item.menuOptionCommand().expression()[1];
-                    if (condition == null || Visit(condition).Boolean)
+                    var expressions = item.menuOptionCommand().expression();
+                    bool shouldIncludeOption;
+                    if (expressions.Length > 1) // Option has a condition
                     {
-                        options.Add(Visit(item.menuOptionCommand().expression()[0]).Text);
-                        availableOptions.Add(item);
+                        var condition = expressions[1];
+                        shouldIncludeOption = (condition == null || Visit(condition).Boolean);
                     }
+                    else // This option is always true
+                    {
+                        shouldIncludeOption = true;
+                    }
+
+                    options.Add(Visit(item.menuOptionCommand().expression()[0]).Text);
+                    availableOptions.Add(item);
                 }
                 script.CurrentLine.OptionsText = options.ToArray();
                 currentStack.Push(context);

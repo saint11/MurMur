@@ -155,7 +155,10 @@ namespace MurMur
                 else if (State == ScriptState.NotInitialized)
                 {
                     State = ScriptState.Talking;
-                    Visitor.Visit(Tags[CurrentTag]);
+                    if (Tags.ContainsKey(CurrentTag))
+                        Visitor.Visit(Tags[CurrentTag]);
+                    else
+                        throw new Exception("Cannot find tag " + CurrentTag + "(remember that tags are case-sensitive)");
                 }
                 else
                 {

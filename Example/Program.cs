@@ -11,12 +11,15 @@ namespace MurMurExample
     {
         static string example = @"
 #init
-	{
-		what = 2 == 2
-		eita=[opa]
-	}
-
-    Let's say Hello {what}, {[true] == false}.
+	Hello World!
+    This is in another line.
+    {menu:[This is a question]}
+    	{option:[answer 1]}
+    		This is the first outcome.
+		{option:[answer 2]}
+			This is the second outcome.
+    {end}
+    But you are always back right here!
 ";
         static void Main(string[] args)
         {
