@@ -8,6 +8,10 @@ using System;
 using System.Linq;
 using System.IO;
 
+#if UNITY_EDITOR
+    using UnityEngine;
+#endif
+
 namespace MurMur
 {
     public enum ScriptState
@@ -60,6 +64,8 @@ namespace MurMur
 
 #if UNITY_EDITOR
             Globals["print"] = (Func<MurMurVariable, MurMurVariable>)Global_Print;
+#else
+            Globals["print"] = (Action<MurMurVariable>)Global_Print;
 #endif
         }
 
@@ -88,12 +94,30 @@ namespace MurMur
 
         private bool TryLoading(string path, out string text)
         {
+
+#if UNITY_EDITOR
+            var file = (TextAsset)Resources.Load(path, typeof(TextAsset));
+            //var file = Resources.Load<TextAsset>(path);
+
+            if (file != null)
+            {
+                text = file.text;
+                AppendString(text);
+                return true;
+            }
+            else
+            {
+                text = null;
+                return false;
+            }
+#else
             if (File.Exists(path))
             {
                 text = File.ReadAllText(path);
                 AppendString(text);
                 return true;
             }
+#endif
 
             text = null;
             return false;
@@ -253,9 +277,14 @@ namespace MurMur
             UnityEngine.Debug.Log(text.Text);
             return new MurMurVariable();
         }
+#else
+        void Global_Print(MurMurVariable text)
+        {
+            Debug.WriteLine(text.Text);
+        }
 #endif
 
-#endregion
+        #endregion
 
     }
 }

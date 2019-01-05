@@ -12,9 +12,11 @@ namespace MurMurExample
         static string example = @"
 #init
 	Hello World!
+    {print:[wow]}
     This is in another line.
     {menu:[This is a question]}
     	{option:[answer 1]}
+            {print:[wow]}
     		This is the first outcome.
 		{option:[answer 2]}
 			This is the second outcome.
