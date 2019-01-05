@@ -163,7 +163,7 @@ namespace MurMur
 
             while (CurrentLine == null || CurrentLine.Type == MurMurLineType.empty || string.IsNullOrEmpty(CurrentLine.Text))
             {
-                if (CurrentLine?.Type == MurMurLineType.empty)
+                if (CurrentLine != null)
                 {
                     previousLine = CurrentLine;
                     CurrentLine = null;
