@@ -1,10 +1,15 @@
+@include: [Declarations]
+
 #init
-	Hello World!
-    This is in another line.
-    {menu:[This is a question]}
-    	{option:[answer 1]}
-    		This is the first outcome.
-		{option:[answer 2]}
-			This is the second outcome.
-    {end}
-    But you are always back right here!
+    {goto: [declarations]}
+    {skip: [intro]}
+
+#intro
+    // TODO: Maybe add more lines to the player
+    {char: [Boss]}
+    How was it? Not that bad right? I'm pretty sure you will be fine.
+    Here, follow me, let me introduce you to your colleagues.
+    This is {rude}, he is the Search And Collect representative.
+    {char: [Rude]}
+    Another Judge? Nice to meet you.
+    Sorry I got a lot of work today, apparently there was a riot near the {company1} headquarters.

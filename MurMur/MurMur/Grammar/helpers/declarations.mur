@@ -1,0 +1,12 @@
+#declarations
+    // Character names
+
+    {player = [Glenn]}
+    //The player character. She is from a poor background, studied a lot and scored high enough to get the Judge job
+    
+    {boss = [Dana]}
+    // Dana is your boss, a middle aged woman that had (and still have) a hard life, an abusive husband and problematic kids. She believes in the company will protect her and she is very proud of where she is.
+
+
+    // Places and things
+    {company = [SEC]}

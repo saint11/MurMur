@@ -64,7 +64,7 @@ mode INSIDE_COMMAND;
 
 	// Expressions
 	NUMBER: DIGIT+ ([.] DIGIT+)?;
-	WORD: (LOWERCASE | UPPERCASE | '_')+;
+	WORD: (LOWERCASE | UPPERCASE | '_')( LOWERCASE | UPPERCASE | '_' | DIGIT )+;
 
 	// Comparisson
 	ASSIGN_SIGNAL: ('=');

@@ -38,7 +38,10 @@ namespace MurMur
 
 
         public string Path;
-        public bool UnsafeMode;
+
+        // Debug and testing
+        public bool UnsafeMode = false;
+        public bool IgnoreUnknownMethods = false;
 
         public MurMurScript()
         {

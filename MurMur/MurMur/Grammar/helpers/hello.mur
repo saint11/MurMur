@@ -1,10 +1,39 @@
+@include: [Story/Declarations]
+
 #init
-	Hello World!
-    This is in another line.
-    {menu:[This is a question]}
-    	{option:[answer 1]}
-    		This is the first outcome.
-		{option:[answer 2]}
-			This is the second outcome.
-    {end}
-    But you are always back right here!
+    {goto: [declarations]}
+    {skip: [intro]}
+
+#intro
+    // TODO: Maybe add more lines to the player
+    {char: [Boss]}
+    How was it? Not that bad right? I'm pretty sure you will be fine.
+    Here, follow me, let me introduce you to your colleagues.
+    This is {rude}, he is the Search And Collect representative.
+    {char: [Rude]}
+    Another Judge? Nice to meet you.
+    Sorry I got a lot of work today, apparently there was a riot near the {company1} headquarters.
+    {char: [Boss]}
+    Oh! {police} must be cramming with work then.
+    {char: [Rude]}
+    Yep, I'm pretty sure they will get their bonus this month!
+    {char: [Boss]}
+    C'mon {player}, let take you to the break room and let {rude} work.
+
+    // Lunch room
+    {char: [Popular]}
+    Hiiii! You must be the new Judge, right?
+    So nice to meet you, oh, you are gorgeous are you sure your application didn't say "actress" or "model" in it?
+    {char: [Boss]}
+    This is {popular}, our Interviewer. When she is not interviewing the captives she's here in the break room.
+    {char: [Popular]}
+    You know me {boss}! I love just love our break room!
+    And you, sweet little one, if you ever need anything or someone to show you around, let me know OK?
+
+    // Work room
+    {char: [Boss]}
+    Alright, {player}, you met almost everyone in this unit, {dedicated} is focused in his work so I'll introduce him to you later.
+    The work day has 2 breaks, the lunch break and the afternoon break.
+    Since today we had this little tour you should start working after the lunch break.
+    
+    {scene: [OfficeScene2]}

@@ -27,9 +27,10 @@ namespace MurMurExample
         {
             var script = new MurMurScript();
             script.UnsafeMode = true;
+            script.IgnoreUnknownMethods = true;
 
-            script.LoadString(example);
-            //script.LoadFile("hello");
+            //script.LoadString(example);
+            script.LoadFile("hello");
 
             script.GoToTag("init");
 
