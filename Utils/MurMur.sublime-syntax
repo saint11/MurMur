@@ -13,7 +13,7 @@ contexts:
     - match: '//'
       push: line_comment
 
-    - match: '//*'
+    - match: '/\*'
       push: comment
 
     - name: Dialog Tag
@@ -108,8 +108,8 @@ contexts:
       pop: true
 
   comment:
-    - meta_scope: comment.line
-    - match: '/*/'
+    - meta_scope: comment
+    - match: '\*/'
       pop: true
 
   dialog_tag:
