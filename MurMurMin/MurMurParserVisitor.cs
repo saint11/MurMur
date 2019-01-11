@@ -197,13 +197,6 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

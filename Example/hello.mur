@@ -1,11 +1,12 @@
 @include: [Declarations]
-
 #init
+	//Eita
     {goto: [declarations]}
     {skip: [intro]}
 
 #intro
     // TODO: Maybe add more lines to the player
+	/* vamo testar*/
     {char: [Boss]}
     How was it? Not that bad right? I'm pretty sure you will be fine.
     Here, follow me, let me introduce you to your colleagues.

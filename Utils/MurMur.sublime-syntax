@@ -13,6 +13,9 @@ contexts:
     - match: '//'
       push: line_comment
 
+    - match: '//*'
+      push: comment
+
     - name: Dialog Tag
       match: '#'
       push: dialog_tag
@@ -36,6 +39,11 @@ contexts:
       pop: true
 
   call_command:
+    - match: '//'
+      push: line_comment
+
+    - match: '//*'
+      push: comment
 
     - match: "(/)"
       scope: keyword.operator
@@ -97,6 +105,11 @@ contexts:
   line_comment:
     - meta_scope: comment.line
     - match: $
+      pop: true
+
+  comment:
+    - meta_scope: comment.line
+    - match: '/*/'
       pop: true
 
   dialog_tag:

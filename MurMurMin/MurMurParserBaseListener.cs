@@ -342,19 +342,6 @@ public partial class MurMurParserBaseListener : IMurMurParserListener {
 	public virtual void ExitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context) { }
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

@@ -127,16 +127,6 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitMenuSubBlock(MurMurParser.MenuSubBlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#fastPickBlock}.
-	 * @param ctx the parse tree
-	 */
-	void enterFastPickBlock(MurMurParser.FastPickBlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MurMurParser#fastPickBlock}.
-	 * @param ctx the parse tree
-	 */
-	void exitFastPickBlock(MurMurParser.FastPickBlockContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MurMurParser#pickThisBlock}.
 	 * @param ctx the parse tree
 	 */

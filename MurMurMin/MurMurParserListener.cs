@@ -294,17 +294,6 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.fastPickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitFastPickBlock([NotNull] MurMurParser.FastPickBlockContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

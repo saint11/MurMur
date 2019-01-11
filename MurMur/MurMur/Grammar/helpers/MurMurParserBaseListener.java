@@ -159,18 +159,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFastPickBlock(MurMurParser.FastPickBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFastPickBlock(MurMurParser.FastPickBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPickThisBlock(MurMurParser.PickThisBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}

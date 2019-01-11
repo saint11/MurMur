@@ -3,7 +3,6 @@ lexer grammar MurMurLexer;
 // Formats
 fragment LOWERCASE : [a-z] ;
 fragment UPPERCASE : [A-Z] ;
-fragment COMMENT_ESCAPE : '//';
 fragment DIGIT : [0-9] ;
 fragment TAG : '#' ;
 
@@ -13,22 +12,28 @@ NEWLINE: ('\n' | '\r' | '\r\n')+;
 
 // Comments
 LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN) ;
+COMMENT: '/*' .*? '*/' -> channel(HIDDEN) ;
 
 // Symbols
 TAG_START: (TAG);
 COMMAND_START: ('{') -> pushMode(INSIDE_COMMAND) ;
-FAST_PICK_START: ('[') -> pushMode(FAST_PICK) ;
 
 INCLUDE_KEYWORD: '@include' -> pushMode(INSIDE_COMMAND);
-TEXT: (~([#@{\r\n/[]) | ('/'~'/'))+;
+TEXT: (~([#@{\r\n/[]) | ('/'~([/*])))+;
 
 
 mode INSIDE_COMMAND;
+	NEW_TAG: ('\n' | '\r' | '\r\n'){_input.La(1)=='#'}? -> popMode;
+	//NEW_TAG: ('\n' | '\r' | '\r\n'){_input.LA(1)=='#'}? -> popMode; // Java version, for testing
 	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')(~[#]);
-	NEW_TAG: ('\n' | '\r' | '\r\n') -> popMode;
+
+	COMMAND_IGNORE: (' ' | '\t')+ -> skip;
+	
+	// Comments
+	COMMAND_LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN);
+	COMMAND_COMMENT: '/*' .*? '*/' -> channel(HIDDEN) ;
 
 //	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
-	COMMAND_IGNORE: (' ' | '\t')+ -> skip;
 
 	COMMAND_PARAMS_START:(':');
 	COMMAND_STRING_START:('[') -> pushMode(STRING_MODE); //go is an exception and allows free text input
@@ -66,16 +71,14 @@ mode INSIDE_COMMAND;
 	NUMBER: DIGIT+ ([.] DIGIT+)?;
 	WORD: (LOWERCASE | UPPERCASE | '_')( LOWERCASE | UPPERCASE | '_' | DIGIT )+;
 
-	// Comparisson
+
+	// Operations
 	ASSIGN_SIGNAL: ('=');
 	COMPARISSON_SIGNAL: ('==' | '!=' | '>' | '<' | '>=' | '<=');
-	MUL_DIV_SIGNAL: '*'|'/';
+	MUL_DIV_SIGNAL: '*'|'/'{_input.La(1)!='*'}?{_input.La(1)!='/'}?;
+	//MUL_DIV_SIGNAL: '*'|'/'{_input.LA(1)!='*'}?{_input.LA(1)!='/'}?; // Java version, for testing
 	ADD_SUB_SIGNAL: '+'|'-';
-
-mode FAST_PICK;
-	SUB_TEXT_SEPARATOR: ('|');
-	FAST_PICK_TEXT: (~([}\r\n/|\]]) | '/'~'/')+;
-	FAST_PICK_END: (']')  -> popMode;
+	
 
 mode STRING_MODE;
 	STRING: (~[\]])+;

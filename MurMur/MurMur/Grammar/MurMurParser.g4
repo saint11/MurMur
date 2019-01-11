@@ -26,7 +26,6 @@ lineFragment
 	| inlineIfBlock
 	| simpleCommand
 	| multiLineCommand
-	| fastPickBlock
 	;
 
 inlineIfBlock: ifCommand inlineIfTrueFragment (elseCommand inlineIfFalseFragment)? endCommand;
@@ -37,7 +36,6 @@ menuSubBlock
 	: menuOptionCommand NEWLINE* block?
 	;
 
-fastPickBlock: FAST_PICK_START FAST_PICK_TEXT (SUB_TEXT_SEPARATOR FAST_PICK_TEXT)* FAST_PICK_END;
 pickThisBlock: pickThisCommand NEWLINE* block*;
 
 simpleCommand
@@ -80,4 +78,4 @@ ifCommand: COMMAND_START KEYWORD_IF COMMAND_PARAMS_START expression COMMAND_END;
 elseCommand: COMMAND_START KEYWORD_ELSE COMMAND_END;
 endCommand: COMMAND_START KEYWORD_END COMMAND_END;
 
-declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string COMMAND_NEWLINE* (NEW_TAG | EOF);
+declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string COMMAND_NEWLINE* NEW_TAG?;
