@@ -25,6 +25,9 @@ The MurMurLine object that the `script.Next()` method returns has the type of th
 ```
 @include:[another file.mur]
 
+@init:
+  variable = [foo]
+
 #tag
   Line of dialog
   Another line, with a {variable} or {shake:2} method
@@ -38,6 +41,7 @@ The MurMurLine object that the `script.Next()` method returns has the type of th
       
 #another
   This is another tag!
+  // This is a comment, so it won't show up
   You can also set values and make operations
   {foo = [abra]}
   {boo = [cadabra]}
@@ -89,6 +93,18 @@ Create or change the value of a variable to a expression. You can perform simple
 
 ### Headers
 The header is a place for special commands and they should be declared before the tags start. They start with the `@`character
+#### Init header
+The init header is a special block that runs right when the file is loaded. It should look something like this:
+
+```
+@init:
+  variable = [foo]
+  
+#someTag
+  // Rest of the game...
+```
+It is a great place to initialize variables that will be used through the script, like characters names, colors and other shortcuts.
+Another good idea is to have a file that only has a init header and then you can include it in all other files in your game. This way you can have a consistent place to initialize values you will use through the whole game.
 
 #### Including more files
 It's not very practical to work with very long files, so you can break them down into multiple files. To do so, simply write this before starting with the tags of a file:
