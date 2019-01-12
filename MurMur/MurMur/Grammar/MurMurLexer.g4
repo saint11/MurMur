@@ -19,11 +19,13 @@ TAG_START: (TAG);
 COMMAND_START: ('{') -> pushMode(INSIDE_COMMAND) ;
 
 INCLUDE_KEYWORD: '@include' -> pushMode(INSIDE_COMMAND);
+INIT_KEYWORD: '@init' -> pushMode(INSIDE_COMMAND);
 TEXT: (~([#@{\r\n/[]) | ('/'~([/*])))+;
 
 
 mode INSIDE_COMMAND;
-	NEW_TAG: ('\n' | '\r' | '\r\n'){_input.La(1)=='#'}? -> popMode;
+    NEW_TAG: ('\n' | '\r' | '\r\n'){_input.La(1)=='#'}? -> popMode;
+	NEW_DECLARATION: ('\n' | '\r' | '\r\n'){_input.La(1)=='@'}? -> popMode;
 	//NEW_TAG: ('\n' | '\r' | '\r\n'){_input.LA(1)=='#'}? -> popMode; // Java version, for testing
 	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')(~[#]);
 

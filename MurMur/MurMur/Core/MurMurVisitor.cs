@@ -27,7 +27,25 @@ namespace MurMur
         public override MurMurVariable VisitMurmur([NotNull] MurMurParser.MurmurContext context)
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
-            return base.VisitMurmur(context);
+
+            var initBlock = context.initBlock();
+            if (initBlock != null)
+            {
+                Console.WriteLine("found init block");
+                var expressions = initBlock.expression();
+                foreach (var expression in expressions)
+                {
+                    VisitExpression(expression);
+                }
+            }
+
+            var tags = context.tag();
+            foreach (var tag in tags)
+            {
+                VisitTag(tag);
+            }
+
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitTag([NotNull] MurMurParser.TagContext context)

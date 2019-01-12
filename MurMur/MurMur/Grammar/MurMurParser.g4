@@ -2,7 +2,14 @@ parser grammar MurMurParser;
 
 options { tokenVocab = MurMurLexer; }
 
-murmur: NEWLINE* (tag | declaration)+ EOF;
+murmur
+    : NEWLINE* initBlock? NEWLINE* (tag | declaration)* EOF
+    ;
+    
+initBlock:
+    INIT_KEYWORD COMMAND_PARAMS_START (COMMAND_NEWLINE | expression)*
+    ;
+    
 tag: TAG_START TEXT NEWLINE* block;
 
 block

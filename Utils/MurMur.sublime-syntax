@@ -24,6 +24,10 @@ contexts:
       match: '@include'
       push: header
 
+    - name: Declarations File
+      match: '@declarations'
+      push: call_command
+
   header:
     - meta_scope: constant.numeric
     - match: '\n'
