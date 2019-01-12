@@ -39,7 +39,7 @@ contexts:
     - match: '//'
       push: line_comment
 
-    - match: '//*'
+    - match: '/\*'
       push: comment
 
     - match: "(/)"

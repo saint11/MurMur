@@ -28,16 +28,13 @@ namespace MurMur
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
 
-            var initBlock = context.initBlock()?[0];
-            if (initBlock != null)
+            // First we run the init block
+            foreach (var expression in context.initBlock()?[0]?.expression())
             {
-                var expressions = initBlock.expression();
-                foreach (var expression in expressions)
-                {
-                    Visit   (expression);
-                }
+                Visit(expression);
             }
-
+            
+            // Then we collect the tags
             var tags = context.tag();
             foreach (var tag in tags)
             {
