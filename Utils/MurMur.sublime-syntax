@@ -21,21 +21,14 @@ contexts:
       push: dialog_tag
 
     - name: Include File
+      scope: constant.numeric
       match: '@include'
-      push: header
-
-    - name: Declarations File
-      match: '@declarations'
       push: call_command
 
-  header:
-    - meta_scope: constant.numeric
-    - match: '\n'
-      pop: true
-
-    - name: Dialog Tag
-      match: '#'
-      push: dialog_tag
+    - name: Init Block
+      scope: constant.numeric
+      match: '@init'
+      push: call_command
 
   error:
     - meta_scope: invalid.illegal
@@ -90,6 +83,9 @@ contexts:
     - match: '}'
       scope: keyword.operator
       pop: true
+
+    - match: '(?=[@#])'
+      set: main
 
   pure_string:
     - meta_scope: constant.language
