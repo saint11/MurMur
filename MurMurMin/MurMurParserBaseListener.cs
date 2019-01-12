@@ -199,6 +199,19 @@ public partial class MurMurParserBaseListener : IMurMurParserListener {
 	public virtual void ExitMurmur([NotNull] MurMurParser.MurmurContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterInitBlock([NotNull] MurMurParser.InitBlockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitInitBlock([NotNull] MurMurParser.InitBlockContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.tag"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

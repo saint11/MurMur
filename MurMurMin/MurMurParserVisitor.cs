@@ -120,6 +120,13 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMurmur([NotNull] MurMurParser.MurmurContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInitBlock([NotNull] MurMurParser.InitBlockContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.tag"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

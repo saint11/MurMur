@@ -27,7 +27,21 @@ namespace MurMur
         public override MurMurVariable VisitMurmur([NotNull] MurMurParser.MurmurContext context)
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
-            return base.VisitMurmur(context);
+
+            // First we run the init block
+            foreach (var expression in context.initBlock()?[0]?.expression())
+            {
+                Visit(expression);
+            }
+            
+            // Then we collect the tags
+            var tags = context.tag();
+            foreach (var tag in tags)
+            {
+                VisitTag(tag);
+            }
+
+            return new MurMurVariable();
         }
 
         public override MurMurVariable VisitTag([NotNull] MurMurParser.TagContext context)
@@ -144,12 +158,12 @@ namespace MurMur
             if (result.Boolean)
             {
                 currentStack.Push(context);
-                Visit(context.block()[0]);
+                return VisitBlock(context.block()[0]);
             }
             else if (context.elseCommand() != null)
             {
                 currentStack.Push(context);
-                Visit(context.block()[1]);
+                return VisitBlock(context.block()[1]);
             }
 
             return new MurMurVariable();

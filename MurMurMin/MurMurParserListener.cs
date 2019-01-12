@@ -173,6 +173,17 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitMurmur([NotNull] MurMurParser.MurmurContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInitBlock([NotNull] MurMurParser.InitBlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInitBlock([NotNull] MurMurParser.InitBlockContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.tag"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
