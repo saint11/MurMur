@@ -1,9 +1,38 @@
-@include: [Declarations]
+// This is a commentary, the script will ignore these lines
+
+@include: [Declarations] // This is how you include more files
 
 @init:
-company1 = [Flexra]
-rude = [Pryce]
+	//This runs immediately when the file is loaded
+	variable = [Hello]
+	result = [number ] + (2 + 2)
 
 #init
-    This is {rude}, he is the Search And Collect representative.
-    Sorry I got a lot of work today, apparently there was a riot near the {company1} headquarters.
+	// The game starts here!
+    {variable} world!
+    This is MurMur and it has a bunch of features.
+    {menu:[Do you want to know more?]}
+    	{option:[Can you use conditionals?]}
+    		{goto:[if_else]}
+		{option:[Can you do operations?]}
+			{goto:[operations]}
+		{option:[Do I need to use a goto in these options?]}
+			Nope, you can just keep typing things inside this block.
+		{end}
+	After the "goto" is done, the code will jump back here
+	Bye now!
+
+#if_else
+	Absolutely! You can have a if block like now.
+	{if:true}
+		This always appears.
+	{else}
+		This never happens.
+	{end}
+	{myVar = [banana]}
+	Or even something like this {if:myVar==[avocado]}won't show up{else}will show up{end} in the middle of the sentence!
+
+#operations
+	Two plus two equals {result}. // Remember? We declared this in the @init block
+	And you can even do math on the fly like this: {8/2 + 4}.
+	You can also append strings {[this is a ] + [string]}

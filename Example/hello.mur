@@ -1,7 +1,5 @@
 // This is a commentary, the script will ignore these lines
-
 @include: [Declarations] // This is how you include more files
-
 @init:
 	//This runs immediately when the file is loaded
 	variable = [Hello]
@@ -35,4 +33,4 @@
 #operations
 	Two plus two equals {result}. // Remember? We declared this in the @init block
 	And you can even do math on the fly like this: {8/2 + 4}.
-	You can also append strings {[this is a ] + [string]}
+	You can also append strings: {[this is a ] + [string]}

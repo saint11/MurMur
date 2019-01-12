@@ -158,12 +158,12 @@ namespace MurMur
             if (result.Boolean)
             {
                 currentStack.Push(context);
-                Visit(context.block()[0]);
+                return VisitBlock(context.block()[0]);
             }
             else if (context.elseCommand() != null)
             {
                 currentStack.Push(context);
-                Visit(context.block()[1]);
+                return VisitBlock(context.block()[1]);
             }
 
             return new MurMurVariable();
