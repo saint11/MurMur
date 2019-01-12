@@ -28,14 +28,13 @@ namespace MurMur
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
 
-            var initBlock = context.initBlock();
+            var initBlock = context.initBlock()?[0];
             if (initBlock != null)
             {
-                Console.WriteLine("found init block");
                 var expressions = initBlock.expression();
                 foreach (var expression in expressions)
                 {
-                    VisitExpression(expression);
+                    Visit   (expression);
                 }
             }
 

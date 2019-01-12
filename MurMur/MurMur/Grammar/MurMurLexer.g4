@@ -5,10 +5,11 @@ fragment LOWERCASE : [a-z] ;
 fragment UPPERCASE : [A-Z] ;
 fragment DIGIT : [0-9] ;
 fragment TAG : '#' ;
+fragment NL : ('\n' | '\r' | '\r\n') ;
 
 // Extras
 WHITESPACE: (' ' | '\t')+ -> skip;
-NEWLINE: ('\n' | '\r' | '\r\n')+;
+NEWLINE: NL+;
 
 // Comments
 LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN) ;
@@ -24,18 +25,16 @@ TEXT: (~([#@{\r\n/[]) | ('/'~([/*])))+;
 
 
 mode INSIDE_COMMAND;
-    NEW_TAG: ('\n' | '\r' | '\r\n'){_input.La(1)=='#'}? -> popMode;
-	NEW_DECLARATION: ('\n' | '\r' | '\r\n'){_input.La(1)=='@'}? -> popMode;
-	//NEW_TAG: ('\n' | '\r' | '\r\n'){_input.LA(1)=='#'}? -> popMode; // Java version, for testing
-	COMMAND_NEWLINE: ('\n' | '\r' | '\r\n')(~[#]);
-
-	COMMAND_IGNORE: (' ' | '\t')+ -> skip;
+    NEW_TAG: NL{_input.La(1)=='#'}? -> popMode;
+	//NEW_TAG: NL{_input.LA(1)=='#'}? -> popMode; // Java version, for testing
+	NEW_DECLARATION: NL{_input.La(1)=='@'}? -> popMode;
+	//NEW_DECLARATION: NL{_input.LA(1)=='@'}? -> popMode;
+	COMMAND_NEWLINE: NL;
 	
 	// Comments
 	COMMAND_LINE_COMMENT: '//' ~[\r\n]* -> channel(HIDDEN);
 	COMMAND_COMMENT: '/*' .*? '*/' -> channel(HIDDEN) ;
-
-//	COMMAND_IGNORE: (' ' | '\t' | '\n' | '\r' | '\r\n')+ -> skip;
+	COMMAND_IGNORE: (' ' | '\t')+ -> skip;
 
 	COMMAND_PARAMS_START:(':');
 	COMMAND_STRING_START:('[') -> pushMode(STRING_MODE); //go is an exception and allows free text input

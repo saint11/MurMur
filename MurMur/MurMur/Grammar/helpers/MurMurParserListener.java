@@ -17,6 +17,16 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitMurmur(MurMurParser.MurmurContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MurMurParser#initBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitBlock(MurMurParser.InitBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#initBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitBlock(MurMurParser.InitBlockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MurMurParser#tag}.
 	 * @param ctx the parse tree
 	 */

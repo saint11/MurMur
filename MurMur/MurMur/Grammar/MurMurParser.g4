@@ -3,7 +3,7 @@ parser grammar MurMurParser;
 options { tokenVocab = MurMurLexer; }
 
 murmur
-    : NEWLINE* initBlock? NEWLINE* (tag | declaration)* EOF
+    : (tag | declaration | initBlock | NEWLINE | COMMAND_NEWLINE | NEW_DECLARATION | NEW_TAG)* EOF
     ;
     
 initBlock:
