@@ -17,11 +17,11 @@
 		{option:[Do I need to use a goto in these options?]}
 			Nope, you can just keep typing things inside this block.
 		{end}
-	After the "goto" is done, the code will jump back here
+	After the "goto" is done, the code will jump back here.
 	Bye now!
 
 #if_else
-	Absolutely! You can have a if block like now.
+	Absolutely! You can have an if block like this:
 	{if:true}
 		This always appears.
 	{else}
@@ -34,3 +34,6 @@
 	Two plus two equals {result}. // Remember? We declared this in the @init block
 	And you can even do math on the fly like this: {8/2 + 4}.
 	You can also append strings: {[this is a ] + [string]}
+
+
+
