@@ -83,7 +83,11 @@ If the name doesn't match anything it place `??command_name??` in the line text.
 #### Command with parameters
 `{command_name:[string parameter], 123, true, [more parameters]}`
 
-The same thing as the simple command, but will call a method with the parameters in front of the `:`. You can have as many parameters as you want.
+or
+
+`{command_name([string parameter], 123, true, [more parameters])}`
+
+The same thing as the simple command, but will call a method with the parameters in front of the `:`. You can have as many parameters as you want. You can also call methods like most languages too, just open and close parenthesis in front of the mathod name and put the parameters inside.
 
 #### Assing variable
 `{variable_to_assign = 2}`
