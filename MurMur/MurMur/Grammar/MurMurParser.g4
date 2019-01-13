@@ -61,7 +61,9 @@ string
 expression
 	: NUMBER											# numberExpression
 	| WORD												# methodOrVariableExpression
-	| WORD (COMMAND_PARAMS_START params)?				# methodExpression
+	| WORD 
+		( ( COMMAND_PARAMS_START params )
+		| ( OPEN_PAREN params CLOSE_PAREN ))?			# methodExpression
 	| (TRUE | FALSE)									# booleanExpression
 	| string											# stringExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression

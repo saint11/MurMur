@@ -423,7 +423,7 @@ namespace MurMur
             if (float.TryParse(text, out float value))
                 return new MurMurVariable(value);
             else
-                throw new MurMurException("Cannot parse " + text + "into a float", context.start.Line);
+                throw new MurMurException("Cannot parse " + text + " into a float", context.start.Line);
         }
 
         #endregion
