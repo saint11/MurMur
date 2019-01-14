@@ -97,11 +97,23 @@ Create or change the value of a variable to a expression. You can perform simple
 
 ### Headers
 The header is a place for special commands and they should be declared before the tags start. They start with the `@`character
-#### Init header
-The init header is a special block that runs right when the file is loaded. It should look something like this:
+#### Defining method
+You can define methods very easily in MurMur, just make sure you are not inside a tag. Just use `@def` and choose a name for it. Here's an example:
 
 ```
-@init:
+@def method_name parameter_1, more_params:
+  variable = [foo] + parameter_1 + more_params
+  value = some_other_method() + variable
+  return value
+```
+
+Note that inside the `@def` block you don't use `{` or `}`, inside this block everything is considered a command, expression or a return statement.
+After defining a method you can call it in your script anywhere, just like any other simple command, this way: `{method(1,2)}` or `{method: 1 ,2}`.
+#### Init header
+The init header is a special method that runs right when the file is loaded. It should look something like this:
+
+```
+@def init:
   variable = [foo]
   
 #someTag
