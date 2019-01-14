@@ -26,6 +26,7 @@ TEXT: (~([#@{\r\n/[]) | ('/'~([/*])))+;
 
 mode INSIDE_COMMAND;
     EXIT_COMMAND: ({_input.La(1)=='#'}? | {_input.La(1)=='@'}?) -> popMode;
+    //EXIT_COMMAND: ({_input.LA(1)=='#'}? | {_input.LA(1)=='@'}?) -> popMode;
     
 	COMMAND_NEWLINE: NL;
 	

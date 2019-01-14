@@ -27,13 +27,25 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInitBlock(MurMurParser.InitBlockContext ctx) { }
+	@Override public void enterDefBlock(MurMurParser.DefBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInitBlock(MurMurParser.InitBlockContext ctx) { }
+	@Override public void exitDefBlock(MurMurParser.DefBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclaration(MurMurParser.DeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaration(MurMurParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -58,18 +70,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBlock(MurMurParser.BlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPickBlock(MurMurParser.PickBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPickBlock(MurMurParser.PickBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -430,18 +430,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitEndCommand(MurMurParser.EndCommandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclaration(MurMurParser.DeclarationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclaration(MurMurParser.DeclarationContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

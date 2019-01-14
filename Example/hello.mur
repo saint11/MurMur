@@ -37,6 +37,3 @@
 	Two plus two equals {result}. // Remember? We declared this in the @init block
 	And you can even do math on the fly like this: {8/2 + 4}.
 	You can also append strings: {[this is a ] + [string]}
-
-
-

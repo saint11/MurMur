@@ -15,18 +15,16 @@ tag: TAG_START TEXT NEWLINE* block;
 
 block
 	: (ifBlock
-	| pickBlock
 	| menuBlock
 	| line
 	)+ ;
 
 // Block types
-pickBlock: pickCommand NEWLINE* pickThisBlock+ endCommand (NEWLINE+ | EOF);
-menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand (NEWLINE+ | EOF);
-ifBlock: ifCommand NEWLINE+ block (elseCommand NEWLINE+ block)? endCommand (NEWLINE+ | EOF);
+menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand NEWLINE+;
+ifBlock: ifCommand NEWLINE+ block (elseCommand NEWLINE+ block)? endCommand NEWLINE+;
 
 line
-	: lineFragment+ (NEWLINE+ | EOF)
+	: lineFragment+ NEWLINE?
 	;
 
 lineFragment

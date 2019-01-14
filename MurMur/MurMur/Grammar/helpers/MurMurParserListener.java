@@ -17,15 +17,25 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitMurmur(MurMurParser.MurmurContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#initBlock}.
+	 * Enter a parse tree produced by {@link MurMurParser#defBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterInitBlock(MurMurParser.InitBlockContext ctx);
+	void enterDefBlock(MurMurParser.DefBlockContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MurMurParser#initBlock}.
+	 * Exit a parse tree produced by {@link MurMurParser#defBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitInitBlock(MurMurParser.InitBlockContext ctx);
+	void exitDefBlock(MurMurParser.DefBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MurMurParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(MurMurParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MurMurParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(MurMurParser.DeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#tag}.
 	 * @param ctx the parse tree
@@ -46,16 +56,6 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBlock(MurMurParser.BlockContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MurMurParser#pickBlock}.
-	 * @param ctx the parse tree
-	 */
-	void enterPickBlock(MurMurParser.PickBlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MurMurParser#pickBlock}.
-	 * @param ctx the parse tree
-	 */
-	void exitPickBlock(MurMurParser.PickBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#menuBlock}.
 	 * @param ctx the parse tree
@@ -376,14 +376,4 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEndCommand(MurMurParser.EndCommandContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MurMurParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclaration(MurMurParser.DeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MurMurParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclaration(MurMurParser.DeclarationContext ctx);
 }
