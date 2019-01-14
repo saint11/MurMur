@@ -33,9 +33,15 @@ namespace MurMur
             {
                 var words = method.WORD();
                 var name = words[0].GetText();
-                script.Globals[name] = (Action)(()=>
+                script.Globals[name] = (Func<MurMurVariable[], MurMurVariable>)((parameters)=>
                 {
-                    Visit(method);
+                    for (int i = 1; i < words.Length; i++)
+                    {
+                        script.Locals[words[i].GetText()] = parameters[i-1];
+                    }
+                    var value = Visit(method);
+                    script.Locals.Clear();
+                    return value;
                 });
             }
 
@@ -246,7 +252,15 @@ namespace MurMur
         public override MurMurVariable VisitMethodOrVariableExpression([NotNull] MurMurParser.MethodOrVariableExpressionContext context)
         {
             var name = context.WORD().GetText();
-            var variable = FindVariable(name, context.start.Line);
+            MurMurVariable variable;
+            try
+            {
+                variable = FindVariable(name);
+            }
+            catch (Exception ex)
+            {
+                throw new MurMurException(ex.Message, context.start.Line);
+            }
 
             if (variable.HasValue())
                 return variable;
@@ -258,6 +272,13 @@ namespace MurMur
             {
                 throw new MurMurException(ex.Message, context.start.Line);
             }
+        }
+
+        public override MurMurVariable VisitReturn([NotNull] MurMurParser.ReturnContext context)
+        {
+            var value = Visit(context.expression());
+            @return = value;
+            return value;
         }
 
         public override MurMurVariable VisitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context)
@@ -294,29 +315,50 @@ namespace MurMur
             }
         }
 
-        public MurMurVariable FindVariable(string name, int line)
+        public MurMurVariable FindVariable(string name)
         {
-            if (script.Globals.ContainsKey(name))
+            object value;
+            if (script.Locals.ContainsKey(name))
             {
-                var value = script.Globals[name];
-                if (value is MurMurVariable)
-                    return (MurMurVariable)value;
-
-                if (value is string)
-                    return new MurMurVariable(value as string);
-
-                if (value is int)
-                    return new MurMurVariable((int)value);
-
-                if (value is float)
-                    return new MurMurVariable((float)value);
-
-                throw new MurMurException("Unknown variable type (" + name + ")", line);
+                value = script.Locals[name];
             }
-            else if (script.UnsafeMode)
-                return new MurMurVariable("??" + name + "??");
+            else if (script.Globals.ContainsKey(name))
+            {
+                value = script.Globals[name];
+            }
             else
-                throw new MurMurException("Could not find variable " + name, line);
+            {
+                throw new Exception("Cannot find variable (" + name + ")");
+            }
+
+            try
+            {
+                return MakeVariable(value);
+            }
+            catch (Exception ex)
+            {
+                if (script.UnsafeMode)
+                    return new MurMurVariable("??" + name + "??");
+                else
+                    throw new Exception(ex.Message + " (" + name + ")");
+            }
+
+        }
+        MurMurVariable MakeVariable(object value)
+        {
+            if (value is MurMurVariable)
+                return (MurMurVariable)value;
+
+            if (value is string)
+                return new MurMurVariable(value as string);
+
+            if (value is int)
+                return new MurMurVariable((int)value);
+
+            if (value is float)
+                return new MurMurVariable((float)value);
+
+            throw new Exception("Unknown variable type");
         }
 
         internal MurMurVariable Invoke(string function, params MurMurVariable[] parameters)
@@ -324,7 +366,7 @@ namespace MurMur
             var method = script.Globals[function];
             if (method == null)
                     throw new Exception("Null method or variable (" + function + ")");
-            
+
             if (method is Func<MurMurVariable>)
             {
                 return (method as Func<MurMurVariable>).Invoke();
@@ -338,6 +380,13 @@ namespace MurMur
             if (method is Func<MurMurVariable, MurMurVariable, MurMurVariable>)
             {
                 return (method as Func<MurMurVariable, MurMurVariable, MurMurVariable>).Invoke(parameters[0], parameters[0]);
+            }
+
+            if (method is Func<MurMurVariable[], MurMurVariable>)
+            {
+                var value = (method as Func<MurMurVariable[], MurMurVariable>).Invoke(parameters);
+                @return = null;
+                return value;
             }
 
             if (method is Action<MurMurVariable>)
@@ -447,8 +496,13 @@ namespace MurMur
 
         #endregion
 
+        MurMurVariable? @return;
         protected override bool ShouldVisitNextChild([NotNull] IRuleNode node, MurMurVariable currentResult)
         {
+            if (@return != null)
+            {
+                return false;
+            }
             if (currentResult.Halt != null)
             {
                 currentStack.Push(currentResult.Halt);

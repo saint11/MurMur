@@ -64,13 +64,13 @@ mode INSIDE_COMMAND;
 	KEYWORD_MENU_OPTION: ('option');
 	KEYWORD_PICK: ('pick');
 	KEYWORD_PICK_THIS: ('this');
+    KEYWORD_RETURN: ('return');
 	TRUE: T R U E;
 	FALSE: F A L S E;
 
 	// Expressions
 	NUMBER: DIGIT+ ([.] DIGIT+)?;
 	WORD: (LOWERCASE | UPPERCASE | '_')( LOWERCASE | UPPERCASE | '_' | DIGIT )+;
-
 
 	// Operations
 	ASSIGN_SIGNAL: ('=');

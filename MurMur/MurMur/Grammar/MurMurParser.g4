@@ -7,7 +7,8 @@ murmur
     ;
     
 defBlock:
-    DEF_KEYWORD WORD (WORD (COMMAND_PARAMS_SEPARATOR WORD)*)? COMMAND_PARAMS_START (COMMAND_NEWLINE | expression)*
+    DEF_KEYWORD WORD (WORD (COMMAND_PARAMS_SEPARATOR WORD)*)? COMMAND_PARAMS_START
+    (COMMAND_NEWLINE | expression | return)*
     ;
 declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string;
     
@@ -16,15 +17,16 @@ tag: TAG_START TEXT NEWLINE* block;
 block
 	: (ifBlock
 	| menuBlock
-	| line
-	)+ ;
+    | line
+	)+
+    ;
 
 // Block types
-menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand NEWLINE+;
-ifBlock: ifCommand NEWLINE+ block (elseCommand NEWLINE+ block)? endCommand NEWLINE+;
+menuBlock: menuCommand NEWLINE* menuSubBlock+ endCommand NEWLINE*;
+ifBlock: ifCommand NEWLINE+ block (elseCommand NEWLINE+ block)? endCommand NEWLINE*;
 
 line
-	: lineFragment+ NEWLINE?
+	: lineFragment+ NEWLINE*
 	;
 
 lineFragment
@@ -41,8 +43,6 @@ inlineIfFalseFragment: lineFragment+;
 menuSubBlock
 	: menuOptionCommand NEWLINE* block?
 	;
-
-pickThisBlock: pickThisCommand NEWLINE* block*;
 
 simpleCommand
 	: COMMAND_START expression COMMAND_END
@@ -77,9 +77,8 @@ expression
 
 params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
 
+return: KEYWORD_RETURN expression;
 
-pickCommand: COMMAND_START KEYWORD_PICK COMMAND_END;
-pickThisCommand: COMMAND_START KEYWORD_PICK_THIS COMMAND_PARAMS_START NUMBER COMMAND_END;
 menuCommand: COMMAND_START KEYWORD_MENU  (COMMAND_PARAMS_START expression)? COMMAND_END;
 menuOptionCommand: COMMAND_START KEYWORD_MENU_OPTION COMMAND_PARAMS_START expression (COMMAND_PARAMS_SEPARATOR expression)? COMMAND_END;
 ifCommand: COMMAND_START KEYWORD_IF COMMAND_PARAMS_START expression COMMAND_END;

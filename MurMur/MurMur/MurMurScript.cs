@@ -25,6 +25,7 @@ namespace MurMur
     public class MurMurScript
     {
         public Dictionary<string, object> Globals { get; private set; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Locals { get; private set; } = new Dictionary<string, object>();
 
         internal Dictionary<string,MurMurParser.BlockContext> Tags;
 
