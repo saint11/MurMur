@@ -3,12 +3,13 @@ parser grammar MurMurParser;
 options { tokenVocab = MurMurLexer; }
 
 murmur
-    : (tag | declaration | initBlock | NEWLINE | COMMAND_NEWLINE | NEW_DECLARATION | NEW_TAG)* EOF
+    : (tag | declaration | defBlock | NEWLINE | COMMAND_NEWLINE | EXIT_COMMAND)* EOF
     ;
     
-initBlock:
-    INIT_KEYWORD COMMAND_PARAMS_START (COMMAND_NEWLINE | expression)*
+defBlock:
+    DEF_KEYWORD WORD (WORD (COMMAND_PARAMS_SEPARATOR WORD)*)? COMMAND_PARAMS_START (COMMAND_NEWLINE | expression)*
     ;
+declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string;
     
 tag: TAG_START TEXT NEWLINE* block;
 
@@ -87,4 +88,3 @@ ifCommand: COMMAND_START KEYWORD_IF COMMAND_PARAMS_START expression COMMAND_END;
 elseCommand: COMMAND_START KEYWORD_ELSE COMMAND_END;
 endCommand: COMMAND_START KEYWORD_END COMMAND_END;
 
-declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string COMMAND_NEWLINE* NEW_TAG?;

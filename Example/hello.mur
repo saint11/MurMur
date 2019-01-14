@@ -1,13 +1,16 @@
 // This is a commentary, the script will ignore these lines
 @include: [Declarations] // This is how you include more files
-@init:
+@def init:
 	//This runs immediately when the file is loaded
 	variable = [Hello]
 	result = [number ] + (2 + 2)
 
+@def double number:
+	return 5 * 2
+
 #init
 	// The game starts here!
-    {variable} world!
+    {variable} world! {double: 3}
     This is MurMur and it has a bunch of features.
     {menu:[Do you want to know more?]}
     	{option:[Can you use conditionals?]}

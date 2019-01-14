@@ -28,18 +28,25 @@ namespace MurMur
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
 
-            // First we run the init block
-            foreach (var expression in context.initBlock()?[0]?.expression())
+            // First we create the methods block
+            foreach (var method in context.defBlock())
             {
-                Visit(expression);
+                var words = method.WORD();
+                var name = words[0].GetText();
+                script.Globals[name] = (Action)(()=>
+                {
+                    Visit(method);
+                });
             }
-            
+
             // Then we collect the tags
             var tags = context.tag();
             foreach (var tag in tags)
             {
                 VisitTag(tag);
             }
+
+            Invoke("init");
 
             return new MurMurVariable();
         }
@@ -243,8 +250,14 @@ namespace MurMur
 
             if (variable.HasValue())
                 return variable;
-
-            return Invoke(name, context.start.Line);
+            try
+            {
+                return Invoke(name);
+            }
+            catch (Exception ex)
+            {
+                throw new MurMurException(ex.Message, context.start.Line);
+            }
         }
 
         public override MurMurVariable VisitMethodExpression([NotNull] MurMurParser.MethodExpressionContext context)
@@ -266,7 +279,7 @@ namespace MurMur
             if (script.Globals.ContainsKey(name))
                 try
                 {
-                    return Invoke(name, context.start.Line, parameters);
+                    return Invoke(name, parameters);
                 }
                 catch (Exception e)
                 {
@@ -306,11 +319,11 @@ namespace MurMur
                 throw new MurMurException("Could not find variable " + name, line);
         }
 
-        internal MurMurVariable Invoke(string function, int line, params MurMurVariable[] parameters)
+        internal MurMurVariable Invoke(string function, params MurMurVariable[] parameters)
         {
             var method = script.Globals[function];
             if (method == null)
-                    throw new MurMurException("Null method or variable (" + function + ")", line);
+                    throw new Exception("Null method or variable (" + function + ")");
             
             if (method is Func<MurMurVariable>)
             {
@@ -351,10 +364,16 @@ namespace MurMur
                 return new MurMurVariable();
             }
 
+            if (method is Action)
+            {
+                (method as Action).Invoke();
+                return new MurMurVariable();
+            }
+
             if (script.UnsafeMode)
                 return new MurMurVariable("??" + function + "??");
             else
-                throw new MurMurException("Unknown method type (" + function + ")", line);
+                throw new Exception("Unknown method type (" + function + ")");
         }
         #region Operations And Values
 
