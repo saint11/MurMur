@@ -137,16 +137,6 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitMenuSubBlock(MurMurParser.MenuSubBlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#pickThisBlock}.
-	 * @param ctx the parse tree
-	 */
-	void enterPickThisBlock(MurMurParser.PickThisBlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MurMurParser#pickThisBlock}.
-	 * @param ctx the parse tree
-	 */
-	void exitPickThisBlock(MurMurParser.PickThisBlockContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MurMurParser#simpleCommand}.
 	 * @param ctx the parse tree
 	 */
@@ -307,25 +297,15 @@ public interface MurMurParserListener extends ParseTreeListener {
 	 */
 	void exitParams(MurMurParser.ParamsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MurMurParser#pickCommand}.
+	 * Enter a parse tree produced by {@link MurMurParser#returnValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterPickCommand(MurMurParser.PickCommandContext ctx);
+	void enterReturnValue(MurMurParser.ReturnValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MurMurParser#pickCommand}.
+	 * Exit a parse tree produced by {@link MurMurParser#returnValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitPickCommand(MurMurParser.PickCommandContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MurMurParser#pickThisCommand}.
-	 * @param ctx the parse tree
-	 */
-	void enterPickThisCommand(MurMurParser.PickThisCommandContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MurMurParser#pickThisCommand}.
-	 * @param ctx the parse tree
-	 */
-	void exitPickThisCommand(MurMurParser.PickThisCommandContext ctx);
+	void exitReturnValue(MurMurParser.ReturnValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MurMurParser#menuCommand}.
 	 * @param ctx the parse tree

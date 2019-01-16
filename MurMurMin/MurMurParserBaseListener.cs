@@ -420,17 +420,17 @@ public partial class MurMurParserBaseListener : IMurMurParserListener {
 	public virtual void ExitParams([NotNull] MurMurParser.ParamsContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.return"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.returnValue"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterReturn([NotNull] MurMurParser.ReturnContext context) { }
+	public virtual void EnterReturnValue([NotNull] MurMurParser.ReturnValueContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.return"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.returnValue"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitReturn([NotNull] MurMurParser.ReturnContext context) { }
+	public virtual void ExitReturnValue([NotNull] MurMurParser.ReturnValueContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuCommand"/>.

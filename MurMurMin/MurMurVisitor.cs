@@ -28,7 +28,13 @@ namespace MurMur
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
 
-            // First we create the methods block
+            // First we include all required files
+            foreach (var file in context.declaration())
+            {
+                VisitDeclaration(file);
+            }
+
+            // then we create the methods block
             foreach (var method in context.defBlock())
             {
                 var words = method.WORD();
@@ -279,7 +285,7 @@ namespace MurMur
             }
         }
 
-        public override MurMurVariable VisitReturn([NotNull] MurMurParser.ReturnContext context)
+        public override MurMurVariable VisitReturnValue([NotNull] MurMurParser.ReturnValueContext context)
         {
             var value = Visit(context.expression());
             @return = value;

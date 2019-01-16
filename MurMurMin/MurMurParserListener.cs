@@ -360,15 +360,15 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitParams([NotNull] MurMurParser.ParamsContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.return"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.returnValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterReturn([NotNull] MurMurParser.ReturnContext context);
+	void EnterReturnValue([NotNull] MurMurParser.ReturnValueContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.return"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.returnValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitReturn([NotNull] MurMurParser.ReturnContext context);
+	void ExitReturnValue([NotNull] MurMurParser.ReturnValueContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuCommand"/>.

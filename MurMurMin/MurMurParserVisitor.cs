@@ -239,11 +239,11 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParams([NotNull] MurMurParser.ParamsContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.return"/>.
+	/// Visit a parse tree produced by <see cref="MurMurParser.returnValue"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitReturn([NotNull] MurMurParser.ReturnContext context);
+	Result VisitReturnValue([NotNull] MurMurParser.ReturnValueContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.menuCommand"/>.

@@ -8,7 +8,7 @@ murmur
     
 defBlock:
     DEF_KEYWORD WORD (WORD (COMMAND_PARAMS_SEPARATOR WORD)*)? COMMAND_PARAMS_START
-    (COMMAND_NEWLINE | expression | return)*
+    (COMMAND_NEWLINE | expression | returnValue)*
     ;
 declaration: INCLUDE_KEYWORD COMMAND_PARAMS_START string;
     
@@ -62,7 +62,7 @@ expression
 	| WORD												# methodOrVariableExpression
 	| WORD 
 		( ( COMMAND_PARAMS_START params )
-		| ( OPEN_PAREN params CLOSE_PAREN ))?			# methodExpression
+		| ( OPEN_PAREN params? CLOSE_PAREN ))?			# methodExpression
 	| (TRUE | FALSE)									# booleanExpression
 	| string											# stringExpression
 	| expression MUL_DIV_SIGNAL expression				# multiplicationExpression
@@ -77,7 +77,7 @@ expression
 
 params: expression (COMMAND_PARAMS_SEPARATOR expression)*;
 
-return: KEYWORD_RETURN expression;
+returnValue: KEYWORD_RETURN expression;
 
 menuCommand: COMMAND_START KEYWORD_MENU  (COMMAND_PARAMS_START expression)? COMMAND_END;
 menuOptionCommand: COMMAND_START KEYWORD_MENU_OPTION COMMAND_PARAMS_START expression (COMMAND_PARAMS_SEPARATOR expression)? COMMAND_END;

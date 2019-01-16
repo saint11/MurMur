@@ -285,7 +285,7 @@ namespace MurMur
             }
         }
 
-        public override MurMurVariable VisitReturn([NotNull] MurMurParser.ReturnContext context)
+        public override MurMurVariable VisitReturnValue([NotNull] MurMurParser.ReturnValueContext context)
         {
             var value = Visit(context.expression());
             @return = value;

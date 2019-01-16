@@ -171,18 +171,6 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPickThisBlock(MurMurParser.PickThisBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPickThisBlock(MurMurParser.PickThisBlockContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSimpleCommand(MurMurParser.SimpleCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -351,25 +339,13 @@ public class MurMurParserBaseListener implements MurMurParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPickCommand(MurMurParser.PickCommandContext ctx) { }
+	@Override public void enterReturnValue(MurMurParser.ReturnValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPickCommand(MurMurParser.PickCommandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPickThisCommand(MurMurParser.PickThisCommandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPickThisCommand(MurMurParser.PickThisCommandContext ctx) { }
+	@Override public void exitReturnValue(MurMurParser.ReturnValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

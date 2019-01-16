@@ -6,11 +6,11 @@
 	result = [number ] + (2 + 2)
 
 @def double number:
-	return 5 * 2
+	return number * 2
 
 #init
 	// The game starts here!
-    {variable} world! {double: 3}
+    {variable} world! {double: 9}
     This is MurMur and it has a bunch of features.
     {menu:[Do you want to know more?]}
     	{option:[Can you use conditionals?]}
@@ -37,3 +37,6 @@
 	Two plus two equals {result}. // Remember? We declared this in the @init block
 	And you can even do math on the fly like this: {8/2 + 4}.
 	You can also append strings: {[this is a ] + [string]}
+
+
+
