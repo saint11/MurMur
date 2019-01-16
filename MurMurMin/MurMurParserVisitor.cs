@@ -120,11 +120,18 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMurmur([NotNull] MurMurParser.MurmurContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// Visit a parse tree produced by <see cref="MurMurParser.defBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitInitBlock([NotNull] MurMurParser.InitBlockContext context);
+	Result VisitDefBlock([NotNull] MurMurParser.DefBlockContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="MurMurParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.tag"/>.
@@ -139,13 +146,6 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBlock([NotNull] MurMurParser.BlockContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.pickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPickBlock([NotNull] MurMurParser.PickBlockContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.menuBlock"/>.
@@ -204,13 +204,6 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -246,18 +239,11 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParams([NotNull] MurMurParser.ParamsContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.pickCommand"/>.
+	/// Visit a parse tree produced by <see cref="MurMurParser.return"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitPickCommand([NotNull] MurMurParser.PickCommandContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.pickThisCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context);
+	Result VisitReturn([NotNull] MurMurParser.ReturnContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="MurMurParser.menuCommand"/>.
@@ -293,12 +279,5 @@ public interface IMurMurParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitEndCommand([NotNull] MurMurParser.EndCommandContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 }
 } // namespace MurMur.Grammar

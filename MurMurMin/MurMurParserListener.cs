@@ -173,15 +173,26 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitMurmur([NotNull] MurMurParser.MurmurContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.defBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterInitBlock([NotNull] MurMurParser.InitBlockContext context);
+	void EnterDefBlock([NotNull] MurMurParser.DefBlockContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.initBlock"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.defBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitInitBlock([NotNull] MurMurParser.InitBlockContext context);
+	void ExitDefBlock([NotNull] MurMurParser.DefBlockContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="MurMurParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDeclaration([NotNull] MurMurParser.DeclarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="MurMurParser.declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.tag"/>.
@@ -204,17 +215,6 @@ public interface IMurMurParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitBlock([NotNull] MurMurParser.BlockContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.pickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPickBlock([NotNull] MurMurParser.PickBlockContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.pickBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPickBlock([NotNull] MurMurParser.PickBlockContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuBlock"/>.
@@ -305,17 +305,6 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitMenuSubBlock([NotNull] MurMurParser.MenuSubBlockContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.pickThisBlock"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPickThisBlock([NotNull] MurMurParser.PickThisBlockContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.simpleCommand"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -371,26 +360,15 @@ public interface IMurMurParserListener : IParseTreeListener {
 	void ExitParams([NotNull] MurMurParser.ParamsContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.pickCommand"/>.
+	/// Enter a parse tree produced by <see cref="MurMurParser.return"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterPickCommand([NotNull] MurMurParser.PickCommandContext context);
+	void EnterReturn([NotNull] MurMurParser.ReturnContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.pickCommand"/>.
+	/// Exit a parse tree produced by <see cref="MurMurParser.return"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitPickCommand([NotNull] MurMurParser.PickCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.pickThisCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.pickThisCommand"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitPickThisCommand([NotNull] MurMurParser.PickThisCommandContext context);
+	void ExitReturn([NotNull] MurMurParser.ReturnContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="MurMurParser.menuCommand"/>.
@@ -446,16 +424,5 @@ public interface IMurMurParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitEndCommand([NotNull] MurMurParser.EndCommandContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDeclaration([NotNull] MurMurParser.DeclarationContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="MurMurParser.declaration"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDeclaration([NotNull] MurMurParser.DeclarationContext context);
 }
 } // namespace MurMur.Grammar

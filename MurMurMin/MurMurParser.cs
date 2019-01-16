@@ -32,44 +32,43 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 public partial class MurMurParser : Parser {
 	public const int
 		WHITESPACE=1, NEWLINE=2, LINE_COMMENT=3, COMMENT=4, TAG_START=5, COMMAND_START=6, 
-		INCLUDE_KEYWORD=7, INIT_KEYWORD=8, TEXT=9, NEW_TAG=10, NEW_DECLARATION=11, 
-		COMMAND_NEWLINE=12, COMMAND_LINE_COMMENT=13, COMMAND_COMMENT=14, COMMAND_IGNORE=15, 
-		COMMAND_PARAMS_START=16, COMMAND_STRING_START=17, OPEN_PAREN=18, CLOSE_PAREN=19, 
-		COMMAND_PARAMS_SEPARATOR=20, COMMAND_END=21, KEYWORD_IF=22, KEYWORD_ELSE=23, 
-		KEYWORD_END=24, KEYWORD_GOTO=25, KEYWORD_MENU=26, KEYWORD_MENU_OPTION=27, 
-		KEYWORD_PICK=28, KEYWORD_PICK_THIS=29, TRUE=30, FALSE=31, NUMBER=32, WORD=33, 
-		ASSIGN_SIGNAL=34, COMPARISSON_SIGNAL=35, MUL_DIV_SIGNAL=36, ADD_SUB_SIGNAL=37, 
-		STRING=38, COMMAND_STRING_END=39;
+		INCLUDE_KEYWORD=7, DEF_KEYWORD=8, TEXT=9, EXIT_COMMAND=10, COMMAND_NEWLINE=11, 
+		COMMAND_LINE_COMMENT=12, COMMAND_COMMENT=13, COMMAND_IGNORE=14, COMMAND_PARAMS_START=15, 
+		COMMAND_STRING_START=16, OPEN_PAREN=17, CLOSE_PAREN=18, COMMAND_PARAMS_SEPARATOR=19, 
+		COMMAND_END=20, KEYWORD_IF=21, KEYWORD_ELSE=22, KEYWORD_END=23, KEYWORD_GOTO=24, 
+		KEYWORD_MENU=25, KEYWORD_MENU_OPTION=26, KEYWORD_PICK=27, KEYWORD_PICK_THIS=28, 
+		KEYWORD_RETURN=29, TRUE=30, FALSE=31, NUMBER=32, WORD=33, ASSIGN_SIGNAL=34, 
+		COMPARISSON_SIGNAL=35, MUL_DIV_SIGNAL=36, ADD_SUB_SIGNAL=37, STRING=38, 
+		COMMAND_STRING_END=39;
 	public const int
-		RULE_murmur = 0, RULE_initBlock = 1, RULE_tag = 2, RULE_block = 3, RULE_pickBlock = 4, 
-		RULE_menuBlock = 5, RULE_ifBlock = 6, RULE_line = 7, RULE_lineFragment = 8, 
+		RULE_murmur = 0, RULE_defBlock = 1, RULE_declaration = 2, RULE_tag = 3, 
+		RULE_block = 4, RULE_menuBlock = 5, RULE_ifBlock = 6, RULE_line = 7, RULE_lineFragment = 8, 
 		RULE_inlineIfBlock = 9, RULE_inlineIfTrueFragment = 10, RULE_inlineIfFalseFragment = 11, 
-		RULE_menuSubBlock = 12, RULE_pickThisBlock = 13, RULE_simpleCommand = 14, 
-		RULE_multiLineCommand = 15, RULE_string = 16, RULE_expression = 17, RULE_params = 18, 
-		RULE_pickCommand = 19, RULE_pickThisCommand = 20, RULE_menuCommand = 21, 
-		RULE_menuOptionCommand = 22, RULE_ifCommand = 23, RULE_elseCommand = 24, 
-		RULE_endCommand = 25, RULE_declaration = 26;
+		RULE_menuSubBlock = 12, RULE_simpleCommand = 13, RULE_multiLineCommand = 14, 
+		RULE_string = 15, RULE_expression = 16, RULE_params = 17, RULE_return = 18, 
+		RULE_menuCommand = 19, RULE_menuOptionCommand = 20, RULE_ifCommand = 21, 
+		RULE_elseCommand = 22, RULE_endCommand = 23;
 	public static readonly string[] ruleNames = {
-		"murmur", "initBlock", "tag", "block", "pickBlock", "menuBlock", "ifBlock", 
+		"murmur", "defBlock", "declaration", "tag", "block", "menuBlock", "ifBlock", 
 		"line", "lineFragment", "inlineIfBlock", "inlineIfTrueFragment", "inlineIfFalseFragment", 
-		"menuSubBlock", "pickThisBlock", "simpleCommand", "multiLineCommand", 
-		"string", "expression", "params", "pickCommand", "pickThisCommand", "menuCommand", 
-		"menuOptionCommand", "ifCommand", "elseCommand", "endCommand", "declaration"
+		"menuSubBlock", "simpleCommand", "multiLineCommand", "string", "expression", 
+		"params", "return", "menuCommand", "menuOptionCommand", "ifCommand", "elseCommand", 
+		"endCommand"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, null, null, null, null, null, null, "'@include'", "'@init'"
+		null, null, null, null, null, null, null, "'@include'", "'@def'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "WHITESPACE", "NEWLINE", "LINE_COMMENT", "COMMENT", "TAG_START", 
-		"COMMAND_START", "INCLUDE_KEYWORD", "INIT_KEYWORD", "TEXT", "NEW_TAG", 
-		"NEW_DECLARATION", "COMMAND_NEWLINE", "COMMAND_LINE_COMMENT", "COMMAND_COMMENT", 
-		"COMMAND_IGNORE", "COMMAND_PARAMS_START", "COMMAND_STRING_START", "OPEN_PAREN", 
-		"CLOSE_PAREN", "COMMAND_PARAMS_SEPARATOR", "COMMAND_END", "KEYWORD_IF", 
-		"KEYWORD_ELSE", "KEYWORD_END", "KEYWORD_GOTO", "KEYWORD_MENU", "KEYWORD_MENU_OPTION", 
-		"KEYWORD_PICK", "KEYWORD_PICK_THIS", "TRUE", "FALSE", "NUMBER", "WORD", 
-		"ASSIGN_SIGNAL", "COMPARISSON_SIGNAL", "MUL_DIV_SIGNAL", "ADD_SUB_SIGNAL", 
-		"STRING", "COMMAND_STRING_END"
+		"COMMAND_START", "INCLUDE_KEYWORD", "DEF_KEYWORD", "TEXT", "EXIT_COMMAND", 
+		"COMMAND_NEWLINE", "COMMAND_LINE_COMMENT", "COMMAND_COMMENT", "COMMAND_IGNORE", 
+		"COMMAND_PARAMS_START", "COMMAND_STRING_START", "OPEN_PAREN", "CLOSE_PAREN", 
+		"COMMAND_PARAMS_SEPARATOR", "COMMAND_END", "KEYWORD_IF", "KEYWORD_ELSE", 
+		"KEYWORD_END", "KEYWORD_GOTO", "KEYWORD_MENU", "KEYWORD_MENU_OPTION", 
+		"KEYWORD_PICK", "KEYWORD_PICK_THIS", "KEYWORD_RETURN", "TRUE", "FALSE", 
+		"NUMBER", "WORD", "ASSIGN_SIGNAL", "COMPARISSON_SIGNAL", "MUL_DIV_SIGNAL", 
+		"ADD_SUB_SIGNAL", "STRING", "COMMAND_STRING_END"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -135,11 +134,11 @@ public partial class MurMurParser : Parser {
 		public DeclarationContext declaration(int i) {
 			return GetRuleContext<DeclarationContext>(i);
 		}
-		public InitBlockContext[] initBlock() {
-			return GetRuleContexts<InitBlockContext>();
+		public DefBlockContext[] defBlock() {
+			return GetRuleContexts<DefBlockContext>();
 		}
-		public InitBlockContext initBlock(int i) {
-			return GetRuleContext<InitBlockContext>(i);
+		public DefBlockContext defBlock(int i) {
+			return GetRuleContext<DefBlockContext>(i);
 		}
 		public ITerminalNode[] NEWLINE() { return GetTokens(MurMurParser.NEWLINE); }
 		public ITerminalNode NEWLINE(int i) {
@@ -149,13 +148,9 @@ public partial class MurMurParser : Parser {
 		public ITerminalNode COMMAND_NEWLINE(int i) {
 			return GetToken(MurMurParser.COMMAND_NEWLINE, i);
 		}
-		public ITerminalNode[] NEW_DECLARATION() { return GetTokens(MurMurParser.NEW_DECLARATION); }
-		public ITerminalNode NEW_DECLARATION(int i) {
-			return GetToken(MurMurParser.NEW_DECLARATION, i);
-		}
-		public ITerminalNode[] NEW_TAG() { return GetTokens(MurMurParser.NEW_TAG); }
-		public ITerminalNode NEW_TAG(int i) {
-			return GetToken(MurMurParser.NEW_TAG, i);
+		public ITerminalNode[] EXIT_COMMAND() { return GetTokens(MurMurParser.EXIT_COMMAND); }
+		public ITerminalNode EXIT_COMMAND(int i) {
+			return GetToken(MurMurParser.EXIT_COMMAND, i);
 		}
 		public MurmurContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -185,58 +180,53 @@ public partial class MurMurParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 63;
+			State = 56;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NEWLINE) | (1L << TAG_START) | (1L << INCLUDE_KEYWORD) | (1L << INIT_KEYWORD) | (1L << NEW_TAG) | (1L << NEW_DECLARATION) | (1L << COMMAND_NEWLINE))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NEWLINE) | (1L << TAG_START) | (1L << INCLUDE_KEYWORD) | (1L << DEF_KEYWORD) | (1L << EXIT_COMMAND) | (1L << COMMAND_NEWLINE))) != 0)) {
 				{
-				State = 61;
+				State = 54;
 				_errHandler.Sync(this);
 				switch (_input.La(1)) {
 				case TAG_START:
 					{
-					State = 54; tag();
+					State = 48; tag();
 					}
 					break;
 				case INCLUDE_KEYWORD:
 					{
-					State = 55; declaration();
+					State = 49; declaration();
 					}
 					break;
-				case INIT_KEYWORD:
+				case DEF_KEYWORD:
 					{
-					State = 56; initBlock();
+					State = 50; defBlock();
 					}
 					break;
 				case NEWLINE:
 					{
-					State = 57; Match(NEWLINE);
+					State = 51; Match(NEWLINE);
 					}
 					break;
 				case COMMAND_NEWLINE:
 					{
-					State = 58; Match(COMMAND_NEWLINE);
+					State = 52; Match(COMMAND_NEWLINE);
 					}
 					break;
-				case NEW_DECLARATION:
+				case EXIT_COMMAND:
 					{
-					State = 59; Match(NEW_DECLARATION);
-					}
-					break;
-				case NEW_TAG:
-					{
-					State = 60; Match(NEW_TAG);
+					State = 53; Match(EXIT_COMMAND);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				}
-				State = 65;
+				State = 58;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 66; Match(Eof);
+			State = 59; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -250,8 +240,12 @@ public partial class MurMurParser : Parser {
 		return _localctx;
 	}
 
-	public partial class InitBlockContext : ParserRuleContext {
-		public ITerminalNode INIT_KEYWORD() { return GetToken(MurMurParser.INIT_KEYWORD, 0); }
+	public partial class DefBlockContext : ParserRuleContext {
+		public ITerminalNode DEF_KEYWORD() { return GetToken(MurMurParser.DEF_KEYWORD, 0); }
+		public ITerminalNode[] WORD() { return GetTokens(MurMurParser.WORD); }
+		public ITerminalNode WORD(int i) {
+			return GetToken(MurMurParser.WORD, i);
+		}
 		public ITerminalNode COMMAND_PARAMS_START() { return GetToken(MurMurParser.COMMAND_PARAMS_START, 0); }
 		public ITerminalNode[] COMMAND_NEWLINE() { return GetTokens(MurMurParser.COMMAND_NEWLINE); }
 		public ITerminalNode COMMAND_NEWLINE(int i) {
@@ -263,48 +257,83 @@ public partial class MurMurParser : Parser {
 		public ExpressionContext expression(int i) {
 			return GetRuleContext<ExpressionContext>(i);
 		}
-		public InitBlockContext(ParserRuleContext parent, int invokingState)
+		public ReturnContext[] @return() {
+			return GetRuleContexts<ReturnContext>();
+		}
+		public ReturnContext @return(int i) {
+			return GetRuleContext<ReturnContext>(i);
+		}
+		public ITerminalNode[] COMMAND_PARAMS_SEPARATOR() { return GetTokens(MurMurParser.COMMAND_PARAMS_SEPARATOR); }
+		public ITerminalNode COMMAND_PARAMS_SEPARATOR(int i) {
+			return GetToken(MurMurParser.COMMAND_PARAMS_SEPARATOR, i);
+		}
+		public DefBlockContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_initBlock; } }
+		public override int RuleIndex { get { return RULE_defBlock; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterInitBlock(this);
+			if (typedListener != null) typedListener.EnterDefBlock(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitInitBlock(this);
+			if (typedListener != null) typedListener.ExitDefBlock(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitInitBlock(this);
+			if (typedVisitor != null) return typedVisitor.VisitDefBlock(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public InitBlockContext initBlock() {
-		InitBlockContext _localctx = new InitBlockContext(_ctx, State);
-		EnterRule(_localctx, 2, RULE_initBlock);
+	public DefBlockContext defBlock() {
+		DefBlockContext _localctx = new DefBlockContext(_ctx, State);
+		EnterRule(_localctx, 2, RULE_defBlock);
+		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 68; Match(INIT_KEYWORD);
-			State = 69; Match(COMMAND_PARAMS_START);
-			State = 74;
+			State = 61; Match(DEF_KEYWORD);
+			State = 62; Match(WORD);
+			State = 71;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,3,_ctx);
+			_la = _input.La(1);
+			if (_la==WORD) {
+				{
+				State = 63; Match(WORD);
+				State = 68;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+				while (_la==COMMAND_PARAMS_SEPARATOR) {
+					{
+					{
+					State = 64; Match(COMMAND_PARAMS_SEPARATOR);
+					State = 65; Match(WORD);
+					}
+					}
+					State = 70;
+					_errHandler.Sync(this);
+					_la = _input.La(1);
+				}
+				}
+			}
+
+			State = 73; Match(COMMAND_PARAMS_START);
+			State = 79;
+			_errHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
-					State = 72;
+					State = 77;
 					_errHandler.Sync(this);
 					switch (_input.La(1)) {
 					case COMMAND_NEWLINE:
 						{
-						State = 70; Match(COMMAND_NEWLINE);
+						State = 74; Match(COMMAND_NEWLINE);
 						}
 						break;
 					case COMMAND_STRING_START:
@@ -314,7 +343,12 @@ public partial class MurMurParser : Parser {
 					case NUMBER:
 					case WORD:
 						{
-						State = 71; expression(0);
+						State = 75; expression(0);
+						}
+						break;
+					case KEYWORD_RETURN:
+						{
+						State = 76; @return();
 						}
 						break;
 					default:
@@ -322,10 +356,59 @@ public partial class MurMurParser : Parser {
 					}
 					} 
 				}
-				State = 76;
+				State = 81;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,3,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,5,_ctx);
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DeclarationContext : ParserRuleContext {
+		public ITerminalNode INCLUDE_KEYWORD() { return GetToken(MurMurParser.INCLUDE_KEYWORD, 0); }
+		public ITerminalNode COMMAND_PARAMS_START() { return GetToken(MurMurParser.COMMAND_PARAMS_START, 0); }
+		public StringContext @string() {
+			return GetRuleContext<StringContext>(0);
+		}
+		public DeclarationContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_declaration; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IMurMurParserListener typedListener = listener as IMurMurParserListener;
+			if (typedListener != null) typedListener.EnterDeclaration(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IMurMurParserListener typedListener = listener as IMurMurParserListener;
+			if (typedListener != null) typedListener.ExitDeclaration(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeclaration(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DeclarationContext declaration() {
+		DeclarationContext _localctx = new DeclarationContext(_ctx, State);
+		EnterRule(_localctx, 4, RULE_declaration);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 82; Match(INCLUDE_KEYWORD);
+			State = 83; Match(COMMAND_PARAMS_START);
+			State = 84; @string();
 			}
 		}
 		catch (RecognitionException re) {
@@ -372,27 +455,27 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public TagContext tag() {
 		TagContext _localctx = new TagContext(_ctx, State);
-		EnterRule(_localctx, 4, RULE_tag);
+		EnterRule(_localctx, 6, RULE_tag);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 77; Match(TAG_START);
-			State = 78; Match(TEXT);
-			State = 82;
+			State = 86; Match(TAG_START);
+			State = 87; Match(TEXT);
+			State = 91;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				State = 79; Match(NEWLINE);
+				State = 88; Match(NEWLINE);
 				}
 				}
-				State = 84;
+				State = 93;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 85; block();
+			State = 94; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -412,12 +495,6 @@ public partial class MurMurParser : Parser {
 		}
 		public IfBlockContext ifBlock(int i) {
 			return GetRuleContext<IfBlockContext>(i);
-		}
-		public PickBlockContext[] pickBlock() {
-			return GetRuleContexts<PickBlockContext>();
-		}
-		public PickBlockContext pickBlock(int i) {
-			return GetRuleContext<PickBlockContext>(i);
 		}
 		public MenuBlockContext[] menuBlock() {
 			return GetRuleContexts<MenuBlockContext>();
@@ -454,42 +531,36 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public BlockContext block() {
 		BlockContext _localctx = new BlockContext(_ctx, State);
-		EnterRule(_localctx, 6, RULE_block);
+		EnterRule(_localctx, 8, RULE_block);
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 91;
+			State = 99;
 			_errHandler.Sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					State = 91;
+					State = 99;
 					_errHandler.Sync(this);
-					switch ( Interpreter.AdaptivePredict(_input,5,_ctx) ) {
+					switch ( Interpreter.AdaptivePredict(_input,7,_ctx) ) {
 					case 1:
 						{
-						State = 87; ifBlock();
+						State = 96; ifBlock();
 						}
 						break;
 
 					case 2:
 						{
-						State = 88; pickBlock();
+						State = 97; menuBlock();
 						}
 						break;
 
 					case 3:
 						{
-						State = 89; menuBlock();
-						}
-						break;
-
-					case 4:
-						{
-						State = 90; line();
+						State = 98; line();
 						}
 						break;
 					}
@@ -497,139 +568,11 @@ public partial class MurMurParser : Parser {
 					break;
 				default:
 					throw new NoViableAltException(this);
-				}
-				State = 93;
-				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,6,_ctx);
-			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class PickBlockContext : ParserRuleContext {
-		public PickCommandContext pickCommand() {
-			return GetRuleContext<PickCommandContext>(0);
-		}
-		public EndCommandContext endCommand() {
-			return GetRuleContext<EndCommandContext>(0);
-		}
-		public ITerminalNode Eof() { return GetToken(MurMurParser.Eof, 0); }
-		public ITerminalNode[] NEWLINE() { return GetTokens(MurMurParser.NEWLINE); }
-		public ITerminalNode NEWLINE(int i) {
-			return GetToken(MurMurParser.NEWLINE, i);
-		}
-		public PickThisBlockContext[] pickThisBlock() {
-			return GetRuleContexts<PickThisBlockContext>();
-		}
-		public PickThisBlockContext pickThisBlock(int i) {
-			return GetRuleContext<PickThisBlockContext>(i);
-		}
-		public PickBlockContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_pickBlock; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterPickBlock(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitPickBlock(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPickBlock(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public PickBlockContext pickBlock() {
-		PickBlockContext _localctx = new PickBlockContext(_ctx, State);
-		EnterRule(_localctx, 8, RULE_pickBlock);
-		int _la;
-		try {
-			int _alt;
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 95; pickCommand();
-			State = 99;
-			_errHandler.Sync(this);
-			_la = _input.La(1);
-			while (_la==NEWLINE) {
-				{
-				{
-				State = 96; Match(NEWLINE);
-				}
 				}
 				State = 101;
 				_errHandler.Sync(this);
-				_la = _input.La(1);
-			}
-			State = 103;
-			_errHandler.Sync(this);
-			_alt = 1;
-			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					State = 102; pickThisBlock();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				State = 105;
-				_errHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(_input,8,_ctx);
 			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
-			State = 107; endCommand();
-			State = 114;
-			_errHandler.Sync(this);
-			switch (_input.La(1)) {
-			case NEWLINE:
-				{
-				State = 109;
-				_errHandler.Sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						State = 108; Match(NEWLINE);
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
-					}
-					State = 111;
-					_errHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(_input,9,_ctx);
-				} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
-				}
-				break;
-			case Eof:
-				{
-				State = 113; Match(Eof);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -650,7 +593,6 @@ public partial class MurMurParser : Parser {
 		public EndCommandContext endCommand() {
 			return GetRuleContext<EndCommandContext>(0);
 		}
-		public ITerminalNode Eof() { return GetToken(MurMurParser.Eof, 0); }
 		public ITerminalNode[] NEWLINE() { return GetTokens(MurMurParser.NEWLINE); }
 		public ITerminalNode NEWLINE(int i) {
 			return GetToken(MurMurParser.NEWLINE, i);
@@ -690,21 +632,21 @@ public partial class MurMurParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 116; menuCommand();
-			State = 120;
+			State = 103; menuCommand();
+			State = 107;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				State = 117; Match(NEWLINE);
+				State = 104; Match(NEWLINE);
 				}
 				}
-				State = 122;
+				State = 109;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 124;
+			State = 111;
 			_errHandler.Sync(this);
 			_alt = 1;
 			do {
@@ -712,51 +654,32 @@ public partial class MurMurParser : Parser {
 				case 1:
 					{
 					{
-					State = 123; menuSubBlock();
+					State = 110; menuSubBlock();
 					}
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				State = 126;
+				State = 113;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,12,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,10,_ctx);
 			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
-			State = 128; endCommand();
-			State = 135;
+			State = 115; endCommand();
+			State = 119;
 			_errHandler.Sync(this);
-			switch (_input.La(1)) {
-			case NEWLINE:
-				{
-				State = 130;
-				_errHandler.Sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						State = 129; Match(NEWLINE);
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
+			_alt = Interpreter.AdaptivePredict(_input,11,_ctx);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					{
+					{
+					State = 116; Match(NEWLINE);
 					}
-					State = 132;
-					_errHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(_input,13,_ctx);
-				} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
+					} 
 				}
-				break;
-			case Eof:
-				{
-				State = 134; Match(Eof);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+				State = 121;
+				_errHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(_input,11,_ctx);
 			}
 			}
 		}
@@ -784,7 +707,6 @@ public partial class MurMurParser : Parser {
 		public EndCommandContext endCommand() {
 			return GetRuleContext<EndCommandContext>(0);
 		}
-		public ITerminalNode Eof() { return GetToken(MurMurParser.Eof, 0); }
 		public ITerminalNode[] NEWLINE() { return GetTokens(MurMurParser.NEWLINE); }
 		public ITerminalNode NEWLINE(int i) {
 			return GetToken(MurMurParser.NEWLINE, i);
@@ -821,78 +743,59 @@ public partial class MurMurParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 137; ifCommand();
-			State = 139;
+			State = 122; ifCommand();
+			State = 124;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			do {
 				{
 				{
-				State = 138; Match(NEWLINE);
+				State = 123; Match(NEWLINE);
 				}
 				}
-				State = 141;
+				State = 126;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			} while ( _la==NEWLINE );
-			State = 143; block();
-			State = 152;
+			State = 128; block();
+			State = 137;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,17,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				{
-				State = 144; elseCommand();
-				State = 146;
+				State = 129; elseCommand();
+				State = 131;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				do {
 					{
 					{
-					State = 145; Match(NEWLINE);
+					State = 130; Match(NEWLINE);
 					}
 					}
-					State = 148;
+					State = 133;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				} while ( _la==NEWLINE );
-				State = 150; block();
+				State = 135; block();
 				}
 				break;
 			}
-			State = 154; endCommand();
-			State = 161;
+			State = 139; endCommand();
+			State = 143;
 			_errHandler.Sync(this);
-			switch (_input.La(1)) {
-			case NEWLINE:
-				{
-				State = 156;
-				_errHandler.Sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						State = 155; Match(NEWLINE);
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
+			_alt = Interpreter.AdaptivePredict(_input,15,_ctx);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					{
+					{
+					State = 140; Match(NEWLINE);
 					}
-					State = 158;
-					_errHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(_input,18,_ctx);
-				} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
+					} 
 				}
-				break;
-			case Eof:
-				{
-				State = 160; Match(Eof);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+				State = 145;
+				_errHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(_input,15,_ctx);
 			}
 			}
 		}
@@ -908,7 +811,6 @@ public partial class MurMurParser : Parser {
 	}
 
 	public partial class LineContext : ParserRuleContext {
-		public ITerminalNode Eof() { return GetToken(MurMurParser.Eof, 0); }
 		public LineFragmentContext[] lineFragment() {
 			return GetRuleContexts<LineFragmentContext>();
 		}
@@ -943,57 +845,43 @@ public partial class MurMurParser : Parser {
 	public LineContext line() {
 		LineContext _localctx = new LineContext(_ctx, State);
 		EnterRule(_localctx, 14, RULE_line);
-		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 164;
+			State = 147;
 			_errHandler.Sync(this);
-			_la = _input.La(1);
+			_alt = 1;
 			do {
-				{
-				{
-				State = 163; lineFragment();
-				}
-				}
-				State = 166;
-				_errHandler.Sync(this);
-				_la = _input.La(1);
-			} while ( _la==COMMAND_START || _la==TEXT );
-			State = 174;
-			_errHandler.Sync(this);
-			switch (_input.La(1)) {
-			case NEWLINE:
-				{
-				State = 169;
-				_errHandler.Sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						State = 168; Match(NEWLINE);
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
+				switch (_alt) {
+				case 1:
+					{
+					{
+					State = 146; lineFragment();
 					}
-					State = 171;
-					_errHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(_input,21,_ctx);
-				} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				break;
-			case Eof:
-				{
-				State = 173; Match(Eof);
+				State = 149;
+				_errHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(_input,16,_ctx);
+			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
+			State = 154;
+			_errHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(_input,17,_ctx);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					{
+					{
+					State = 151; Match(NEWLINE);
+					}
+					} 
 				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+				State = 156;
+				_errHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(_input,17,_ctx);
 			}
 			}
 		}
@@ -1044,34 +932,34 @@ public partial class MurMurParser : Parser {
 		LineFragmentContext _localctx = new LineFragmentContext(_ctx, State);
 		EnterRule(_localctx, 16, RULE_lineFragment);
 		try {
-			State = 180;
+			State = 161;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,23,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,18,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 176; Match(TEXT);
+				State = 157; Match(TEXT);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 177; inlineIfBlock();
+				State = 158; inlineIfBlock();
 				}
 				break;
 
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 178; simpleCommand();
+				State = 159; simpleCommand();
 				}
 				break;
 
 			case 4:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 179; multiLineCommand();
+				State = 160; multiLineCommand();
 				}
 				break;
 			}
@@ -1130,19 +1018,19 @@ public partial class MurMurParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 182; ifCommand();
-			State = 183; inlineIfTrueFragment();
-			State = 187;
+			State = 163; ifCommand();
+			State = 164; inlineIfTrueFragment();
+			State = 168;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,24,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				{
-				State = 184; elseCommand();
-				State = 185; inlineIfFalseFragment();
+				State = 165; elseCommand();
+				State = 166; inlineIfFalseFragment();
 				}
 				break;
 			}
-			State = 189; endCommand();
+			State = 170; endCommand();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1191,7 +1079,7 @@ public partial class MurMurParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 192;
+			State = 173;
 			_errHandler.Sync(this);
 			_alt = 1;
 			do {
@@ -1199,16 +1087,16 @@ public partial class MurMurParser : Parser {
 				case 1:
 					{
 					{
-					State = 191; lineFragment();
+					State = 172; lineFragment();
 					}
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				State = 194;
+				State = 175;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,25,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,20,_ctx);
 			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
 			}
 		}
@@ -1258,7 +1146,7 @@ public partial class MurMurParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 197;
+			State = 178;
 			_errHandler.Sync(this);
 			_alt = 1;
 			do {
@@ -1266,16 +1154,16 @@ public partial class MurMurParser : Parser {
 				case 1:
 					{
 					{
-					State = 196; lineFragment();
+					State = 177; lineFragment();
 					}
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				State = 199;
+				State = 180;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,26,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,21,_ctx);
 			} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
 			}
 		}
@@ -1329,113 +1217,28 @@ public partial class MurMurParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 201; menuOptionCommand();
-			State = 205;
+			State = 182; menuOptionCommand();
+			State = 186;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				State = 202; Match(NEWLINE);
+				State = 183; Match(NEWLINE);
 				}
 				}
-				State = 207;
+				State = 188;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 209;
+			State = 190;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,28,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,23,_ctx) ) {
 			case 1:
 				{
-				State = 208; block();
+				State = 189; block();
 				}
 				break;
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class PickThisBlockContext : ParserRuleContext {
-		public PickThisCommandContext pickThisCommand() {
-			return GetRuleContext<PickThisCommandContext>(0);
-		}
-		public ITerminalNode[] NEWLINE() { return GetTokens(MurMurParser.NEWLINE); }
-		public ITerminalNode NEWLINE(int i) {
-			return GetToken(MurMurParser.NEWLINE, i);
-		}
-		public BlockContext[] block() {
-			return GetRuleContexts<BlockContext>();
-		}
-		public BlockContext block(int i) {
-			return GetRuleContext<BlockContext>(i);
-		}
-		public PickThisBlockContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_pickThisBlock; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterPickThisBlock(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitPickThisBlock(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPickThisBlock(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public PickThisBlockContext pickThisBlock() {
-		PickThisBlockContext _localctx = new PickThisBlockContext(_ctx, State);
-		EnterRule(_localctx, 26, RULE_pickThisBlock);
-		int _la;
-		try {
-			int _alt;
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 211; pickThisCommand();
-			State = 215;
-			_errHandler.Sync(this);
-			_la = _input.La(1);
-			while (_la==NEWLINE) {
-				{
-				{
-				State = 212; Match(NEWLINE);
-				}
-				}
-				State = 217;
-				_errHandler.Sync(this);
-				_la = _input.La(1);
-			}
-			State = 221;
-			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,30,_ctx);
-			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
-				if ( _alt==1 ) {
-					{
-					{
-					State = 218; block();
-					}
-					} 
-				}
-				State = 223;
-				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,30,_ctx);
 			}
 			}
 		}
@@ -1479,13 +1282,13 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public SimpleCommandContext simpleCommand() {
 		SimpleCommandContext _localctx = new SimpleCommandContext(_ctx, State);
-		EnterRule(_localctx, 28, RULE_simpleCommand);
+		EnterRule(_localctx, 26, RULE_simpleCommand);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 224; Match(COMMAND_START);
-			State = 225; expression(0);
-			State = 226; Match(COMMAND_END);
+			State = 192; Match(COMMAND_START);
+			State = 193; expression(0);
+			State = 194; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1535,34 +1338,34 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public MultiLineCommandContext multiLineCommand() {
 		MultiLineCommandContext _localctx = new MultiLineCommandContext(_ctx, State);
-		EnterRule(_localctx, 30, RULE_multiLineCommand);
+		EnterRule(_localctx, 28, RULE_multiLineCommand);
 		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 228; Match(COMMAND_START);
-			State = 232;
+			State = 196; Match(COMMAND_START);
+			State = 200;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==COMMAND_NEWLINE) {
 				{
 				{
-				State = 229; Match(COMMAND_NEWLINE);
+				State = 197; Match(COMMAND_NEWLINE);
 				}
 				}
-				State = 234;
+				State = 202;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 241;
+			State = 209;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			do {
 				{
 				{
-				State = 235; expression(0);
-				State = 237;
+				State = 203; expression(0);
+				State = 205;
 				_errHandler.Sync(this);
 				_alt = 1;
 				do {
@@ -1570,37 +1373,37 @@ public partial class MurMurParser : Parser {
 					case 1:
 						{
 						{
-						State = 236; Match(COMMAND_NEWLINE);
+						State = 204; Match(COMMAND_NEWLINE);
 						}
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-					State = 239;
+					State = 207;
 					_errHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(_input,32,_ctx);
+					_alt = Interpreter.AdaptivePredict(_input,25,_ctx);
 				} while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber );
 				}
 				}
-				State = 243;
+				State = 211;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << COMMAND_STRING_START) | (1L << OPEN_PAREN) | (1L << TRUE) | (1L << FALSE) | (1L << NUMBER) | (1L << WORD))) != 0) );
-			State = 248;
+			State = 216;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==COMMAND_NEWLINE) {
 				{
 				{
-				State = 245; Match(COMMAND_NEWLINE);
+				State = 213; Match(COMMAND_NEWLINE);
 				}
 				}
-				State = 250;
+				State = 218;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 251; Match(COMMAND_END);
+			State = 219; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1641,13 +1444,13 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public StringContext @string() {
 		StringContext _localctx = new StringContext(_ctx, State);
-		EnterRule(_localctx, 32, RULE_string);
+		EnterRule(_localctx, 30, RULE_string);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 253; Match(COMMAND_STRING_START);
-			State = 254; Match(STRING);
-			State = 255; Match(COMMAND_STRING_END);
+			State = 221; Match(COMMAND_STRING_START);
+			State = 222; Match(STRING);
+			State = 223; Match(COMMAND_STRING_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1889,23 +1692,23 @@ public partial class MurMurParser : Parser {
 		int _parentState = State;
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 34;
-		EnterRecursionRule(_localctx, 34, RULE_expression, _p);
+		int _startState = 32;
+		EnterRecursionRule(_localctx, 32, RULE_expression, _p);
 		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 278;
+			State = 246;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,36,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,29,_ctx) ) {
 			case 1:
 				{
 				_localctx = new NumberExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				State = 258; Match(NUMBER);
+				State = 226; Match(NUMBER);
 				}
 				break;
 
@@ -1914,7 +1717,7 @@ public partial class MurMurParser : Parser {
 				_localctx = new MethodOrVariableExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 259; Match(WORD);
+				State = 227; Match(WORD);
 				}
 				break;
 
@@ -1923,15 +1726,15 @@ public partial class MurMurParser : Parser {
 				_localctx = new MethodExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 260; Match(WORD);
-				State = 267;
+				State = 228; Match(WORD);
+				State = 235;
 				_errHandler.Sync(this);
-				switch ( Interpreter.AdaptivePredict(_input,35,_ctx) ) {
+				switch ( Interpreter.AdaptivePredict(_input,28,_ctx) ) {
 				case 1:
 					{
 					{
-					State = 261; Match(COMMAND_PARAMS_START);
-					State = 262; @params();
+					State = 229; Match(COMMAND_PARAMS_START);
+					State = 230; @params();
 					}
 					}
 					break;
@@ -1939,9 +1742,9 @@ public partial class MurMurParser : Parser {
 				case 2:
 					{
 					{
-					State = 263; Match(OPEN_PAREN);
-					State = 264; @params();
-					State = 265; Match(CLOSE_PAREN);
+					State = 231; Match(OPEN_PAREN);
+					State = 232; @params();
+					State = 233; Match(CLOSE_PAREN);
 					}
 					}
 					break;
@@ -1954,7 +1757,7 @@ public partial class MurMurParser : Parser {
 				_localctx = new BooleanExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 269;
+				State = 237;
 				_la = _input.La(1);
 				if ( !(_la==TRUE || _la==FALSE) ) {
 				_errHandler.RecoverInline(this);
@@ -1974,7 +1777,7 @@ public partial class MurMurParser : Parser {
 				_localctx = new StringExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 270; @string();
+				State = 238; @string();
 				}
 				break;
 
@@ -1983,9 +1786,9 @@ public partial class MurMurParser : Parser {
 				_localctx = new PriorityExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 271; Match(OPEN_PAREN);
-				State = 272; expression(0);
-				State = 273; Match(CLOSE_PAREN);
+				State = 239; Match(OPEN_PAREN);
+				State = 240; expression(0);
+				State = 241; Match(CLOSE_PAREN);
 				}
 				break;
 
@@ -1994,32 +1797,32 @@ public partial class MurMurParser : Parser {
 				_localctx = new AssignExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 275; Match(WORD);
-				State = 276; Match(ASSIGN_SIGNAL);
-				State = 277; expression(1);
+				State = 243; Match(WORD);
+				State = 244; Match(ASSIGN_SIGNAL);
+				State = 245; expression(1);
 				}
 				break;
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 294;
+			State = 262;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,38,_ctx);
+			_alt = Interpreter.AdaptivePredict(_input,31,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) TriggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					State = 292;
+					State = 260;
 					_errHandler.Sync(this);
-					switch ( Interpreter.AdaptivePredict(_input,37,_ctx) ) {
+					switch ( Interpreter.AdaptivePredict(_input,30,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MultiplicationExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 280;
+						State = 248;
 						if (!(Precpred(_ctx, 6))) throw new FailedPredicateException(this, "Precpred(_ctx, 6)");
-						State = 281; Match(MUL_DIV_SIGNAL);
-						State = 282; expression(7);
+						State = 249; Match(MUL_DIV_SIGNAL);
+						State = 250; expression(7);
 						}
 						break;
 
@@ -2027,10 +1830,10 @@ public partial class MurMurParser : Parser {
 						{
 						_localctx = new MultiplicationExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 283;
+						State = 251;
 						if (!(Precpred(_ctx, 4))) throw new FailedPredicateException(this, "Precpred(_ctx, 4)");
-						State = 284; Match(MUL_DIV_SIGNAL);
-						State = 285; expression(5);
+						State = 252; Match(MUL_DIV_SIGNAL);
+						State = 253; expression(5);
 						}
 						break;
 
@@ -2038,10 +1841,10 @@ public partial class MurMurParser : Parser {
 						{
 						_localctx = new AdditiveExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 286;
+						State = 254;
 						if (!(Precpred(_ctx, 3))) throw new FailedPredicateException(this, "Precpred(_ctx, 3)");
-						State = 287; Match(ADD_SUB_SIGNAL);
-						State = 288; expression(4);
+						State = 255; Match(ADD_SUB_SIGNAL);
+						State = 256; expression(4);
 						}
 						break;
 
@@ -2049,18 +1852,18 @@ public partial class MurMurParser : Parser {
 						{
 						_localctx = new ComparissonExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 289;
+						State = 257;
 						if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
-						State = 290; Match(COMPARISSON_SIGNAL);
-						State = 291; expression(3);
+						State = 258; Match(COMPARISSON_SIGNAL);
+						State = 259; expression(3);
 						}
 						break;
 					}
 					} 
 				}
-				State = 296;
+				State = 264;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,38,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,31,_ctx);
 			}
 			}
 		}
@@ -2109,27 +1912,27 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public ParamsContext @params() {
 		ParamsContext _localctx = new ParamsContext(_ctx, State);
-		EnterRule(_localctx, 36, RULE_params);
+		EnterRule(_localctx, 34, RULE_params);
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 297; expression(0);
-			State = 302;
+			State = 265; expression(0);
+			State = 270;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,39,_ctx);
+			_alt = Interpreter.AdaptivePredict(_input,32,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 298; Match(COMMAND_PARAMS_SEPARATOR);
-					State = 299; expression(0);
+					State = 266; Match(COMMAND_PARAMS_SEPARATOR);
+					State = 267; expression(0);
 					}
 					} 
 				}
-				State = 304;
+				State = 272;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,39,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,32,_ctx);
 			}
 			}
 		}
@@ -2144,91 +1947,40 @@ public partial class MurMurParser : Parser {
 		return _localctx;
 	}
 
-	public partial class PickCommandContext : ParserRuleContext {
-		public ITerminalNode COMMAND_START() { return GetToken(MurMurParser.COMMAND_START, 0); }
-		public ITerminalNode KEYWORD_PICK() { return GetToken(MurMurParser.KEYWORD_PICK, 0); }
-		public ITerminalNode COMMAND_END() { return GetToken(MurMurParser.COMMAND_END, 0); }
-		public PickCommandContext(ParserRuleContext parent, int invokingState)
+	public partial class ReturnContext : ParserRuleContext {
+		public ITerminalNode KEYWORD_RETURN() { return GetToken(MurMurParser.KEYWORD_RETURN, 0); }
+		public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public ReturnContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_pickCommand; } }
+		public override int RuleIndex { get { return RULE_return; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterPickCommand(this);
+			if (typedListener != null) typedListener.EnterReturn(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitPickCommand(this);
+			if (typedListener != null) typedListener.ExitReturn(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPickCommand(this);
+			if (typedVisitor != null) return typedVisitor.VisitReturn(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public PickCommandContext pickCommand() {
-		PickCommandContext _localctx = new PickCommandContext(_ctx, State);
-		EnterRule(_localctx, 38, RULE_pickCommand);
+	public ReturnContext @return() {
+		ReturnContext _localctx = new ReturnContext(_ctx, State);
+		EnterRule(_localctx, 36, RULE_return);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 305; Match(COMMAND_START);
-			State = 306; Match(KEYWORD_PICK);
-			State = 307; Match(COMMAND_END);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class PickThisCommandContext : ParserRuleContext {
-		public ITerminalNode COMMAND_START() { return GetToken(MurMurParser.COMMAND_START, 0); }
-		public ITerminalNode KEYWORD_PICK_THIS() { return GetToken(MurMurParser.KEYWORD_PICK_THIS, 0); }
-		public ITerminalNode COMMAND_PARAMS_START() { return GetToken(MurMurParser.COMMAND_PARAMS_START, 0); }
-		public ITerminalNode NUMBER() { return GetToken(MurMurParser.NUMBER, 0); }
-		public ITerminalNode COMMAND_END() { return GetToken(MurMurParser.COMMAND_END, 0); }
-		public PickThisCommandContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_pickThisCommand; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterPickThisCommand(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitPickThisCommand(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitPickThisCommand(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public PickThisCommandContext pickThisCommand() {
-		PickThisCommandContext _localctx = new PickThisCommandContext(_ctx, State);
-		EnterRule(_localctx, 40, RULE_pickThisCommand);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 309; Match(COMMAND_START);
-			State = 310; Match(KEYWORD_PICK_THIS);
-			State = 311; Match(COMMAND_PARAMS_START);
-			State = 312; Match(NUMBER);
-			State = 313; Match(COMMAND_END);
+			State = 273; Match(KEYWORD_RETURN);
+			State = 274; expression(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2273,24 +2025,24 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public MenuCommandContext menuCommand() {
 		MenuCommandContext _localctx = new MenuCommandContext(_ctx, State);
-		EnterRule(_localctx, 42, RULE_menuCommand);
+		EnterRule(_localctx, 38, RULE_menuCommand);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 315; Match(COMMAND_START);
-			State = 316; Match(KEYWORD_MENU);
-			State = 319;
+			State = 276; Match(COMMAND_START);
+			State = 277; Match(KEYWORD_MENU);
+			State = 280;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==COMMAND_PARAMS_START) {
 				{
-				State = 317; Match(COMMAND_PARAMS_START);
-				State = 318; expression(0);
+				State = 278; Match(COMMAND_PARAMS_START);
+				State = 279; expression(0);
 				}
 			}
 
-			State = 321; Match(COMMAND_END);
+			State = 282; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2339,26 +2091,26 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public MenuOptionCommandContext menuOptionCommand() {
 		MenuOptionCommandContext _localctx = new MenuOptionCommandContext(_ctx, State);
-		EnterRule(_localctx, 44, RULE_menuOptionCommand);
+		EnterRule(_localctx, 40, RULE_menuOptionCommand);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 323; Match(COMMAND_START);
-			State = 324; Match(KEYWORD_MENU_OPTION);
-			State = 325; Match(COMMAND_PARAMS_START);
-			State = 326; expression(0);
-			State = 329;
+			State = 284; Match(COMMAND_START);
+			State = 285; Match(KEYWORD_MENU_OPTION);
+			State = 286; Match(COMMAND_PARAMS_START);
+			State = 287; expression(0);
+			State = 290;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==COMMAND_PARAMS_SEPARATOR) {
 				{
-				State = 327; Match(COMMAND_PARAMS_SEPARATOR);
-				State = 328; expression(0);
+				State = 288; Match(COMMAND_PARAMS_SEPARATOR);
+				State = 289; expression(0);
 				}
 			}
 
-			State = 331; Match(COMMAND_END);
+			State = 292; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2403,15 +2155,15 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public IfCommandContext ifCommand() {
 		IfCommandContext _localctx = new IfCommandContext(_ctx, State);
-		EnterRule(_localctx, 46, RULE_ifCommand);
+		EnterRule(_localctx, 42, RULE_ifCommand);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 333; Match(COMMAND_START);
-			State = 334; Match(KEYWORD_IF);
-			State = 335; Match(COMMAND_PARAMS_START);
-			State = 336; expression(0);
-			State = 337; Match(COMMAND_END);
+			State = 294; Match(COMMAND_START);
+			State = 295; Match(KEYWORD_IF);
+			State = 296; Match(COMMAND_PARAMS_START);
+			State = 297; expression(0);
+			State = 298; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2452,13 +2204,13 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public ElseCommandContext elseCommand() {
 		ElseCommandContext _localctx = new ElseCommandContext(_ctx, State);
-		EnterRule(_localctx, 48, RULE_elseCommand);
+		EnterRule(_localctx, 44, RULE_elseCommand);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 339; Match(COMMAND_START);
-			State = 340; Match(KEYWORD_ELSE);
-			State = 341; Match(COMMAND_END);
+			State = 300; Match(COMMAND_START);
+			State = 301; Match(KEYWORD_ELSE);
+			State = 302; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2499,92 +2251,13 @@ public partial class MurMurParser : Parser {
 	[RuleVersion(0)]
 	public EndCommandContext endCommand() {
 		EndCommandContext _localctx = new EndCommandContext(_ctx, State);
-		EnterRule(_localctx, 50, RULE_endCommand);
+		EnterRule(_localctx, 46, RULE_endCommand);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 343; Match(COMMAND_START);
-			State = 344; Match(KEYWORD_END);
-			State = 345; Match(COMMAND_END);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class DeclarationContext : ParserRuleContext {
-		public ITerminalNode INCLUDE_KEYWORD() { return GetToken(MurMurParser.INCLUDE_KEYWORD, 0); }
-		public ITerminalNode COMMAND_PARAMS_START() { return GetToken(MurMurParser.COMMAND_PARAMS_START, 0); }
-		public StringContext @string() {
-			return GetRuleContext<StringContext>(0);
-		}
-		public ITerminalNode[] COMMAND_NEWLINE() { return GetTokens(MurMurParser.COMMAND_NEWLINE); }
-		public ITerminalNode COMMAND_NEWLINE(int i) {
-			return GetToken(MurMurParser.COMMAND_NEWLINE, i);
-		}
-		public ITerminalNode NEW_TAG() { return GetToken(MurMurParser.NEW_TAG, 0); }
-		public DeclarationContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_declaration; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.EnterDeclaration(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IMurMurParserListener typedListener = listener as IMurMurParserListener;
-			if (typedListener != null) typedListener.ExitDeclaration(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IMurMurParserVisitor<TResult> typedVisitor = visitor as IMurMurParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitDeclaration(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public DeclarationContext declaration() {
-		DeclarationContext _localctx = new DeclarationContext(_ctx, State);
-		EnterRule(_localctx, 52, RULE_declaration);
-		try {
-			int _alt;
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 347; Match(INCLUDE_KEYWORD);
-			State = 348; Match(COMMAND_PARAMS_START);
-			State = 349; @string();
-			State = 353;
-			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,42,_ctx);
-			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
-				if ( _alt==1 ) {
-					{
-					{
-					State = 350; Match(COMMAND_NEWLINE);
-					}
-					} 
-				}
-				State = 355;
-				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,42,_ctx);
-			}
-			State = 357;
-			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,43,_ctx) ) {
-			case 1:
-				{
-				State = 356; Match(NEW_TAG);
-				}
-				break;
-			}
+			State = 304; Match(COMMAND_START);
+			State = 305; Match(KEYWORD_END);
+			State = 306; Match(COMMAND_END);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2600,7 +2273,7 @@ public partial class MurMurParser : Parser {
 
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 17: return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 16: return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
@@ -2618,153 +2291,129 @@ public partial class MurMurParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3)\x16A\x4\x2\t\x2"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3)\x137\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
 		"\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
-		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x4\x1B"+
-		"\t\x1B\x4\x1C\t\x1C\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\a\x2@\n"+
-		"\x2\f\x2\xE\x2\x43\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x3\x3\x3\a\x3K\n\x3"+
-		"\f\x3\xE\x3N\v\x3\x3\x4\x3\x4\x3\x4\a\x4S\n\x4\f\x4\xE\x4V\v\x4\x3\x4"+
-		"\x3\x4\x3\x5\x3\x5\x3\x5\x3\x5\x6\x5^\n\x5\r\x5\xE\x5_\x3\x6\x3\x6\a\x6"+
-		"\x64\n\x6\f\x6\xE\x6g\v\x6\x3\x6\x6\x6j\n\x6\r\x6\xE\x6k\x3\x6\x3\x6\x6"+
-		"\x6p\n\x6\r\x6\xE\x6q\x3\x6\x5\x6u\n\x6\x3\a\x3\a\a\ay\n\a\f\a\xE\a|\v"+
-		"\a\x3\a\x6\a\x7F\n\a\r\a\xE\a\x80\x3\a\x3\a\x6\a\x85\n\a\r\a\xE\a\x86"+
-		"\x3\a\x5\a\x8A\n\a\x3\b\x3\b\x6\b\x8E\n\b\r\b\xE\b\x8F\x3\b\x3\b\x3\b"+
-		"\x6\b\x95\n\b\r\b\xE\b\x96\x3\b\x3\b\x5\b\x9B\n\b\x3\b\x3\b\x6\b\x9F\n"+
-		"\b\r\b\xE\b\xA0\x3\b\x5\b\xA4\n\b\x3\t\x6\t\xA7\n\t\r\t\xE\t\xA8\x3\t"+
-		"\x6\t\xAC\n\t\r\t\xE\t\xAD\x3\t\x5\t\xB1\n\t\x3\n\x3\n\x3\n\x3\n\x5\n"+
-		"\xB7\n\n\x3\v\x3\v\x3\v\x3\v\x3\v\x5\v\xBE\n\v\x3\v\x3\v\x3\f\x6\f\xC3"+
-		"\n\f\r\f\xE\f\xC4\x3\r\x6\r\xC8\n\r\r\r\xE\r\xC9\x3\xE\x3\xE\a\xE\xCE"+
-		"\n\xE\f\xE\xE\xE\xD1\v\xE\x3\xE\x5\xE\xD4\n\xE\x3\xF\x3\xF\a\xF\xD8\n"+
-		"\xF\f\xF\xE\xF\xDB\v\xF\x3\xF\a\xF\xDE\n\xF\f\xF\xE\xF\xE1\v\xF\x3\x10"+
-		"\x3\x10\x3\x10\x3\x10\x3\x11\x3\x11\a\x11\xE9\n\x11\f\x11\xE\x11\xEC\v"+
-		"\x11\x3\x11\x3\x11\x6\x11\xF0\n\x11\r\x11\xE\x11\xF1\x6\x11\xF4\n\x11"+
-		"\r\x11\xE\x11\xF5\x3\x11\a\x11\xF9\n\x11\f\x11\xE\x11\xFC\v\x11\x3\x11"+
-		"\x3\x11\x3\x12\x3\x12\x3\x12\x3\x12\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13"+
-		"\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x5\x13\x10E\n\x13\x3\x13\x3\x13\x3"+
-		"\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x5\x13\x119\n\x13\x3\x13"+
-		"\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13"+
-		"\x3\x13\a\x13\x127\n\x13\f\x13\xE\x13\x12A\v\x13\x3\x14\x3\x14\x3\x14"+
-		"\a\x14\x12F\n\x14\f\x14\xE\x14\x132\v\x14\x3\x15\x3\x15\x3\x15\x3\x15"+
-		"\x3\x16\x3\x16\x3\x16\x3\x16\x3\x16\x3\x16\x3\x17\x3\x17\x3\x17\x3\x17"+
-		"\x5\x17\x142\n\x17\x3\x17\x3\x17\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3"+
-		"\x18\x5\x18\x14C\n\x18\x3\x18\x3\x18\x3\x19\x3\x19\x3\x19\x3\x19\x3\x19"+
-		"\x3\x19\x3\x1A\x3\x1A\x3\x1A\x3\x1A\x3\x1B\x3\x1B\x3\x1B\x3\x1B\x3\x1C"+
-		"\x3\x1C\x3\x1C\x3\x1C\a\x1C\x162\n\x1C\f\x1C\xE\x1C\x165\v\x1C\x3\x1C"+
-		"\x5\x1C\x168\n\x1C\x3\x1C\x2\x2\x3$\x1D\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f"+
-		"\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2"+
-		"\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2\x34\x2\x36\x2\x2\x3\x3\x2"+
-		" !\x18B\x2\x41\x3\x2\x2\x2\x4\x46\x3\x2\x2\x2\x6O\x3\x2\x2\x2\b]\x3\x2"+
-		"\x2\x2\n\x61\x3\x2\x2\x2\fv\x3\x2\x2\x2\xE\x8B\x3\x2\x2\x2\x10\xA6\x3"+
-		"\x2\x2\x2\x12\xB6\x3\x2\x2\x2\x14\xB8\x3\x2\x2\x2\x16\xC2\x3\x2\x2\x2"+
-		"\x18\xC7\x3\x2\x2\x2\x1A\xCB\x3\x2\x2\x2\x1C\xD5\x3\x2\x2\x2\x1E\xE2\x3"+
-		"\x2\x2\x2 \xE6\x3\x2\x2\x2\"\xFF\x3\x2\x2\x2$\x118\x3\x2\x2\x2&\x12B\x3"+
-		"\x2\x2\x2(\x133\x3\x2\x2\x2*\x137\x3\x2\x2\x2,\x13D\x3\x2\x2\x2.\x145"+
-		"\x3\x2\x2\x2\x30\x14F\x3\x2\x2\x2\x32\x155\x3\x2\x2\x2\x34\x159\x3\x2"+
-		"\x2\x2\x36\x15D\x3\x2\x2\x2\x38@\x5\x6\x4\x2\x39@\x5\x36\x1C\x2:@\x5\x4"+
-		"\x3\x2;@\a\x4\x2\x2<@\a\xE\x2\x2=@\a\r\x2\x2>@\a\f\x2\x2?\x38\x3\x2\x2"+
-		"\x2?\x39\x3\x2\x2\x2?:\x3\x2\x2\x2?;\x3\x2\x2\x2?<\x3\x2\x2\x2?=\x3\x2"+
-		"\x2\x2?>\x3\x2\x2\x2@\x43\x3\x2\x2\x2\x41?\x3\x2\x2\x2\x41\x42\x3\x2\x2"+
-		"\x2\x42\x44\x3\x2\x2\x2\x43\x41\x3\x2\x2\x2\x44\x45\a\x2\x2\x3\x45\x3"+
-		"\x3\x2\x2\x2\x46G\a\n\x2\x2GL\a\x12\x2\x2HK\a\xE\x2\x2IK\x5$\x13\x2JH"+
-		"\x3\x2\x2\x2JI\x3\x2\x2\x2KN\x3\x2\x2\x2LJ\x3\x2\x2\x2LM\x3\x2\x2\x2M"+
-		"\x5\x3\x2\x2\x2NL\x3\x2\x2\x2OP\a\a\x2\x2PT\a\v\x2\x2QS\a\x4\x2\x2RQ\x3"+
-		"\x2\x2\x2SV\x3\x2\x2\x2TR\x3\x2\x2\x2TU\x3\x2\x2\x2UW\x3\x2\x2\x2VT\x3"+
-		"\x2\x2\x2WX\x5\b\x5\x2X\a\x3\x2\x2\x2Y^\x5\xE\b\x2Z^\x5\n\x6\x2[^\x5\f"+
-		"\a\x2\\^\x5\x10\t\x2]Y\x3\x2\x2\x2]Z\x3\x2\x2\x2][\x3\x2\x2\x2]\\\x3\x2"+
-		"\x2\x2^_\x3\x2\x2\x2_]\x3\x2\x2\x2_`\x3\x2\x2\x2`\t\x3\x2\x2\x2\x61\x65"+
-		"\x5(\x15\x2\x62\x64\a\x4\x2\x2\x63\x62\x3\x2\x2\x2\x64g\x3\x2\x2\x2\x65"+
-		"\x63\x3\x2\x2\x2\x65\x66\x3\x2\x2\x2\x66i\x3\x2\x2\x2g\x65\x3\x2\x2\x2"+
-		"hj\x5\x1C\xF\x2ih\x3\x2\x2\x2jk\x3\x2\x2\x2ki\x3\x2\x2\x2kl\x3\x2\x2\x2"+
-		"lm\x3\x2\x2\x2mt\x5\x34\x1B\x2np\a\x4\x2\x2on\x3\x2\x2\x2pq\x3\x2\x2\x2"+
-		"qo\x3\x2\x2\x2qr\x3\x2\x2\x2ru\x3\x2\x2\x2su\a\x2\x2\x3to\x3\x2\x2\x2"+
-		"ts\x3\x2\x2\x2u\v\x3\x2\x2\x2vz\x5,\x17\x2wy\a\x4\x2\x2xw\x3\x2\x2\x2"+
-		"y|\x3\x2\x2\x2zx\x3\x2\x2\x2z{\x3\x2\x2\x2{~\x3\x2\x2\x2|z\x3\x2\x2\x2"+
-		"}\x7F\x5\x1A\xE\x2~}\x3\x2\x2\x2\x7F\x80\x3\x2\x2\x2\x80~\x3\x2\x2\x2"+
-		"\x80\x81\x3\x2\x2\x2\x81\x82\x3\x2\x2\x2\x82\x89\x5\x34\x1B\x2\x83\x85"+
-		"\a\x4\x2\x2\x84\x83\x3\x2\x2\x2\x85\x86\x3\x2\x2\x2\x86\x84\x3\x2\x2\x2"+
-		"\x86\x87\x3\x2\x2\x2\x87\x8A\x3\x2\x2\x2\x88\x8A\a\x2\x2\x3\x89\x84\x3"+
-		"\x2\x2\x2\x89\x88\x3\x2\x2\x2\x8A\r\x3\x2\x2\x2\x8B\x8D\x5\x30\x19\x2"+
-		"\x8C\x8E\a\x4\x2\x2\x8D\x8C\x3\x2\x2\x2\x8E\x8F\x3\x2\x2\x2\x8F\x8D\x3"+
-		"\x2\x2\x2\x8F\x90\x3\x2\x2\x2\x90\x91\x3\x2\x2\x2\x91\x9A\x5\b\x5\x2\x92"+
-		"\x94\x5\x32\x1A\x2\x93\x95\a\x4\x2\x2\x94\x93\x3\x2\x2\x2\x95\x96\x3\x2"+
-		"\x2\x2\x96\x94\x3\x2\x2\x2\x96\x97\x3\x2\x2\x2\x97\x98\x3\x2\x2\x2\x98"+
-		"\x99\x5\b\x5\x2\x99\x9B\x3\x2\x2\x2\x9A\x92\x3\x2\x2\x2\x9A\x9B\x3\x2"+
-		"\x2\x2\x9B\x9C\x3\x2\x2\x2\x9C\xA3\x5\x34\x1B\x2\x9D\x9F\a\x4\x2\x2\x9E"+
-		"\x9D\x3\x2\x2\x2\x9F\xA0\x3\x2\x2\x2\xA0\x9E\x3\x2\x2\x2\xA0\xA1\x3\x2"+
-		"\x2\x2\xA1\xA4\x3\x2\x2\x2\xA2\xA4\a\x2\x2\x3\xA3\x9E\x3\x2\x2\x2\xA3"+
-		"\xA2\x3\x2\x2\x2\xA4\xF\x3\x2\x2\x2\xA5\xA7\x5\x12\n\x2\xA6\xA5\x3\x2"+
-		"\x2\x2\xA7\xA8\x3\x2\x2\x2\xA8\xA6\x3\x2\x2\x2\xA8\xA9\x3\x2\x2\x2\xA9"+
-		"\xB0\x3\x2\x2\x2\xAA\xAC\a\x4\x2\x2\xAB\xAA\x3\x2\x2\x2\xAC\xAD\x3\x2"+
-		"\x2\x2\xAD\xAB\x3\x2\x2\x2\xAD\xAE\x3\x2\x2\x2\xAE\xB1\x3\x2\x2\x2\xAF"+
-		"\xB1\a\x2\x2\x3\xB0\xAB\x3\x2\x2\x2\xB0\xAF\x3\x2\x2\x2\xB1\x11\x3\x2"+
-		"\x2\x2\xB2\xB7\a\v\x2\x2\xB3\xB7\x5\x14\v\x2\xB4\xB7\x5\x1E\x10\x2\xB5"+
-		"\xB7\x5 \x11\x2\xB6\xB2\x3\x2\x2\x2\xB6\xB3\x3\x2\x2\x2\xB6\xB4\x3\x2"+
-		"\x2\x2\xB6\xB5\x3\x2\x2\x2\xB7\x13\x3\x2\x2\x2\xB8\xB9\x5\x30\x19\x2\xB9"+
-		"\xBD\x5\x16\f\x2\xBA\xBB\x5\x32\x1A\x2\xBB\xBC\x5\x18\r\x2\xBC\xBE\x3"+
-		"\x2\x2\x2\xBD\xBA\x3\x2\x2\x2\xBD\xBE\x3\x2\x2\x2\xBE\xBF\x3\x2\x2\x2"+
-		"\xBF\xC0\x5\x34\x1B\x2\xC0\x15\x3\x2\x2\x2\xC1\xC3\x5\x12\n\x2\xC2\xC1"+
-		"\x3\x2\x2\x2\xC3\xC4\x3\x2\x2\x2\xC4\xC2\x3\x2\x2\x2\xC4\xC5\x3\x2\x2"+
-		"\x2\xC5\x17\x3\x2\x2\x2\xC6\xC8\x5\x12\n\x2\xC7\xC6\x3\x2\x2\x2\xC8\xC9"+
-		"\x3\x2\x2\x2\xC9\xC7\x3\x2\x2\x2\xC9\xCA\x3\x2\x2\x2\xCA\x19\x3\x2\x2"+
-		"\x2\xCB\xCF\x5.\x18\x2\xCC\xCE\a\x4\x2\x2\xCD\xCC\x3\x2\x2\x2\xCE\xD1"+
-		"\x3\x2\x2\x2\xCF\xCD\x3\x2\x2\x2\xCF\xD0\x3\x2\x2\x2\xD0\xD3\x3\x2\x2"+
-		"\x2\xD1\xCF\x3\x2\x2\x2\xD2\xD4\x5\b\x5\x2\xD3\xD2\x3\x2\x2\x2\xD3\xD4"+
-		"\x3\x2\x2\x2\xD4\x1B\x3\x2\x2\x2\xD5\xD9\x5*\x16\x2\xD6\xD8\a\x4\x2\x2"+
-		"\xD7\xD6\x3\x2\x2\x2\xD8\xDB\x3\x2\x2\x2\xD9\xD7\x3\x2\x2\x2\xD9\xDA\x3"+
-		"\x2\x2\x2\xDA\xDF\x3\x2\x2\x2\xDB\xD9\x3\x2\x2\x2\xDC\xDE\x5\b\x5\x2\xDD"+
-		"\xDC\x3\x2\x2\x2\xDE\xE1\x3\x2\x2\x2\xDF\xDD\x3\x2\x2\x2\xDF\xE0\x3\x2"+
-		"\x2\x2\xE0\x1D\x3\x2\x2\x2\xE1\xDF\x3\x2\x2\x2\xE2\xE3\a\b\x2\x2\xE3\xE4"+
-		"\x5$\x13\x2\xE4\xE5\a\x17\x2\x2\xE5\x1F\x3\x2\x2\x2\xE6\xEA\a\b\x2\x2"+
-		"\xE7\xE9\a\xE\x2\x2\xE8\xE7\x3\x2\x2\x2\xE9\xEC\x3\x2\x2\x2\xEA\xE8\x3"+
-		"\x2\x2\x2\xEA\xEB\x3\x2\x2\x2\xEB\xF3\x3\x2\x2\x2\xEC\xEA\x3\x2\x2\x2"+
-		"\xED\xEF\x5$\x13\x2\xEE\xF0\a\xE\x2\x2\xEF\xEE\x3\x2\x2\x2\xF0\xF1\x3"+
-		"\x2\x2\x2\xF1\xEF\x3\x2\x2\x2\xF1\xF2\x3\x2\x2\x2\xF2\xF4\x3\x2\x2\x2"+
-		"\xF3\xED\x3\x2\x2\x2\xF4\xF5\x3\x2\x2\x2\xF5\xF3\x3\x2\x2\x2\xF5\xF6\x3"+
-		"\x2\x2\x2\xF6\xFA\x3\x2\x2\x2\xF7\xF9\a\xE\x2\x2\xF8\xF7\x3\x2\x2\x2\xF9"+
-		"\xFC\x3\x2\x2\x2\xFA\xF8\x3\x2\x2\x2\xFA\xFB\x3\x2\x2\x2\xFB\xFD\x3\x2"+
-		"\x2\x2\xFC\xFA\x3\x2\x2\x2\xFD\xFE\a\x17\x2\x2\xFE!\x3\x2\x2\x2\xFF\x100"+
-		"\a\x13\x2\x2\x100\x101\a(\x2\x2\x101\x102\a)\x2\x2\x102#\x3\x2\x2\x2\x103"+
-		"\x104\b\x13\x1\x2\x104\x119\a\"\x2\x2\x105\x119\a#\x2\x2\x106\x10D\a#"+
-		"\x2\x2\x107\x108\a\x12\x2\x2\x108\x10E\x5&\x14\x2\x109\x10A\a\x14\x2\x2"+
-		"\x10A\x10B\x5&\x14\x2\x10B\x10C\a\x15\x2\x2\x10C\x10E\x3\x2\x2\x2\x10D"+
-		"\x107\x3\x2\x2\x2\x10D\x109\x3\x2\x2\x2\x10D\x10E\x3\x2\x2\x2\x10E\x119"+
-		"\x3\x2\x2\x2\x10F\x119\t\x2\x2\x2\x110\x119\x5\"\x12\x2\x111\x112\a\x14"+
-		"\x2\x2\x112\x113\x5$\x13\x2\x113\x114\a\x15\x2\x2\x114\x119\x3\x2\x2\x2"+
-		"\x115\x116\a#\x2\x2\x116\x117\a$\x2\x2\x117\x119\x5$\x13\x3\x118\x103"+
-		"\x3\x2\x2\x2\x118\x105\x3\x2\x2\x2\x118\x106\x3\x2\x2\x2\x118\x10F\x3"+
-		"\x2\x2\x2\x118\x110\x3\x2\x2\x2\x118\x111\x3\x2\x2\x2\x118\x115\x3\x2"+
-		"\x2\x2\x119\x128\x3\x2\x2\x2\x11A\x11B\f\b\x2\x2\x11B\x11C\a&\x2\x2\x11C"+
-		"\x127\x5$\x13\t\x11D\x11E\f\x6\x2\x2\x11E\x11F\a&\x2\x2\x11F\x127\x5$"+
-		"\x13\a\x120\x121\f\x5\x2\x2\x121\x122\a\'\x2\x2\x122\x127\x5$\x13\x6\x123"+
-		"\x124\f\x4\x2\x2\x124\x125\a%\x2\x2\x125\x127\x5$\x13\x5\x126\x11A\x3"+
-		"\x2\x2\x2\x126\x11D\x3\x2\x2\x2\x126\x120\x3\x2\x2\x2\x126\x123\x3\x2"+
-		"\x2\x2\x127\x12A\x3\x2\x2\x2\x128\x126\x3\x2\x2\x2\x128\x129\x3\x2\x2"+
-		"\x2\x129%\x3\x2\x2\x2\x12A\x128\x3\x2\x2\x2\x12B\x130\x5$\x13\x2\x12C"+
-		"\x12D\a\x16\x2\x2\x12D\x12F\x5$\x13\x2\x12E\x12C\x3\x2\x2\x2\x12F\x132"+
-		"\x3\x2\x2\x2\x130\x12E\x3\x2\x2\x2\x130\x131\x3\x2\x2\x2\x131\'\x3\x2"+
-		"\x2\x2\x132\x130\x3\x2\x2\x2\x133\x134\a\b\x2\x2\x134\x135\a\x1E\x2\x2"+
-		"\x135\x136\a\x17\x2\x2\x136)\x3\x2\x2\x2\x137\x138\a\b\x2\x2\x138\x139"+
-		"\a\x1F\x2\x2\x139\x13A\a\x12\x2\x2\x13A\x13B\a\"\x2\x2\x13B\x13C\a\x17"+
-		"\x2\x2\x13C+\x3\x2\x2\x2\x13D\x13E\a\b\x2\x2\x13E\x141\a\x1C\x2\x2\x13F"+
-		"\x140\a\x12\x2\x2\x140\x142\x5$\x13\x2\x141\x13F\x3\x2\x2\x2\x141\x142"+
-		"\x3\x2\x2\x2\x142\x143\x3\x2\x2\x2\x143\x144\a\x17\x2\x2\x144-\x3\x2\x2"+
-		"\x2\x145\x146\a\b\x2\x2\x146\x147\a\x1D\x2\x2\x147\x148\a\x12\x2\x2\x148"+
-		"\x14B\x5$\x13\x2\x149\x14A\a\x16\x2\x2\x14A\x14C\x5$\x13\x2\x14B\x149"+
-		"\x3\x2\x2\x2\x14B\x14C\x3\x2\x2\x2\x14C\x14D\x3\x2\x2\x2\x14D\x14E\a\x17"+
-		"\x2\x2\x14E/\x3\x2\x2\x2\x14F\x150\a\b\x2\x2\x150\x151\a\x18\x2\x2\x151"+
-		"\x152\a\x12\x2\x2\x152\x153\x5$\x13\x2\x153\x154\a\x17\x2\x2\x154\x31"+
-		"\x3\x2\x2\x2\x155\x156\a\b\x2\x2\x156\x157\a\x19\x2\x2\x157\x158\a\x17"+
-		"\x2\x2\x158\x33\x3\x2\x2\x2\x159\x15A\a\b\x2\x2\x15A\x15B\a\x1A\x2\x2"+
-		"\x15B\x15C\a\x17\x2\x2\x15C\x35\x3\x2\x2\x2\x15D\x15E\a\t\x2\x2\x15E\x15F"+
-		"\a\x12\x2\x2\x15F\x163\x5\"\x12\x2\x160\x162\a\xE\x2\x2\x161\x160\x3\x2"+
-		"\x2\x2\x162\x165\x3\x2\x2\x2\x163\x161\x3\x2\x2\x2\x163\x164\x3\x2\x2"+
-		"\x2\x164\x167\x3\x2\x2\x2\x165\x163\x3\x2\x2\x2\x166\x168\a\f\x2\x2\x167"+
-		"\x166\x3\x2\x2\x2\x167\x168\x3\x2\x2\x2\x168\x37\x3\x2\x2\x2.?\x41JLT"+
-		"]_\x65kqtz\x80\x86\x89\x8F\x96\x9A\xA0\xA3\xA8\xAD\xB0\xB6\xBD\xC4\xC9"+
-		"\xCF\xD3\xD9\xDF\xEA\xF1\xF5\xFA\x10D\x118\x126\x128\x130\x141\x14B\x163"+
-		"\x167";
+		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x3\x2\x3\x2\x3\x2"+
+		"\x3\x2\x3\x2\x3\x2\a\x2\x39\n\x2\f\x2\xE\x2<\v\x2\x3\x2\x3\x2\x3\x3\x3"+
+		"\x3\x3\x3\x3\x3\x3\x3\a\x3\x45\n\x3\f\x3\xE\x3H\v\x3\x5\x3J\n\x3\x3\x3"+
+		"\x3\x3\x3\x3\x3\x3\a\x3P\n\x3\f\x3\xE\x3S\v\x3\x3\x4\x3\x4\x3\x4\x3\x4"+
+		"\x3\x5\x3\x5\x3\x5\a\x5\\\n\x5\f\x5\xE\x5_\v\x5\x3\x5\x3\x5\x3\x6\x3\x6"+
+		"\x3\x6\x6\x6\x66\n\x6\r\x6\xE\x6g\x3\a\x3\a\a\al\n\a\f\a\xE\ao\v\a\x3"+
+		"\a\x6\ar\n\a\r\a\xE\as\x3\a\x3\a\a\ax\n\a\f\a\xE\a{\v\a\x3\b\x3\b\x6\b"+
+		"\x7F\n\b\r\b\xE\b\x80\x3\b\x3\b\x3\b\x6\b\x86\n\b\r\b\xE\b\x87\x3\b\x3"+
+		"\b\x5\b\x8C\n\b\x3\b\x3\b\a\b\x90\n\b\f\b\xE\b\x93\v\b\x3\t\x6\t\x96\n"+
+		"\t\r\t\xE\t\x97\x3\t\a\t\x9B\n\t\f\t\xE\t\x9E\v\t\x3\n\x3\n\x3\n\x3\n"+
+		"\x5\n\xA4\n\n\x3\v\x3\v\x3\v\x3\v\x3\v\x5\v\xAB\n\v\x3\v\x3\v\x3\f\x6"+
+		"\f\xB0\n\f\r\f\xE\f\xB1\x3\r\x6\r\xB5\n\r\r\r\xE\r\xB6\x3\xE\x3\xE\a\xE"+
+		"\xBB\n\xE\f\xE\xE\xE\xBE\v\xE\x3\xE\x5\xE\xC1\n\xE\x3\xF\x3\xF\x3\xF\x3"+
+		"\xF\x3\x10\x3\x10\a\x10\xC9\n\x10\f\x10\xE\x10\xCC\v\x10\x3\x10\x3\x10"+
+		"\x6\x10\xD0\n\x10\r\x10\xE\x10\xD1\x6\x10\xD4\n\x10\r\x10\xE\x10\xD5\x3"+
+		"\x10\a\x10\xD9\n\x10\f\x10\xE\x10\xDC\v\x10\x3\x10\x3\x10\x3\x11\x3\x11"+
+		"\x3\x11\x3\x11\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12"+
+		"\x3\x12\x3\x12\x5\x12\xEE\n\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3"+
+		"\x12\x3\x12\x3\x12\x3\x12\x5\x12\xF9\n\x12\x3\x12\x3\x12\x3\x12\x3\x12"+
+		"\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\x3\x12\a\x12\x107\n"+
+		"\x12\f\x12\xE\x12\x10A\v\x12\x3\x13\x3\x13\x3\x13\a\x13\x10F\n\x13\f\x13"+
+		"\xE\x13\x112\v\x13\x3\x14\x3\x14\x3\x14\x3\x15\x3\x15\x3\x15\x3\x15\x5"+
+		"\x15\x11B\n\x15\x3\x15\x3\x15\x3\x16\x3\x16\x3\x16\x3\x16\x3\x16\x3\x16"+
+		"\x5\x16\x125\n\x16\x3\x16\x3\x16\x3\x17\x3\x17\x3\x17\x3\x17\x3\x17\x3"+
+		"\x17\x3\x18\x3\x18\x3\x18\x3\x18\x3\x19\x3\x19\x3\x19\x3\x19\x3\x19\x2"+
+		"\x2\x3\"\x1A\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2\x12\x2\x14"+
+		"\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2$\x2&\x2(\x2*\x2,\x2.\x2"+
+		"\x30\x2\x2\x3\x3\x2 !\x151\x2:\x3\x2\x2\x2\x4?\x3\x2\x2\x2\x6T\x3\x2\x2"+
+		"\x2\bX\x3\x2\x2\x2\n\x65\x3\x2\x2\x2\fi\x3\x2\x2\x2\xE|\x3\x2\x2\x2\x10"+
+		"\x95\x3\x2\x2\x2\x12\xA3\x3\x2\x2\x2\x14\xA5\x3\x2\x2\x2\x16\xAF\x3\x2"+
+		"\x2\x2\x18\xB4\x3\x2\x2\x2\x1A\xB8\x3\x2\x2\x2\x1C\xC2\x3\x2\x2\x2\x1E"+
+		"\xC6\x3\x2\x2\x2 \xDF\x3\x2\x2\x2\"\xF8\x3\x2\x2\x2$\x10B\x3\x2\x2\x2"+
+		"&\x113\x3\x2\x2\x2(\x116\x3\x2\x2\x2*\x11E\x3\x2\x2\x2,\x128\x3\x2\x2"+
+		"\x2.\x12E\x3\x2\x2\x2\x30\x132\x3\x2\x2\x2\x32\x39\x5\b\x5\x2\x33\x39"+
+		"\x5\x6\x4\x2\x34\x39\x5\x4\x3\x2\x35\x39\a\x4\x2\x2\x36\x39\a\r\x2\x2"+
+		"\x37\x39\a\f\x2\x2\x38\x32\x3\x2\x2\x2\x38\x33\x3\x2\x2\x2\x38\x34\x3"+
+		"\x2\x2\x2\x38\x35\x3\x2\x2\x2\x38\x36\x3\x2\x2\x2\x38\x37\x3\x2\x2\x2"+
+		"\x39<\x3\x2\x2\x2:\x38\x3\x2\x2\x2:;\x3\x2\x2\x2;=\x3\x2\x2\x2<:\x3\x2"+
+		"\x2\x2=>\a\x2\x2\x3>\x3\x3\x2\x2\x2?@\a\n\x2\x2@I\a#\x2\x2\x41\x46\a#"+
+		"\x2\x2\x42\x43\a\x15\x2\x2\x43\x45\a#\x2\x2\x44\x42\x3\x2\x2\x2\x45H\x3"+
+		"\x2\x2\x2\x46\x44\x3\x2\x2\x2\x46G\x3\x2\x2\x2GJ\x3\x2\x2\x2H\x46\x3\x2"+
+		"\x2\x2I\x41\x3\x2\x2\x2IJ\x3\x2\x2\x2JK\x3\x2\x2\x2KQ\a\x11\x2\x2LP\a"+
+		"\r\x2\x2MP\x5\"\x12\x2NP\x5&\x14\x2OL\x3\x2\x2\x2OM\x3\x2\x2\x2ON\x3\x2"+
+		"\x2\x2PS\x3\x2\x2\x2QO\x3\x2\x2\x2QR\x3\x2\x2\x2R\x5\x3\x2\x2\x2SQ\x3"+
+		"\x2\x2\x2TU\a\t\x2\x2UV\a\x11\x2\x2VW\x5 \x11\x2W\a\x3\x2\x2\x2XY\a\a"+
+		"\x2\x2Y]\a\v\x2\x2Z\\\a\x4\x2\x2[Z\x3\x2\x2\x2\\_\x3\x2\x2\x2][\x3\x2"+
+		"\x2\x2]^\x3\x2\x2\x2^`\x3\x2\x2\x2_]\x3\x2\x2\x2`\x61\x5\n\x6\x2\x61\t"+
+		"\x3\x2\x2\x2\x62\x66\x5\xE\b\x2\x63\x66\x5\f\a\x2\x64\x66\x5\x10\t\x2"+
+		"\x65\x62\x3\x2\x2\x2\x65\x63\x3\x2\x2\x2\x65\x64\x3\x2\x2\x2\x66g\x3\x2"+
+		"\x2\x2g\x65\x3\x2\x2\x2gh\x3\x2\x2\x2h\v\x3\x2\x2\x2im\x5(\x15\x2jl\a"+
+		"\x4\x2\x2kj\x3\x2\x2\x2lo\x3\x2\x2\x2mk\x3\x2\x2\x2mn\x3\x2\x2\x2nq\x3"+
+		"\x2\x2\x2om\x3\x2\x2\x2pr\x5\x1A\xE\x2qp\x3\x2\x2\x2rs\x3\x2\x2\x2sq\x3"+
+		"\x2\x2\x2st\x3\x2\x2\x2tu\x3\x2\x2\x2uy\x5\x30\x19\x2vx\a\x4\x2\x2wv\x3"+
+		"\x2\x2\x2x{\x3\x2\x2\x2yw\x3\x2\x2\x2yz\x3\x2\x2\x2z\r\x3\x2\x2\x2{y\x3"+
+		"\x2\x2\x2|~\x5,\x17\x2}\x7F\a\x4\x2\x2~}\x3\x2\x2\x2\x7F\x80\x3\x2\x2"+
+		"\x2\x80~\x3\x2\x2\x2\x80\x81\x3\x2\x2\x2\x81\x82\x3\x2\x2\x2\x82\x8B\x5"+
+		"\n\x6\x2\x83\x85\x5.\x18\x2\x84\x86\a\x4\x2\x2\x85\x84\x3\x2\x2\x2\x86"+
+		"\x87\x3\x2\x2\x2\x87\x85\x3\x2\x2\x2\x87\x88\x3\x2\x2\x2\x88\x89\x3\x2"+
+		"\x2\x2\x89\x8A\x5\n\x6\x2\x8A\x8C\x3\x2\x2\x2\x8B\x83\x3\x2\x2\x2\x8B"+
+		"\x8C\x3\x2\x2\x2\x8C\x8D\x3\x2\x2\x2\x8D\x91\x5\x30\x19\x2\x8E\x90\a\x4"+
+		"\x2\x2\x8F\x8E\x3\x2\x2\x2\x90\x93\x3\x2\x2\x2\x91\x8F\x3\x2\x2\x2\x91"+
+		"\x92\x3\x2\x2\x2\x92\xF\x3\x2\x2\x2\x93\x91\x3\x2\x2\x2\x94\x96\x5\x12"+
+		"\n\x2\x95\x94\x3\x2\x2\x2\x96\x97\x3\x2\x2\x2\x97\x95\x3\x2\x2\x2\x97"+
+		"\x98\x3\x2\x2\x2\x98\x9C\x3\x2\x2\x2\x99\x9B\a\x4\x2\x2\x9A\x99\x3\x2"+
+		"\x2\x2\x9B\x9E\x3\x2\x2\x2\x9C\x9A\x3\x2\x2\x2\x9C\x9D\x3\x2\x2\x2\x9D"+
+		"\x11\x3\x2\x2\x2\x9E\x9C\x3\x2\x2\x2\x9F\xA4\a\v\x2\x2\xA0\xA4\x5\x14"+
+		"\v\x2\xA1\xA4\x5\x1C\xF\x2\xA2\xA4\x5\x1E\x10\x2\xA3\x9F\x3\x2\x2\x2\xA3"+
+		"\xA0\x3\x2\x2\x2\xA3\xA1\x3\x2\x2\x2\xA3\xA2\x3\x2\x2\x2\xA4\x13\x3\x2"+
+		"\x2\x2\xA5\xA6\x5,\x17\x2\xA6\xAA\x5\x16\f\x2\xA7\xA8\x5.\x18\x2\xA8\xA9"+
+		"\x5\x18\r\x2\xA9\xAB\x3\x2\x2\x2\xAA\xA7\x3\x2\x2\x2\xAA\xAB\x3\x2\x2"+
+		"\x2\xAB\xAC\x3\x2\x2\x2\xAC\xAD\x5\x30\x19\x2\xAD\x15\x3\x2\x2\x2\xAE"+
+		"\xB0\x5\x12\n\x2\xAF\xAE\x3\x2\x2\x2\xB0\xB1\x3\x2\x2\x2\xB1\xAF\x3\x2"+
+		"\x2\x2\xB1\xB2\x3\x2\x2\x2\xB2\x17\x3\x2\x2\x2\xB3\xB5\x5\x12\n\x2\xB4"+
+		"\xB3\x3\x2\x2\x2\xB5\xB6\x3\x2\x2\x2\xB6\xB4\x3\x2\x2\x2\xB6\xB7\x3\x2"+
+		"\x2\x2\xB7\x19\x3\x2\x2\x2\xB8\xBC\x5*\x16\x2\xB9\xBB\a\x4\x2\x2\xBA\xB9"+
+		"\x3\x2\x2\x2\xBB\xBE\x3\x2\x2\x2\xBC\xBA\x3\x2\x2\x2\xBC\xBD\x3\x2\x2"+
+		"\x2\xBD\xC0\x3\x2\x2\x2\xBE\xBC\x3\x2\x2\x2\xBF\xC1\x5\n\x6\x2\xC0\xBF"+
+		"\x3\x2\x2\x2\xC0\xC1\x3\x2\x2\x2\xC1\x1B\x3\x2\x2\x2\xC2\xC3\a\b\x2\x2"+
+		"\xC3\xC4\x5\"\x12\x2\xC4\xC5\a\x16\x2\x2\xC5\x1D\x3\x2\x2\x2\xC6\xCA\a"+
+		"\b\x2\x2\xC7\xC9\a\r\x2\x2\xC8\xC7\x3\x2\x2\x2\xC9\xCC\x3\x2\x2\x2\xCA"+
+		"\xC8\x3\x2\x2\x2\xCA\xCB\x3\x2\x2\x2\xCB\xD3\x3\x2\x2\x2\xCC\xCA\x3\x2"+
+		"\x2\x2\xCD\xCF\x5\"\x12\x2\xCE\xD0\a\r\x2\x2\xCF\xCE\x3\x2\x2\x2\xD0\xD1"+
+		"\x3\x2\x2\x2\xD1\xCF\x3\x2\x2\x2\xD1\xD2\x3\x2\x2\x2\xD2\xD4\x3\x2\x2"+
+		"\x2\xD3\xCD\x3\x2\x2\x2\xD4\xD5\x3\x2\x2\x2\xD5\xD3\x3\x2\x2\x2\xD5\xD6"+
+		"\x3\x2\x2\x2\xD6\xDA\x3\x2\x2\x2\xD7\xD9\a\r\x2\x2\xD8\xD7\x3\x2\x2\x2"+
+		"\xD9\xDC\x3\x2\x2\x2\xDA\xD8\x3\x2\x2\x2\xDA\xDB\x3\x2\x2\x2\xDB\xDD\x3"+
+		"\x2\x2\x2\xDC\xDA\x3\x2\x2\x2\xDD\xDE\a\x16\x2\x2\xDE\x1F\x3\x2\x2\x2"+
+		"\xDF\xE0\a\x12\x2\x2\xE0\xE1\a(\x2\x2\xE1\xE2\a)\x2\x2\xE2!\x3\x2\x2\x2"+
+		"\xE3\xE4\b\x12\x1\x2\xE4\xF9\a\"\x2\x2\xE5\xF9\a#\x2\x2\xE6\xED\a#\x2"+
+		"\x2\xE7\xE8\a\x11\x2\x2\xE8\xEE\x5$\x13\x2\xE9\xEA\a\x13\x2\x2\xEA\xEB"+
+		"\x5$\x13\x2\xEB\xEC\a\x14\x2\x2\xEC\xEE\x3\x2\x2\x2\xED\xE7\x3\x2\x2\x2"+
+		"\xED\xE9\x3\x2\x2\x2\xED\xEE\x3\x2\x2\x2\xEE\xF9\x3\x2\x2\x2\xEF\xF9\t"+
+		"\x2\x2\x2\xF0\xF9\x5 \x11\x2\xF1\xF2\a\x13\x2\x2\xF2\xF3\x5\"\x12\x2\xF3"+
+		"\xF4\a\x14\x2\x2\xF4\xF9\x3\x2\x2\x2\xF5\xF6\a#\x2\x2\xF6\xF7\a$\x2\x2"+
+		"\xF7\xF9\x5\"\x12\x3\xF8\xE3\x3\x2\x2\x2\xF8\xE5\x3\x2\x2\x2\xF8\xE6\x3"+
+		"\x2\x2\x2\xF8\xEF\x3\x2\x2\x2\xF8\xF0\x3\x2\x2\x2\xF8\xF1\x3\x2\x2\x2"+
+		"\xF8\xF5\x3\x2\x2\x2\xF9\x108\x3\x2\x2\x2\xFA\xFB\f\b\x2\x2\xFB\xFC\a"+
+		"&\x2\x2\xFC\x107\x5\"\x12\t\xFD\xFE\f\x6\x2\x2\xFE\xFF\a&\x2\x2\xFF\x107"+
+		"\x5\"\x12\a\x100\x101\f\x5\x2\x2\x101\x102\a\'\x2\x2\x102\x107\x5\"\x12"+
+		"\x6\x103\x104\f\x4\x2\x2\x104\x105\a%\x2\x2\x105\x107\x5\"\x12\x5\x106"+
+		"\xFA\x3\x2\x2\x2\x106\xFD\x3\x2\x2\x2\x106\x100\x3\x2\x2\x2\x106\x103"+
+		"\x3\x2\x2\x2\x107\x10A\x3\x2\x2\x2\x108\x106\x3\x2\x2\x2\x108\x109\x3"+
+		"\x2\x2\x2\x109#\x3\x2\x2\x2\x10A\x108\x3\x2\x2\x2\x10B\x110\x5\"\x12\x2"+
+		"\x10C\x10D\a\x15\x2\x2\x10D\x10F\x5\"\x12\x2\x10E\x10C\x3\x2\x2\x2\x10F"+
+		"\x112\x3\x2\x2\x2\x110\x10E\x3\x2\x2\x2\x110\x111\x3\x2\x2\x2\x111%\x3"+
+		"\x2\x2\x2\x112\x110\x3\x2\x2\x2\x113\x114\a\x1F\x2\x2\x114\x115\x5\"\x12"+
+		"\x2\x115\'\x3\x2\x2\x2\x116\x117\a\b\x2\x2\x117\x11A\a\x1B\x2\x2\x118"+
+		"\x119\a\x11\x2\x2\x119\x11B\x5\"\x12\x2\x11A\x118\x3\x2\x2\x2\x11A\x11B"+
+		"\x3\x2\x2\x2\x11B\x11C\x3\x2\x2\x2\x11C\x11D\a\x16\x2\x2\x11D)\x3\x2\x2"+
+		"\x2\x11E\x11F\a\b\x2\x2\x11F\x120\a\x1C\x2\x2\x120\x121\a\x11\x2\x2\x121"+
+		"\x124\x5\"\x12\x2\x122\x123\a\x15\x2\x2\x123\x125\x5\"\x12\x2\x124\x122"+
+		"\x3\x2\x2\x2\x124\x125\x3\x2\x2\x2\x125\x126\x3\x2\x2\x2\x126\x127\a\x16"+
+		"\x2\x2\x127+\x3\x2\x2\x2\x128\x129\a\b\x2\x2\x129\x12A\a\x17\x2\x2\x12A"+
+		"\x12B\a\x11\x2\x2\x12B\x12C\x5\"\x12\x2\x12C\x12D\a\x16\x2\x2\x12D-\x3"+
+		"\x2\x2\x2\x12E\x12F\a\b\x2\x2\x12F\x130\a\x18\x2\x2\x130\x131\a\x16\x2"+
+		"\x2\x131/\x3\x2\x2\x2\x132\x133\a\b\x2\x2\x133\x134\a\x19\x2\x2\x134\x135"+
+		"\a\x16\x2\x2\x135\x31\x3\x2\x2\x2%\x38:\x46IOQ]\x65gmsy\x80\x87\x8B\x91"+
+		"\x97\x9C\xA3\xAA\xB1\xB6\xBC\xC0\xCA\xD1\xD5\xDA\xED\xF8\x106\x108\x110"+
+		"\x11A\x124";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

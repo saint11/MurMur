@@ -28,21 +28,34 @@ namespace MurMur
         {
             script.Tags = new Dictionary<string, MurMurParser.BlockContext>();
 
-            // First we create the methods block
+            // First we include all required files
+            foreach (var file in context.declaration())
+            {
+                VisitDeclaration(file);
+            }
+
+            // then we create the methods block
             foreach (var method in context.defBlock())
             {
                 var words = method.WORD();
                 var name = words[0].GetText();
-                script.Globals[name] = (Func<MurMurVariable[], MurMurVariable>)((parameters)=>
+                if (name == "init")
                 {
-                    for (int i = 1; i < words.Length; i++)
+                    Visit(method);
+                }
+                else
+                {
+                    script.Globals[name] = (Func<MurMurVariable[], MurMurVariable>)((parameters) =>
                     {
-                        script.Locals[words[i].GetText()] = parameters[i-1];
-                    }
-                    var value = Visit(method);
-                    script.Locals.Clear();
-                    return value;
-                });
+                        for (int i = 1; i < words.Length; i++)
+                        {
+                            script.Locals[words[i].GetText()] = parameters[i - 1];
+                        }
+                        var value = Visit(method);
+                        script.Locals.Clear();
+                        return value;
+                    });
+                }
             }
 
             // Then we collect the tags
@@ -51,8 +64,6 @@ namespace MurMur
             {
                 VisitTag(tag);
             }
-
-            Invoke("init");
 
             return new MurMurVariable();
         }
