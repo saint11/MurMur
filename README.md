@@ -95,13 +95,15 @@ The same thing as the simple command, but will call a method with the parameters
 Create or change the value of a variable to a expression. You can perform simple operations such as `{foo = 3 + 3}` or `{magic = [abra] + another_variable}`.
 
 ### Menu statement
-`{menu:[Strings are under square brackets]}
+```
+{menu:[Strings are under square brackets]}
     {option:[This is a menu option], optionalCondition == 2}
       This option will render this line.
     {option:[This is another menu option], false}
       The other option will render this other line and jump to another tag
       {skip:[another]}
-{end}`
+{end}
+```
 
 ### Headers
 The header is a place for special commands and they should be declared before the tags start. They start with the `@`character
